@@ -1,0 +1,32 @@
+/*后台分页样式（分类列表、文章列表）*/
+.result_content ul li span {
+    font-size: 15px;
+    padding: 6px 12px;
+}
+
+/*UI编辑器 纠正样式*/
+.edui-default {
+    line-height: 28px;
+}
+div.edui-combox-body,div.edui-button-body,div.edui-spitbutton-body{
+    overflow: hidden;
+    height: 20px;
+}
+div.edui-box{
+    overflow: hidden;
+    height:22px;
+}
+
+/*图片上传样式*/
+.uploadify{
+    display: inline-block;
+}
+.uploadify-button{
+    border: none;
+    border-radius: 5px;
+    margin-top: 8px;
+}
+table.add_tab tr td span.uploadify-button-text{
+    color:#FFF;
+    margin: 0;
+}
