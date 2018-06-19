@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Model\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Input;
+
+//引入验证码类文件
+require_once 'org/code/Code.class.php';
+
+class LoginController extends CommonController
+{
+    //登陆
+    public function login(){
+        if($input = Input::all()){
+            $code = new \Code();
+            $_code = $code->get();
+            if(strtoupper($input['code']) != $_code){
+                return back()->with('msg','验证码错误!');
+            }
+            //取一条记录
+            $user = User::first();
+            if($user->user_name != $input['user_name'] || Crypt::decrypt($user->user_pass) != $input['user_pass']){
+                return back()->with('msg','用户名或密码错误!');
+            }
+            //将登陆信息写入session
+            session(['user'=>$user]);
+            return redirect('admin/index');
+        }else{
+            //删除session
+            session(['user'=>null]);
+            //服务器信息
+            //dd($_SERVER);
+            return view('admin/login');
+        }
+    }
+    //创建验证码
+    public function code()
+    {
+        $code = new \Code();
+        $code->make();
+    }
+    //退出
+    public function quit()
+    {
+        session(['user'=>null]);
+        return redirect('admin/login');
+    }
+    
+    
+    
+    
+    
+    
+    
+    //获取验证码值
+    public function getcode(){
+        $code= new\Code();
+        echo $code->get();
+    }
+    //加密解密算法
+    public function crypt(){
+        $str = '123456';
+        $str_p = 'eyJpdiI6ImxpaGlGc0NjbklhVEVPVHB0ekFqVVE9PSIsInZhbHVlIjoiSlhpbjNnYkFDemIzRjh6bEtoUnpkdz09IiwibWFjIjoiNzI3YTBhZDBlZjU4MjJlY2NhY2E5NjA5NGJiZGQxY2E0YWIxN2ZmYzIxM2M4MzQxYWE3NTAwMTVjOWI4OWRkMCJ9';
+        echo \Crypt::encrypt($str),"<br/>";
+        echo \crypt::decrypt($str_p);
+    }
+
+}
