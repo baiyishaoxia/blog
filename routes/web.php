@@ -17,6 +17,12 @@ Route::get('/', function () {
 
 //测试数据库连接
 Route::get('/test', 'IndexController@index');
+//验证码页
+Route::get('/getVerify', 'IndexController@getVerify');
+//生成验证码
+Route::get('test/getCreateverify/{tmp}', 'IndexController@getCreateverify');
+//验证码验证
+Route::post('test/getCode','IndexController@getCode');
 
 Route::any('admin/crypt', 'Admin\LoginController@crypt');
 //后台登陆
