@@ -7,17 +7,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 
-//引入验证码类文件
-require_once 'org/code/Code.class.php';
+//引入验证码类文件(自定义验证码)
+//require_once 'org/code/Code.class.php';
 
 class LoginController extends CommonController
 {
     //登陆
     public function login(){
         if($input = Input::all()){
-            $code = new \Code();
-            $_code = $code->get();
-            if(strtoupper($input['code']) != $_code){
+//            $code = new \Code();
+//            $_code = $code->get();
+//            if(strtoupper($input['code']) != $_code){
+//                return back()->with('msg','验证码错误!');
+//            }
+            //使用laravel内置验证码
+            if (strtolower(\Session::get('milkcaptcha')) != strtolower($input['code'])) {
                 return back()->with('msg','验证码错误!');
             }
             //取一条记录
