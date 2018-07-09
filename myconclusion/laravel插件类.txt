@@ -1,0 +1,54 @@
+1、提示语
+https://www.cnblogs.com/xuzhengzong/p/8918852.html
+
+
+解决方案
+
+①php artisan ide-helper:generate
+
+②composer require barryvdh/laravel-ide-helper
+③app/Exception/Handler.php   页面下面的函数render,注释掉其余的语句,往其中添加:
+ return parent::render($request,$exception);即可解决
+
+
+2、Form插件
+http://www.bubuko.com/infodetail-2131301.html
+
+解决方案
+
+①打开config/app.php
+②移除以下句
+providers中的‘Illuminate\Html\HtmlServiceProvider‘
+aliases中的
+‘Form‘      => ‘Illuminate\Html\FormFacade‘,
+‘HTML‘      => ‘Illuminate\Html\HtmlFacade
+③移除illuminate/html包
+
+composer remove illuminate/html
+composer update
+
+④代替的包为laravelcollective/html
+
+所以：
+
+安装laravelcollective/html
+
+composer require laravelcollective/html
+回到config/app.php
+
+加入如下语句：
+
+providers中的
+Collective\Html\HtmlServiceProvider::class,
+
+aliases中的
+‘Form‘=>Collective\Html\FormFacade::class,
+‘Html‘=>Collective\Html\HtmlFacade::class,
+
+⑤问题解决
+
+
+3、laravel跳转视图
+
+①工具phpstrom
+②File->Settings->Languages & Frameworks->Laravel->勾选（Enable plugin for this project与Use AutoPopup for completion）
