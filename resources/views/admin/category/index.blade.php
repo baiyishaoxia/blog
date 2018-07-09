@@ -54,8 +54,8 @@
                         <th class="tc">排序</th>
                         <th class="tc">ID</th>
                         <th>分类名称</th>
-                        <th>分类描述</th>
                         <th>标题</th>
+                        <th>分类描述</th>
                         <th>查看次数</th>
                         <th>操作</th>
                     </tr>
@@ -68,7 +68,10 @@
                         </td>
                         <td class="tc">{{$v->cate_id}}</td>
                         <td>
-                            <a href="#"><?php echo str_repeat('-',(5*$v->level)) ?>{{$v->cate_name}}</a>
+                            <a href="#">
+                                <?php //echo str_repeat('-',(5*$v->level)) ?>
+                                    {!! $v->cate_name !!}
+                            </a>
                         </td>
                         <td>{{$v->cate_title}}</td>
                         <td>{{str_limit($v->cate_discription,18)}}</td>

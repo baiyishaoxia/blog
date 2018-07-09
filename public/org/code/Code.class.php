@@ -24,6 +24,7 @@ class Code{
 	private $fontColor='';
 
 	public function __construct() {
+        session_start();
 	}
 
 	//创建验证码

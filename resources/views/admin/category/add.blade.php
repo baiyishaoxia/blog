@@ -42,12 +42,13 @@
                     <tr>
                         <th width="120"><i class="require">*</i>父级分类：</th>
                         <td>
-                            <select name="cate_pid">
-                                <option value="0">==顶级分类==</option>
-                                @foreach($data as $key => $v)
-                                  <option value="{{$v->cate_id}}">{{str_repeat('-',(5*$v->level))}}{{$v->cate_name}}</option>
-                                @endforeach
-                            </select>
+                            {{--<select name="cate_pid">--}}
+                                {{--<option value="0">==顶级分类==</option>--}}
+                                {{--@foreach($data as $key => $v)--}}
+                                  {{--<option value="{{$v->cate_id}}">{{str_repeat('-',(5*$v->level))}}{{$v->cate_name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                            {{Form::select('cate_pid',\App\Http\Model\Category::tree2(1))}}
                         </td>
                     </tr>
                     <tr>

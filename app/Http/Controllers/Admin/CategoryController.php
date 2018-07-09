@@ -15,7 +15,13 @@ class CategoryController extends CommonController
     public function index()
     {
         //第①种初始化数据(无限级联)
-        $cateInfo = Category::moreTree();
+        //$cateInfo = Category::moreTree();
+        $tree = Category::orderBy('cate_order','asc')
+            ->get();
+        foreach ($tree as $key => $value){
+            $tree[$key]['cate_name'] = '<span class="folder-open"></span>'.$value['cate_name'];
+        }
+        $cateInfo = Category::getCateTree($tree,'<span class="folder-line"></span>');
         //获取当前的分页数
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         //实例化collect方法
@@ -31,8 +37,6 @@ class CategoryController extends CommonController
         //第②种初始化数据(二级联)
         //$cateInfo = Category::tree();
         return view('admin.category.index',compact('data','count'));
-
-
     }
     //响应回调函数
     public function changeOrder()

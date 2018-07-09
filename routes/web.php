@@ -48,6 +48,7 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
 
     //文章
     Route::resource('article','ArticleController');
+    Route::post('article','ArticleController@index');
 
     //图片上传
     Route::any('upload','CommonController@upload');

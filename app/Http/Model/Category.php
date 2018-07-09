@@ -67,18 +67,50 @@ class Category extends Model
         return $arr;
     }
     //多维树形结构、层次关系(多维无限级)
-    public static function getCateTree($data,$pid=0,$level=0)
+    public static function getCateTree($data,$html = '--',$pid=0,$level=0)
     {
         static $cate_list = array();
         foreach ($data as $row){
             if($row['cate_pid'] == $pid){
-                  $row['level'] = $level;
-                  $cate_list[] = $row;
-                  self::getCateTree($data,$row['cate_id'],$level+1);
+                $row['level'] = $level;
+                $row['html']  = str_repeat($html, $level);
+                $row['cate_name']  = $row['html'].$row['cate_name'];
+                $cate_list[] = $row;
+                self::getCateTree($data,$html,$row['cate_id'],$level+1);
             }
         }
         return $cate_list;
 
+    }
+
+    //region   $data数组  (键值)$index => $val       tang
+    public static function array2ToArray1($data,$index,$val){
+        $arr=array();
+        foreach ($data as $key =>$value){
+            $arr[$value[$index]]=$value[$val];
+        }
+        return $arr;
+    }
+    //endregion
+
+    /**
+     * 父亲菜单，type为多加一个无父亲分类，type为2多加一个所有分类
+     * @param int $type
+     * @return array
+     * @author tang
+     */
+    public static function tree2($type=1){
+        $tree=self::orderBy('cate_order','asc')
+            ->get();
+        $tree = self::getCateTree($tree->toArray(),'|--');
+        $tree=self::array2ToArray1($tree,'cate_id','cate_name');
+        if($type==1){
+            $tree=[''=>'无父亲分类']+$tree;
+        }
+        if($type==2){
+            $tree=[''=>'所有分类']+$tree;
+        }
+        return $tree;
     }
 
 

@@ -12,10 +12,18 @@ use Symfony\Component\HttpFoundation\IpUtils;
 class ArticleController extends CommonController
 {
     //admin.article(get) 全部文章列表
-    public function index()
+    public function index(Request $request)
     {
-        $perpage = 6;
-        $data = Article::orderBy('art_id','desc')->paginate($perpage);
+        $perpage = 8;
+        $data = Article::orderBy('art_id','desc');
+        if($request->get('cate_id')){
+            $data = $data->whereIn('cate_id', Category::where('cate_id',$request->get('cate_id'))->pluck('cate_id')->toArray())
+                ->orWhereIn('cate_id', Category::where('cate_pid',$request->get('cate_id'))->pluck('cate_id')->toArray());
+        }
+        if($request->get('keywords')){
+            $data = $data->where('art_title', 'like','%'.$request->get('keywords').'%');
+        }
+        $data = $data->paginate($perpage);
         $count = '当前第'.$data->currentPage().'页，每页'.$data->perPage().'条数据,'.'总共'.$data->total().'条数据。';
         return view('admin.article.index',compact('data','count'));
     }
