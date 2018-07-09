@@ -23,6 +23,7 @@ class CreateArticleTable extends Migration
             $table->string('art_author',11);          //作者
             $table->integer('art_view')->default(0);    //查看次数 默认0
             $table->integer('art_time');    //时间戳
+            $table->integer('art_order');   //排序
             $table->integer('cate_id');     //分类id
 
             $table->softDeletes(); //软删除
