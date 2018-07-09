@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost1
+ Source Server         : 127.0.0.1
  Source Server Type    : MySQL
  Source Server Version : 50545
- Source Host           : localhost:3306
+ Source Host           : 127.0.0.1:3306
  Source Schema         : blog
 
  Target Server Type    : MySQL
  Target Server Version : 50545
  File Encoding         : 65001
 
- Date: 19/06/2018 20:13:10
+ Date: 09/07/2018 12:34:51
 */
 
 SET NAMES utf8mb4;
@@ -58,7 +58,7 @@ CREATE TABLE `blog_category`  (
   `cate_order` int(10) NOT NULL DEFAULT 0 COMMENT '分类',
   `cate_pid` int(11) NOT NULL DEFAULT 0 COMMENT '父级',
   PRIMARY KEY (`cate_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of blog_category
@@ -78,6 +78,7 @@ INSERT INTO `blog_category` VALUES (16, '腾讯篮球', '篮球运动是最为�
 INSERT INTO `blog_category` VALUES (18, '游戏', '游戏，最休闲、最放松、最快乐的方式之一', '游戏、腾讯游戏、网络游戏', '最休闲、最放松、最快乐的方式之一', 0, 1, 0);
 INSERT INTO `blog_category` VALUES (19, '腾讯台球', '台球,考验最好的眼力、判断力，思考力之一', '台球、桌球', '考验最好的眼力、判断力，思考力之一', 0, 6, 8);
 INSERT INTO `blog_category` VALUES (21, 'Laravel', 'Laravel学院- 优质Laravel中文学习资源平台', 'php框架、laravel', '简洁、优雅的PHP开发框架(PHP Web Framework)', 0, 0, 0);
+INSERT INTO `blog_category` VALUES (22, '12', '12', '12', '12', 0, 12, 0);
 
 -- ----------------------------
 -- Table structure for blog_links
@@ -104,7 +105,7 @@ INSERT INTO `blog_links` VALUES (5, '离校手续', '离校手续办理情况', 
 INSERT INTO `blog_links` VALUES (6, '在线翻译', '有道词典，你的私人翻译秘书', 'http://fanyi.youdao.com/', 6, 0);
 INSERT INTO `blog_links` VALUES (7, '腾讯企业邮箱', '一个码农记录工时的点点滴滴', 'https://exmail.qq.com/login', 1, 0);
 INSERT INTO `blog_links` VALUES (9, 'laravel框架', '为 WEB 艺术家创造的 PHP 框架', 'https://www.golaravel.com/', 1, 0);
-INSERT INTO `blog_links` VALUES (10, '1', '1', '1222', 0, 0);
+INSERT INTO `blog_links` VALUES (10, 'PHP中文网之laravel教程', 'php中文网', 'http://www.php.cn/course/283.html', 0, 0);
 INSERT INTO `blog_links` VALUES (11, '2', '2', '2', NULL, 0);
 INSERT INTO `blog_links` VALUES (12, '3', '3', '3', NULL, 0);
 
@@ -139,5 +140,20 @@ CREATE TABLE `blog_user`  (
 -- Records of blog_user
 -- ----------------------------
 INSERT INTO `blog_user` VALUES (1, 'admin', 'eyJpdiI6Im9KUWNNbjRadnp3TDM0VERJNW16dGc9PSIsInZhbHVlIjoienBrMnpYc1pjeHVDYkZCcURGRHZRZz09IiwibWFjIjoiNDg5ZjcwNzE4ODljNjQ1ZDk5NmU2YWRlMjNkMDZkZjI0ZjgxNDliYzMyMTY2NmNkMTgzYTZkMGU1MjA0OTU3ZiJ9');
+
+-- ----------------------------
+-- Table structure for blog_users
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_users`;
+CREATE TABLE `blog_users`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp DEFAULT NULL,
+  `updated_at` timestamp DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
