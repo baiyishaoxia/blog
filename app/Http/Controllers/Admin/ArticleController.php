@@ -15,7 +15,7 @@ class ArticleController extends CommonController
     public function index(Request $request)
     {
         $perpage = 8;
-        $data = Article::orderBy('art_id','desc');
+        $data = Article::orderBy('art_order','asc')->orderBy('art_id','desc');
         if($request->get('cate_id')){
             $data = $data->whereIn('cate_id', Category::where('cate_id',$request->get('cate_id'))->pluck('cate_id')->toArray())
                 ->orWhereIn('cate_id', Category::where('cate_pid',$request->get('cate_id'))->pluck('cate_id')->toArray());
@@ -25,7 +25,9 @@ class ArticleController extends CommonController
         }
         $data = $data->paginate($perpage);
         $count = '当前第'.$data->currentPage().'页，每页'.$data->perPage().'条数据,'.'总共'.$data->total().'条数据。';
-        return view('admin.article.index',compact('data','count'));
+
+        $type = 'soft';
+        return view('admin.article.index',compact('data','count','type'));
     }
 
     //admin.article.create(get) 添加文章
@@ -38,7 +40,7 @@ class ArticleController extends CommonController
     //admin.article.store(post)
     public function store()
     {
-       $input = Input::except('_token');
+       $input = Input::except('_token','file_upload');
        if(!$input['art_thumb']){
            $input['art_thumb'] = 'uploads/default.jpg';
        }
@@ -59,10 +61,10 @@ class ArticleController extends CommonController
            if($re){
                return redirect('admin/article');
            }else{
-               return back()->withErrors('数据填充失败，请稍后重试！');
+               return back()->withInput()->withErrors('数据填充失败，请稍后重试！');
            }
        }else{
-           return back()->withErrors($validator);
+           return back()->withInput()->withErrors($validator);
        }
     }
 
@@ -70,13 +72,13 @@ class ArticleController extends CommonController
     public function edit($art_id)
     {
         $filed = Article::select('*')->find($art_id);
-        $data = Category::moreTree($filed->cate_id);
+        $data = Category::moreTree($filed['cate_id']);
         return view('admin.article.edit',compact('data','filed'));
     }
     //admin.article.{article}(put)  处理修改
     public function update($art_id)
     {
-       $input = Input::except('_token','_method');
+       $input = Input::except('_token','_method','file_upload');
        $rules = [
             'art_title' =>'required',
             'art_author'=>'required',
@@ -114,6 +116,72 @@ class ArticleController extends CommonController
         }
         return $data;
     }
+
+    //region   保存        tang
+    public function postSave()
+    {
+        $input = Input::all();
+        foreach ($input['data'] as $id => $data){
+            $content_data = Article::find($id);
+            $content_data->art_order = $data['sort'];
+            $content_data->save();
+        }
+        return redirect('admin/article')->withErrors('保存成功');
+    }
+    //endregion
+
+    //region   移动到回收站(软删除)        tang
+    public function postSoftDel(Request $request)
+    {
+        try {
+            $input = $request->all();
+            Article::destroy($input['id']);
+            return redirect(\URL::action('admin/article'))->withSuccess("删除成功");
+        }catch (\Exception $e){
+            return back()->withErrors("操作异常");
+        }
+    }
+    //endregion
+
+    //region   回收站列表        tang
+    public function getRecycleList(Request $request)
+    {
+        $data = Article::onlyTrashed()->orderBy('art_id','desc');
+        if($request->get('cate_id')){
+            $data = $data->whereIn('cate_id', Category::where('cate_id',$request->get('cate_id'))->pluck('cate_id')->toArray())
+                ->orWhereIn('cate_id', Category::where('cate_pid',$request->get('cate_id'))->pluck('cate_id')->toArray());
+        }
+        if($request->get('keywords')){
+            $data = $data->where('art_title', 'like','%'.$request->get('keywords').'%');
+        }
+        $perpage = 8;
+        $data = $data->paginate($perpage);
+        $count = '当前第'.$data->currentPage().'页，每页'.$data->perPage().'条数据,'.'总共'.$data->total().'条数据。';
+        $type = 'del';
+        return view('admin.article.index',compact('data','count','type'));
+    }
+    //endregion
+
+    //region   还原        tang
+    public function postRestore(Request $request)
+    {
+        $ids = $request->get('id');
+        if($ids){
+            Article::withTrashed()->whereIn('art_id',$ids)->restore();
+            return redirect(\URL::action('Admin\ArticleController@getRecycleList'))->withErrors('还原成功');
+        }else{
+            return back()->withErrors('还原失败,请选择需要还原的数据');
+        }
+    }
+    //endregion
+
+    //region   彻底删除        tang
+    public function postDel(Request $request)
+    {
+        Article::whereIn('art_id',$request->get('id'))->forceDelete();
+        return redirect(\URL::action('Admin\ArticleController@getRecycleList'))->withSuccess("删除成功");
+    }
+    //endregion
 
 
 }

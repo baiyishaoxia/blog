@@ -10,3 +10,14 @@ function load() {
     location.reload();
 }
 
+//全选取消按钮函数
+function checkAll(chkobj) {
+    if ($(chkobj).text() == "全选") {
+        $(chkobj).children("span").text("取消");
+        $(".checkall input:enabled").prop("checked", true);
+    } else {
+        $(chkobj).children("span").text("全选");
+        $(".checkall input:enabled").prop("checked", false);
+    }
+}
+

@@ -10,16 +10,15 @@
 
     <!--结果页快捷搜索框 开始-->
     <div class="search_wrap">
+        @if($type == 'del')
+        {{Form::open(['url'=>URL::action('Admin\ArticleController@getRecycleList')])}}
+        @else
         {{Form::open(['url'=>URL::action('Admin\ArticleController@index')])}}
+        @endif
             <table class="search_tab">
                 <tr>
                     <th width="120">选择分类:</th>
                     <td>
-                        {{--<select onchange="javascript:location.href=this.value;">--}}
-                            {{--<option value="">全部</option>--}}
-                            {{--<option value="http://www.baidu.com">百度</option>--}}
-                            {{--<option value="http://www.sina.com">新浪</option>--}}
-                        {{--</select>--}}
                         {{Form::select('cate_id',\App\Http\Model\Category::tree2(2),Request::get('cate_id'))}}
                     </td>
                     <th width="70">关键字:</th>
@@ -32,7 +31,7 @@
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
-    <form action="#" method="post">
+    {{Form::open()}}
         <div class="result_wrap">
             <div class="result_title">
                 <h3>文章列表</h3>
@@ -40,9 +39,18 @@
             <!--快捷导航 开始-->
             <div class="result_content">
                 <div class="short_wrap">
+                   @if($type =='del')
+                        <a class="all" href="javascript:;" onclick="checkAll(this);"><i class="fa fa-plus"></i><span>全选</span></a>
+                        <a href="{{URL::action('Admin\ArticleController@postDel')}}" class="del btndel" ><i class="fa fa-recycle"></i><span>彻底删除</span></a>
+                        <a href="{{URL::action('Admin\ArticleController@postRestore')}}" class="del btnsave" ><i class="fa fa-refresh"></i><span>还原</span></a>
+                        <a href="{{url('admin/article')}}" ><i class="fa fa-recycle"></i><span>返回文章列表</span></a>
+                   @else
                     <a href="{{url('admin/article/create')}}"><i class="fa fa-plus"></i>新增文章</a>
-                    <a href="#"><i class="fa fa-recycle"></i>批量删除</a>
-                    <a href="#"><i class="fa fa-refresh"></i>更新排序</a>
+                    <a href="{{URL::action('Admin\ArticleController@postSave')}}"  class="save btnsave"><i class="fa fa-refresh"></i>更新排序</a>
+                    <a class="all" href="javascript:;" onclick="checkAll(this);"><i class="fa fa-plus"></i><span>全选</span></a>
+                    <a href="{{URL::action('Admin\ArticleController@postSoftDel')}}" class="del btndel" ><i class="fa fa-recycle"></i>移动到回收站</a>
+                    <a href="{{URL::action('Admin\ArticleController@getRecycleList')}}"><i class="fa fa-refresh"></i>进入回收站</a>
+                  @endif
                 </div>
             </div>
             <!--快捷导航 结束-->
@@ -52,7 +60,7 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%"><input type="checkbox" name=""></th>
+                        <th width="4%">选择</th>
                         <th class="tc">排序</th>
                         <th class="tc">ID</th>
                         <th>标题</th>
@@ -68,9 +76,13 @@
                     </tr>
                     @foreach($data as $key => $v)
                     <tr>
-                        <td class="tc"><input type="checkbox" name="id[]" value="{{$v->art_id}}"></td>
+                        <th>
+							<span class="checkall" style="vertical-align:middle;">
+							{{Form::checkbox('id[]',$v->art_id,null)}}
+							</span>
+                        </th>
                         <td class="tc">
-                            <input type="text" name="ord[]" value="0">
+                            {{Form::text('data['.$v->art_id.'][sort]',$v->art_order,['class'=>'sort'])}}
                         </td>
                         <td class="tc">{{$v->art_id}}</td>
                         <td><a href="#">{{$v->art_title}}</a></td>
@@ -101,7 +113,7 @@
 
             </div>
         </div>
-    </form>
+    {{Form::close()}}
 
     <!--搜索结果页面 列表 结束-->
     <script>
@@ -124,5 +136,6 @@
                 });
             });
         }
+
     </script>
 @endsection

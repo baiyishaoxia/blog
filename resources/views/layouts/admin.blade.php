@@ -19,8 +19,9 @@
 </head>
 
 <body>
-
 @yield('content')
+
+@include('admin.msg')
 
 </body>
 </html>

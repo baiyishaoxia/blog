@@ -46,9 +46,22 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::resource('category','CategoryController');
     Route::post('cate/changeOrder','CategoryController@changeOrder');
 
-    //文章
+    //文章(资源  搜索  移动到回收站)
+    //回收站列表
+    Route::get('article/recycleList','ArticleController@getRecycleList');
+    //还原
+    Route::post('article/restore','ArticleController@postRestore');
+    //保存排序
+    Route::post('article/save','ArticleController@postSave');
+    //彻底删除
+    Route::post('article/del','ArticleController@postDel');
+    //定义资源(其中包括 index create store edit update destroy 方法)
     Route::resource('article','ArticleController');
+    //自定义post方法,将覆盖 资源中的store
     Route::post('article','ArticleController@index');
+    Route::post('article/softdel','ArticleController@postSoftDel');
+    //该方法本应是资源里自带的,由于自定义搜索与该方法冲突,因此重新定义
+    Route::post('article/store','ArticleController@store');
 
     //图片上传
     Route::any('upload','CommonController@upload');

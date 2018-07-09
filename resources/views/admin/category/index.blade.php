@@ -50,7 +50,7 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%"><input type="checkbox" name=""></th>
+                        <th>选择</th>
                         <th class="tc">排序</th>
                         <th class="tc">ID</th>
                         <th>分类名称</th>
@@ -61,7 +61,7 @@
                     </tr>
                     @foreach($data as $key => $v)
                     <tr>
-                        <td class="tc"><input type="checkbox" name="id[]" value="{{$v->cate_id}}"></td>
+                        <th  width="5%"><input type="checkbox" name="id[]" value="{{$v->cate_id}}"></th>
                         <td class="tc">
                             {{--排序: 需要参数 本身框位置,id值--}}
                             <input type="text" name="ord[]" onchange="changeOrder(this,{{$v->cate_id}})" value="{{$v->cate_order}}" >
