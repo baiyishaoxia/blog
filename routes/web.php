@@ -78,3 +78,19 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware'=>['web'],'prefix'=>'home','namespace'=>'Home'],function () {
+    Route::any('/upload', 'ArticleController@upload');
+    Route::any('/mail', 'ArticleController@mail');
+
+    Route::get('cache1','ArticleController@cache1');
+    Route::get('cache2','ArticleController@cache2');
+
+    Route::get('error','ArticleController@error');
+    Route::get('log','ArticleController@log');
+    Route::get('queue','ArticleController@queue');
+});
