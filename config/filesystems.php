@@ -54,6 +54,12 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        //文件上传的目录(upload方法),其中url参数是用于Stroage用来访问的绝对路径
+        'uploads' => [
+            'driver' => 'local',
+            //'root' => storage_path('app/uploads'),
+            'root' => public_path('file'),
+        ],
 
         's3' => [
             'driver' => 's3',
