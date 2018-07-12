@@ -43,7 +43,7 @@
                 <div class="short_wrap">
                     <a href="{{url('admin/links/create')}}"><i class="fa fa-plus"></i>添加链接</a>
                     <a href="javascript:void(0)" id="btnDel"><i class="fa fa-recycle"></i>批量删除</a>
-                    <a href="{{url('admin/recycle')}}"><i class="fa fa-recycle"></i>回收站</a>
+                    <a href="{{URL::action('Admin\LinksController@recycle')}}"><i class="fa fa-recycle"></i>回收站</a>
                 </div>
             </div>
             <!--快捷导航 结束-->
@@ -147,7 +147,7 @@
          *一键删除
          */
         $("#btnDel").click(function () {
-            document.dereform.action="{{url('admin/delAll')}}";
+            document.dereform.action="{{url('admin/links/delAll')}}";
             document.dereform.submit();
         })
 

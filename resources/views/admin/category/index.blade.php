@@ -31,7 +31,7 @@
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
-    <form action="#" method="post">
+    {{Form::open()}}
         <div class="result_wrap">
             <div class="result_title">
                 <h3>快捷操作</h3>
@@ -40,7 +40,8 @@
             <div class="result_content">
                 <div class="short_wrap">
                     <a href="{{url('admin/category/create')}}"><i class="fa fa-plus"></i>添加分类</a>
-                    <a href="#"><i class="fa fa-recycle"></i>批量删除</a>
+                    <a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a>
+                    <a href="{{URL::action('Admin\CategoryController@postDel')}}" class="del btndel" ><i class="fa fa-recycle"></i>批量删除</a>
                 </div>
             </div>
             <!--快捷导航 结束-->
@@ -61,7 +62,11 @@
                     </tr>
                     @foreach($data as $key => $v)
                     <tr>
-                        <th  width="5%"><input type="checkbox" name="id[]" value="{{$v->cate_id}}"></th>
+                        <th align="center">
+                                <span class="checkall" style="vertical-align:middle;">
+									{{Form::checkbox('id[]',$v['cate_id'],null)}}
+                                </span>
+                        </th>
                         <td class="tc">
                             {{--排序: 需要参数 本身框位置,id值--}}
                             <input type="text" name="ord[]" onchange="changeOrder(this,{{$v->cate_id}})" value="{{$v->cate_order}}" >
@@ -89,7 +94,7 @@
                         <br /><span class="rows">{{$count}} </span>
                     </div>
                 </div>
-    </form>
+            {{Form::close()}}
     <!--搜索结果页面 列表 结束-->
     <script>
         //$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});

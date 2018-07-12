@@ -75,7 +75,7 @@
                         <td>{{str_limit($v->link_title,50)}}</td>
                         <td>{{$v->link_url}}</td>
                         <td>
-                            <a href="{{url('admin/restore')}}/{{$v->link_id}}">还原</a>
+                            <a href="{{url('admin/links/restore')}}/{{$v->link_id}}">还原</a>
                             <a href="javascript:void(0)" onclick="delLink({{$v->link_id}})">删除</a>
                         </td>
                     </tr>
@@ -143,7 +143,7 @@
         //一键还原
         $("#restoreAll").click(function () {
             //alert("{{url('admin/restoreAll')}}");
-            document.deform.action="{{url('admin/restoreAll')}}";
+            document.deform.action="{{url('admin/links/restoreAll')}}";
             document.deform.submit();
         })
     </script>

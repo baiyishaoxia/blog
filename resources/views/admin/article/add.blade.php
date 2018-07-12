@@ -26,7 +26,6 @@
         </div>
         <div class="result_content">
             <div class="short_wrap">
-                <a href="#"><i class="fa fa-recycle"></i>批量删除</a>
                 <a href="{{url('admin/article')}}"><i class="fa fa-refresh"></i>全部文章</a>
             </div>
         </div>
@@ -34,8 +33,9 @@
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form action="{{url('admin/article/store')}}" method="post">
-            {{csrf_field()}}
+        {{Form::open(['url'=>url('admin/article/store'),'id'=>'form1'])}}
+        {{--<form action="{{url('admin/article/store')}}" method="post">--}}
+            {{--{{csrf_field()}}--}}
             <table class="add_tab">
                 <tbody>
                 <tr>
@@ -53,14 +53,14 @@
                 <tr>
                     <th>文章标题：</th>
                     <td>
-                        <input type="text" class="lg" name="art_title">
+                        {{Form::text('art_title',null,['class'=>'lg'])}}
                         <p>标题可以写30个字</p>
                     </td>
                 </tr>
                 <tr>
                     <th><i class="require">*</i>作者：</th>
                     <td>
-                        <input type="text" class="sm" name="art_author">
+                        {{Form::text('art_author',null,['class'=>'sm'])}}
                     </td>
                 </tr>
                 <tr>
@@ -99,13 +99,13 @@
                 <tr>
                     <th>关键词：</th>
                     <td>
-                        <input type="text" class="lg" name="art_tag">
+                        {{Form::text('art_tag',null,['class'=>'lg'])}}
                     </td>
                 </tr>
                 <tr>
                     <th>描述：</th>
                     <td>
-                        <textarea name="art_discription"></textarea>
+                        {{Form::textarea('art_discription',null)}}
                     </td>
                 </tr>
                 <tr>
@@ -122,13 +122,13 @@
                 <tr>
                     <th></th>
                     <td>
-                        <input type="submit" value="提交">
+                        {{Form::submit('提交保存',['class'=>'btn'])}}
                         <input type="button" class="back" onclick="history.go(-1)" value="返回">
                     </td>
                 </tr>
                 </tbody>
             </table>
-        </form>
+        {{Form::close()}}
     </div>
 
 @endsection
