@@ -37,7 +37,8 @@ class Category extends Model
 
     //分类列表用的数据(使用多维,除去本身id)
     public static function moreEditTree($cate_id){
-        $cateInfo = self::orderBy('cate_order','asc')->where('cate_id','<>',$cate_id)->get();
+        //$cateInfo = self::orderBy('cate_order','asc')->where('cate_id','<>',$cate_id)->get();
+        $cateInfo = self::orderBy('cate_order','asc')->get();
         //二次遍历查询顶级分类
         foreach ($cateInfo as $key => $value) {
             if($value['cate_pid'] > 0){
