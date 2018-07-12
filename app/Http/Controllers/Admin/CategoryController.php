@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Model\Article;
 use App\Http\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -109,6 +110,14 @@ class CategoryController extends CommonController
     public function update($cate_id)
     {
         $input = Input::except('_token','_method');
+        if($input['cate_pid']!= $cate_id) {
+            $input['cate_pid'] = $input['cate_pid'];
+        }else{
+            return back()->withInput()->withErrors("父级不可以是本身");
+        }
+        if(Category::where('cate_pid',$cate_id)->count()>0){
+            return back()->withInput()->withErrors("该父级有子级,请先删除子级后修改");
+        }
         $re = Category::where('cate_id',$cate_id)->update($input);
         if($re){
             return redirect('admin/category');
@@ -140,5 +149,30 @@ class CategoryController extends CommonController
         }
         return $data;
     }
+
+    //region   批量删除        tang
+    public function postDel(Request $request)
+    {
+        $input = $request->all();
+        try{
+            if (Article::whereIn('cate_id',$input['id'])->count()>0){
+                return redirect('admin/category')->withSuccess("分类下存在内容，请删除完后再进行此操作");
+            }
+            if(Category::whereIn('cate_pid',$input['id'])->count()>0){
+                return back()->withInput()->withErrors("该父级有子级,请先删除子级后删除");
+            }else{
+                $re = Category::whereIn('cate_id',$input['id'])->delete();
+                if($re){
+                    return back()->withErrors("删除成功");
+                }else{
+                    return back()->withErrors("数据异常,删除失败");
+                }
+            }
+        }catch (\Exception $e){
+            //AdminErrorLog::log($e);
+            return back()->withErrors("操作异常");
+        }
+    }
+    //endregion
 
 }

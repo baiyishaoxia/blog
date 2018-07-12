@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Model\Links;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\URL;
 
 class LinksController extends CommonController
 {
@@ -102,7 +103,7 @@ class LinksController extends CommonController
     {
        $re = Links::restore($link_id);
        if($re){
-           return redirect('admin/recycle');
+           return redirect(\URL::action('Admin\LinksController@recycle'));
        }else{
            return back()->withErrors('数据异常，还原失败！');
        }
@@ -125,7 +126,7 @@ class LinksController extends CommonController
                 return back()->withErrors('数据异常，批量删除失败');
             }
         }else{
-                return redirect('admin/links');
+                return redirect('admin/links')->withErrors('请选择要删除的记录数');
         }
     }
     //批量还原
@@ -135,12 +136,12 @@ class LinksController extends CommonController
         if(isset($link_id['id'])){
             $re = Links::restoreAll($link_id['id']);
             if($re) {
-                return redirect('admin/recycle');
+                return redirect(\URL::action('Admin\LinksController@recycle'));
             }else{
                 return back()->withErrors('数据异常，批量还原失败');
             }
         }else{
-            return redirect('admin/recycle');
+            return redirect(URL::action('Admin\LinksController@recycle'))->withSuccess('请选择还原的数据');
         }
     }
     //响应回调函数
@@ -150,8 +151,8 @@ class LinksController extends CommonController
         $id = $input['filed_id'];             //字段id值
         $orderName = $input['order_name'];    //排序字段名
         $order = $input['filed_order'];      //排序order值
-        $model = $input['model'];             //所属模型  （未实现可变类）
-        $input = $model::find($id);
+        //$model = $input['model'];             //所属模型  （未实现可变类）
+        $input = Links::find($id);
         $input->$orderName = $order;
         $re = $input->update();
         if($re){
