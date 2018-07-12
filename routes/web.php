@@ -45,6 +45,7 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     //分类
     Route::resource('category','CategoryController');
     Route::post('cate/changeOrder','CategoryController@changeOrder');
+    Route::post('cate/delAll','CategoryController@postDel');
 
     //文章(资源  搜索  移动到回收站)
     //回收站列表
@@ -67,14 +68,18 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::any('upload','CommonController@upload');
 
     //友情链接
-    Route::resource('links','LinksController');
     //回收站、还原、逻辑删除、批量删除、批量还原、排序
-    Route::get('recycle','LinksController@recycle');
-    Route::get('restore/{link_id}','LinksController@restore');
+    Route::get('links/recycle','LinksController@recycle');
+    Route::get('links/restore/{link_id}','LinksController@restore');
     Route::get('links/del/{link_id}','LinksController@del');
-    Route::post('delAll','LinksController@delLinkAll');
-    Route::post('restoreAll','LinksController@restoreAll');
+    Route::post('links/delAll','LinksController@delLinkAll');
+    Route::post('links/restoreAll','LinksController@restoreAll');
     Route::post('link/changeOrder','LinksController@changeOrder');
+
+    Route::resource('links','LinksController');
+
+    //图片列表
+    Route::get('');
 });
 
 
