@@ -115,7 +115,7 @@ class CategoryController extends CommonController
         }else{
             return back()->withInput()->withErrors("父级不可以是本身");
         }
-        if(Category::where('cate_pid',$cate_id)->count()>0){
+        if(Category::where('cate_pid',$cate_id)->count()>0  && $input['cate_pid']!=null){
             return back()->withInput()->withErrors("该父级有子级,请先删除子级后修改");
         }
         $re = Category::where('cate_id',$cate_id)->update($input);
@@ -160,13 +160,12 @@ class CategoryController extends CommonController
             }
             if(Category::whereIn('cate_pid',$input['id'])->count()>0){
                 return back()->withInput()->withErrors("该父级有子级,请先删除子级后删除");
+            }
+            $re = Category::whereIn('cate_id',$input['id'])->delete();
+            if($re){
+                return back()->withErrors("删除成功");
             }else{
-                $re = Category::whereIn('cate_id',$input['id'])->delete();
-                if($re){
-                    return back()->withErrors("删除成功");
-                }else{
-                    return back()->withErrors("数据异常,删除失败");
-                }
+                return back()->withErrors("数据异常,删除失败");
             }
         }catch (\Exception $e){
             //AdminErrorLog::log($e);
