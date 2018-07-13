@@ -78,11 +78,30 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
 
     Route::resource('links','LinksController');
 
+    //图片分类
+    Route::get('image/list','ImagesListController@index');
+    Route::get('image/list/create/{Pid?}','ImagesListController@getCreate');
+    Route::post('image/list/create','ImagesListController@postCreate');
+    Route::get('image/list/edit/{id}','ImagesListController@getEdit');
+    Route::post('image/list/edit','ImagesListController@postEdit');
+    Route::post('image/list/delAll','ImagesListController@postDel');
     //图片列表
-    Route::get('');
+    Route::get('images/content','ImagesContentController@index');
+    Route::get('image/content/create','ImagesContentController@getCreate');
+    Route::post('image/content/create','ImagesContentController@postCreate');
+    Route::post('image/content/delAll','ImagesContentController@postDel');
+    Route::get('image/content/del','ImagesContentController@del');
 });
 
+Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namespace'=>'Background'],function (){
+    //region   上传        tang
+    Route::post('file','UploadController@postFile');
+    Route::post('image','UploadController@postImg');
+    Route::post('edimg','UploadController@postEditorImg');
+    Route::post('video','UploadController@postVideo');
+    //endregion
 
+});
 
 Auth::routes();
 
