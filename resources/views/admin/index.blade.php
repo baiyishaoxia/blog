@@ -30,7 +30,8 @@
 					<li><a href="{{Url('admin/article/create')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>添加文章</a></li>
 					<li><a href="{{Url('admin/article')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>文章列表</a></li>
 					<li><a href="{{url('admin/links')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>友情链接</a></li>
-					<li><a href="img.html" target="main"><i class="fa fa-fw fa-image"></i>图片列表</a></li>
+					<li><a href="{{URL::action('Admin\ImagesListController@index')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>图片分类</a></li>
+					<li><a href="{{URL::action('Admin\ImagesContentController@index')}}" target="main"><i class="fa fa-fw fa-image"></i>图片列表</a></li>
 				</ul>
 			</li>
 			<li>

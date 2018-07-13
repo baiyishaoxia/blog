@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>后台管理系统</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{asset('admin/style/css/ch-ui.admin.css')}}">
     <link rel="stylesheet" href="{{asset('admin/style/css/admin.css')}}">
