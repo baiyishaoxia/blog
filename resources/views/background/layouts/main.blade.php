@@ -16,6 +16,7 @@
     {{Html::script('background/script/common.js')}}
     {{Html::script('background/js/uploader.js')}}
     {{Html::script('background/js/laymain.js')}}
+    @include('UEditor::head')
     @yield('css')
 </head>
 
