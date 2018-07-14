@@ -115,4 +115,16 @@ class ImagesListController extends Controller
     }
     //endregion
 
+    //region   保存        tang
+    public function postSave(Request $request){
+        $input=$request->all();
+        foreach ($input['data'] as $id => $data){
+            $category_data = ImagesClass::find($id);
+            $category_data -> Sort =$data['sort'];
+            $category_data -> save();
+        }
+        return redirect(\URL::action('Admin\ImagesListController@index'))->withSuccess("保存排序成功");
+    }
+    //endregion
+
 }

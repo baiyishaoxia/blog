@@ -15,8 +15,8 @@ class ImagesContentController extends Controller
 
         if($request->get('ImgClass_Id')){
             $img_class_ids = $request->get('ImgClass_Id');
-//            $data = $data->whereIn('ImgClass_Id', ImagesClass::where('Id',$request->get('ImgClass_Id'))->pluck('Id')->toArray())
-//                ->orWhereIn('ImgClass_Id',ImagesClass::where('Pid',$request->get('ImgClass_Id'))->pluck('Id')->toArray());
+            //$data = $data->whereIn('ImgClass_Id', ImagesClass::where('Id',$request->get('ImgClass_Id'))->pluck('Id')->toArray())
+            //             ->orWhereIn('ImgClass_Id',ImagesClass::where('Pid',$request->get('ImgClass_Id'))->pluck('Id')->toArray());
             $data = $data->whereIn('ImgClass_Id', function ($query) use($img_class_ids) {
                     return $query->from('images_class')->where('Id',$img_class_ids)->select('Id');
                  })
@@ -57,7 +57,7 @@ class ImagesContentController extends Controller
         }
         if($count == count($imgs)){
             \DB::commit();
-            return redirect(\URL::action('Admin\ImagesListController@index'))->withSuccess('新增成功');
+            return redirect(\URL::action('Admin\ImagesContentController@index'))->withSuccess('新增成功');
         }else{
             \DB::rollBack();
             return back()->withInput()->withErrors('数据异常,新增失败');
@@ -70,7 +70,7 @@ class ImagesContentController extends Controller
     {
         $re = ImagesContent::destroy($request->get('id'));
         if($re){
-            return redirect(\URL::action('Admin\ImagesListController@index'))->withSuccess('删除成功');
+            return redirect(\URL::action('Admin\ImagesContentController@index'))->withSuccess('删除成功');
         }else{
             return back()->withInput()->withErrors('数据异常,删除失败');
         }
