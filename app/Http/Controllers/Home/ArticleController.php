@@ -26,9 +26,9 @@ class ArticleController extends Controller
                $filename = date('Y-m-d-H-i-s').'-'.uniqid().'.'.$ext;
                $res = \Storage::disk('uploads')->put($filename,file_get_contents($oldpath));
                if ($res){
-                   return true;
+                   return '测试上传方法成功,上传的目录在/public/file/...';
                }else{
-                   return false;
+                   return '上传失败';
                }
            }
         }
