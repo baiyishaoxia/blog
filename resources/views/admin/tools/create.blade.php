@@ -144,13 +144,13 @@
     </div>
     <div class="tab-content" style="display: none">
         <!-- 加载编辑器的容器 -->
-        <script id="container2" name="Content" type="text/plain">
+        <script id="container" name="Content" type="text/plain">
         </script>
 
         <!-- 实例化编辑器 -->
         <script type="text/javascript">
             $(function () {
-                var ue = UE.getEditor('container2');
+                var ue = UE.getEditor('container')
                 ue.ready(function() {
                     ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');//此处为支持laravel5 csrf ,根据实际情况修改,目的就是设置 _token 值.
                 });
