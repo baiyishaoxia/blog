@@ -90,7 +90,7 @@
                                         'uploader' : '{{URL::action('Admin\CommonController@upload')}}',
                                         'onUploadSuccess':function (file,data,response) {
                                             $('input[name=art_thumb]').val(data);
-                                            $('#art_thumb_img').attr('src','/'+data);
+                                            $('#art_thumb_img').attr('src','/storage/'+data);
                                         }
                                     });
                                 });
@@ -100,7 +100,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <img src="/{{$filed->art_thumb}}" alt="" id="art_thumb_img" class="sm" style="max-width: 350px;max-height: 100px" >
+                            <img src="{{Storage::url($filed->art_thumb)}}" alt="" id="art_thumb_img" class="sm" style="max-width: 350px;max-height: 100px" >
                         </td>
                     </tr>
                     <tr>

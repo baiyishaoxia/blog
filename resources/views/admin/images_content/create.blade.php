@@ -16,7 +16,7 @@
             $(".upload-video").each(function () {
                 $(this).InitUploader({sendurl: "{{URL::action('Background\UploadController@postImg')}}", swf: "{{asset('/background/script/webuploader/uploader.swf')}}" });
             });
-            $(".upload-album").InitUploader({ btntext: "批量上传", multiple: true, sendurl: "{{URL::action('Background\UploadController@postImg')}}", swf: "{{asset('/background/script/webuploader/uploader.swf')}}" });
+            $(".upload-album").InitUploader({ btntext: "批量上传", multiple: true, sendurl: "{{URL::action('Background\UploadController@postImg')}}", swf: "{{asset('background/script/webuploader/uploader.swf')}}" });
             //创建上传附件
             $(".attach-btn").click(function () {
                 showAttachDialog();
@@ -48,7 +48,7 @@
     </script>
 @endsection
 @section('content')
-    {{Form::open(['url'=>URL::action('Admin\ImagesListController@postCreate'),'id'=>'form1'])}}
+    {{Form::open(['url'=>URL::action('Admin\ImagesContentController@postCreate'),'id'=>'form1'])}}
         <!--导航栏-->
         <div class="location">
             <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>

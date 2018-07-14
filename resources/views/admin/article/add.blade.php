@@ -83,7 +83,7 @@
                                     'uploader' : '{{URL::action('Admin\CommonController@upload')}}',
                                     'onUploadSuccess':function (file,data,response) {
                                         $('input[name=art_thumb]').val(data);
-                                        $('#art_thumb_img').attr('src','/'+data);
+                                        $('#art_thumb_img').attr('src','/storage/'+data );
                                     }
                                 });
                             });

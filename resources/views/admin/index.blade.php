@@ -7,6 +7,7 @@
 			<ul>
 				<li><a href="#" class="active">首页</a></li>
 				<li><a href="#">管理页</a></li>
+				<li><a href="{{URL::action('HomeController@index')}}" target="_blank">预览前台</a></li>
 			</ul>
 		</div>
 		<div class="top_right">
@@ -39,6 +40,7 @@
 				<ul class="sub_menu">
 					<li><a href="#" target="main"><i class="fa fa-fw fa-cubes"></i>网站配置</a></li>
 					<li><a href="#" target="main"><i class="fa fa-fw fa-database"></i>备份还原</a></li>
+					<li><a href="{{URL::action('Admin\ToolsController@getCreate')}}" target="main"><i class="fa fa-fw fa-database"></i>工具类</a></li>
 				</ul>
 			</li>
 			<li>

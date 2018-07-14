@@ -90,7 +90,7 @@
                         <td><a href="#">{{\App\Http\Model\Category::find($v->cate_id)->cate_name}}</a></td>
                         <td>{{$v->art_tag}}</td>
                         <td>{{str_limit($v->art_discription,18)}}</td>
-                        <td><img src="/{{$v->art_thumb}}" width="100" height="60" align="center"></td>
+                        <td><img src="{{Storage::url($v->art_thumb)}}" width="100" height="60" align="center"></td>
                         <td>{{ str_limit(strip_tags($v->art_content),18) }}  </td>
                         <td>{{date('Y-m-d',$v->art_time)}}</td>
                         <td>{{$v->art_view}}</td>
