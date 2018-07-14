@@ -4,6 +4,27 @@ namespace App\Common;
 
 class Tree
 {
+    /**
+     * 父亲菜单，type为多加一个无父亲分类，type为2多加一个所有分类
+     * @param array $tree
+     * @param int $type
+     * @return array
+     * @author tang
+     */
+    public static function tree($tree,$type=1){
+        $tree = self::getCateTree($tree,'|--');
+        $tree=self::array2ToArray1($tree,'id','title');
+        if($type==1){
+            $tree=[''=>'无父亲分类']+$tree;
+        }
+        if($type==2){
+            $tree=[''=>'所有分类']+$tree;
+        }
+        return $tree;
+    }
+
+
+
 
     //region   建立树形        tang
     public static function getCateTree($data ,$html = '--',$pid=0,$level=0)
@@ -23,9 +44,7 @@ class Tree
     //endregion
 
 
-
-
-
+    //region   转数组        tang
     public static function array2ToArray1($data,$index,$val){
         $arr=array();
         foreach ($data as $key =>$value){
@@ -33,6 +52,8 @@ class Tree
         }
         return $arr;
     }
+    //endregion
+
     /**
      * 组合一维数组
      * @param $cate
