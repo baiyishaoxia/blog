@@ -166,6 +166,9 @@ return [
         //Form组件
         Collective\Html\HtmlServiceProvider::class,
 
+        //UEditor百度编辑器
+        Stevenyangecho\UEditor\UEditorServiceProvider::class
+
     ],
 
     /*
@@ -218,6 +221,9 @@ return [
         //Form组件
         'Form'=>Collective\Html\FormFacade::class,
         'Html'=>Collective\Html\HtmlFacade::class,
+
+        //UEditor百度编辑器
+        'UEditor'=>Stevenyangecho\UEditor\UEditorServiceProvider::class
 
     ],
 
