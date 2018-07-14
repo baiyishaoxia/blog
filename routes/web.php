@@ -85,27 +85,36 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::get('image/list/edit/{id}','ImagesListController@getEdit');
     Route::post('image/list/edit','ImagesListController@postEdit');
     Route::post('image/list/delAll','ImagesListController@postDel');
+    Route::post('image/list/save','ImagesListController@postSave');
     //图片列表
     Route::get('images/content','ImagesContentController@index');
     Route::get('image/content/create','ImagesContentController@getCreate');
     Route::post('image/content/create','ImagesContentController@postCreate');
     Route::post('image/content/delAll','ImagesContentController@postDel');
     Route::get('image/content/del','ImagesContentController@del');
+
+    //region   工具类        tang
+    Route::get('tools/content/create','ToolsController@getCreate');
+    //endregion
 });
 
 Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namespace'=>'Background'],function (){
-    //region   上传        tang
+    //region   上传组件        tang
     Route::post('file','UploadController@postFile');
     Route::post('image','UploadController@postImg');
     Route::post('edimg','UploadController@postEditorImg');
     Route::post('video','UploadController@postVideo');
     //endregion
 
+    //region   工具配置        tang
+    Route::get('tools/file','ToolsController@getFile');
+    //endregion
+
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/front', 'HomeController@index');
 
 Route::group(['middleware'=>['web'],'prefix'=>'home','namespace'=>'Home'],function () {
     Route::any('/upload', 'ArticleController@upload');
