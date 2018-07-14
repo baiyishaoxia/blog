@@ -17,7 +17,7 @@ class Upload
      * @param $request_file
      * @param $type
      * @return array
-     * @author Ruiec.Simba
+     * @author tang
      */
     public static function file(UploadedFile $request_file, $type){
         #获取图片服务商
