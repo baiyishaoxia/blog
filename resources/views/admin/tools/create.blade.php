@@ -73,7 +73,9 @@
                     <li><a class="selected" href="javascript:;">基本选项框</a></li>
                     <li><a href="#tab2">扩展选项框1</a></li>
                     <li><a href="javascript:;">扩展选项框2</a></li>
-                    <li><a href="javascript:;">其他扩展</a></li>
+                    <li><a href="javascript:;">Laraver百度编辑器</a></li>
+                    <li><a href="javascript:;">标准编辑器</a></li>
+                    <li><a href="javascript:;">简洁版编辑器</a></li>
                     <li><a href="javascript:;">SEO选项</a></li>
                 </ul>
             </div>
@@ -108,6 +110,29 @@
                 {{Form::textarea('Intro',null,['class'=>'input normal'])}}
             </dd>
         </dl>
+        <dl>
+            <dt>排序1</dt>
+            <dd>
+                {{Form::text('sort',99,['class'=>'input small'])}}
+                <span class="Validform_checktip">*数字，越小越向前</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>排序2</dt>
+            <dd>
+                {{Form::number('Sort', 99, ['class' => 'input normal'])}}
+                <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>是否为系统分类</dt>
+            <dd>
+                <div class="rule-single-checkbox">
+                    {{Form::checkbox('is_sys',true)}}
+                </div>
+                <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
     </div>
 
     <div class="tab-content" id="tab2" style="display: none">
@@ -120,6 +145,40 @@
         <div class="cc">
 
         </div>
+        <dl>
+            <dt>推荐类型</dt>
+            <dd>
+                <div class="rule-multi-checkbox">
+                        <span>
+                            {{Form::checkbox('is_top',true,null,['id'=>'is_top'])}}
+                            {{Form::label('is_top','置顶')}}
+                            {{Form::checkbox('is_red',true,null,['id'=>'is_red'])}}
+                            {{Form::label('item1','推荐')}}
+                            {{Form::checkbox('is_hot',true,null,['id'=>'is_hot'])}}
+                            {{Form::label('item1','热门')}}
+                            {{Form::checkbox('is_slide',true,null,['id'=>'is_slide'])}}
+                            {{Form::label('item1','幻灯片')}}
+                        </span>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>单选框</dt>
+            <dd>
+                <div class="rule-multi-radio">
+                <span>
+                    {{Form::radio('radio[]',1,null,['id'=>'people1'])}}
+                    {{Form::label('people1','选择1')}}
+                    {{Form::radio('radio[]',2,null,['id'=>'people2'])}}
+                    {{Form::label('people2','选择2')}}
+                    {{Form::radio('radio[]',3,null,['id'=>'people3'])}}
+                    {{Form::label('people3','选择3')}}
+                    {{Form::radio('radio[]',4,null,['id'=>'people4'])}}
+                    {{Form::label('people4','选择4')}}
+                </span>
+                </div>
+            </dd>
+        </dl>
     </div>
     <div class="tab-content" style="display: none">
         <dl>
@@ -143,16 +202,43 @@
         </dl>
     </div>
     <div class="tab-content" style="display: none">
-        <!-- 加载编辑器的容器 -->
+        <!-- 加载Laravel编辑器的容器 -->
         <script id="container" name="Content" type="text/plain">
         </script>
 
         <!-- 实例化编辑器 -->
         <script type="text/javascript">
             $(function () {
-                var ue = UE.getEditor('container')
+                var ue = UE.getEditor('container');
                 ue.ready(function() {
                     ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');//此处为支持laravel5 csrf ,根据实际情况修改,目的就是设置 _token 值.
+                });
+            })
+        </script>
+    </div>
+    <div class="tab-content" style="display: none">
+        <!-- 加载标准编辑器的容器 -->
+        {{Form::textarea('standard',null,['id'=>'id_001'])}}
+        <script type="text/javascript">
+            $(function () {
+                var ue = UE.getEditor("id_001");
+                ue.ready(function() {
+                    ue.execCommand("serverparam", "_token", "'.csrf_token().'");//此处为支持laravel5 csrf ,根据实际情况修改,目的就是设置 _token 值.
+                });
+            })
+        </script>
+    </div>
+    <div class="tab-content" style="display: none">
+        <!-- 加载简洁编辑器的容器 -->
+        {{Form::textarea('concise',null,['id'=>'id_002'])}}
+        <script type="text/javascript">
+            $(function () {
+                layui.use("layedit", function(){
+                    var layedit = layui.layedit;
+                    //构建一个默认的编辑器
+                    var index = layedit.build("id_002",{
+                        tool: ["Bold","italic","underline","strikeThrough","|","face", "link", "unlink", "|", "left", "center", "right"]
+                    });
                 });
             })
         </script>
