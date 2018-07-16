@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Common\\Api\\File\\File' => $baseDir . '/app/Common/Api/File/File.php',
+    'App\\Common\\ArrayTools' => $baseDir . '/app/Common/ArrayTools.php',
     'App\\Common\\Tree' => $baseDir . '/app/Common/Tree.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -23,6 +24,8 @@ return array(
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+    'App\\Http\\Controllers\\Background\\FileController' => $baseDir . '/app/Http/Controllers/Background/FileController.php',
+    'App\\Http\\Controllers\\Background\\FileKeyController' => $baseDir . '/app/Http/Controllers/Background/FileKeyController.php',
     'App\\Http\\Controllers\\Background\\ToolsController' => $baseDir . '/app/Http/Controllers/Background/ToolsController.php',
     'App\\Http\\Controllers\\Background\\UploadController' => $baseDir . '/app/Http/Controllers/Background/UploadController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',

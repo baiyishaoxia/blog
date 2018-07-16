@@ -369,6 +369,7 @@ class ComposerStaticInit298b804ea6e21e34df9ccfdc536aa0b4
 
     public static $classMap = array (
         'App\\Common\\Api\\File\\File' => __DIR__ . '/../..' . '/app/Common/Api/File/File.php',
+        'App\\Common\\ArrayTools' => __DIR__ . '/../..' . '/app/Common/ArrayTools.php',
         'App\\Common\\Tree' => __DIR__ . '/../..' . '/app/Common/Tree.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -385,6 +386,8 @@ class ComposerStaticInit298b804ea6e21e34df9ccfdc536aa0b4
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+        'App\\Http\\Controllers\\Background\\FileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Background/FileController.php',
+        'App\\Http\\Controllers\\Background\\FileKeyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Background/FileKeyController.php',
         'App\\Http\\Controllers\\Background\\ToolsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Background/ToolsController.php',
         'App\\Http\\Controllers\\Background\\UploadController' => __DIR__ . '/../..' . '/app/Http/Controllers/Background/UploadController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
