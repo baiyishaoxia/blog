@@ -144,4 +144,40 @@ class Tree
         return $arr;
     }
     //endregion
+
+    //region   建立树形        tang
+    public static function getCateTrees($data ,$name='Name',$par_id='Pid',$id='Id',$html = '--',$pid=0,$level=0)
+    {
+        static $cate_list = array();
+        foreach ($data as $row){
+            if($row[$par_id] == $pid){
+                $row['level'] = $level;
+                $row['html']  = str_repeat($html, $level);
+                $row[$name]=$row['html'].$row[$name];
+                $row['imgs'] = \Qiniu\json_decode($row['imgs']);
+                $cate_list[] = $row;
+                self::getCateTrees($data,$name,$par_id,$id,$html,$row[$id],$level+1);
+            }
+        }
+        return $cate_list;
+    }
+    //endregion
+
+
+    //region   树形结构        tang
+    public static function trees($tree_array,$par_id='parent_id',$id='id',$name='name',$type=1){
+        $tree = self::getCateTrees($tree_array,$name,$par_id,$id,'|--');
+        $tree=self::array2ToArray1($tree,$id,$name);
+        if($type==1){
+            $tree=[''=>'无父亲分类']+$tree;
+        }
+        if($type==2){
+            $tree=[''=>'所有分类']+$tree;
+        }
+        if($type==3){
+            $tree = ['new'=>'最新','hot'=>'热门','top'=>'头条'];
+        }
+        return $tree;
+    }
+    //endregion
 }
