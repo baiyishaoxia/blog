@@ -94,7 +94,18 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::get('image/content/del','ImagesContentController@del');
 
     //region   工具类        tang
-    Route::get('tools/content/create','ToolsController@getCreate');
+    Route::get('tools/list','ToolsController@getIndex');
+
+    Route::get('tools/list/create/{parent_id?}','ToolsController@getCreate');
+    Route::post('tools/list/create','ToolsController@postCreate');
+    Route::get('tools/list/edit/{id}','ToolsController@getEdit');
+    Route::post('tools/list/edit','ToolsController@postEdit');
+    Route::post('tools/list/save','ToolsController@postSave');
+    Route::post('tools/list/delAll','ToolsController@postDel');
+    Route::get('tools/list/top/{id}','ToolsController@getTop');
+    Route::get('tools/list/red/{id}','ToolsController@getRed');
+    Route::get('tools/list/hot/{id}','ToolsController@getHot');
+    Route::get('tools/list/slide/{id}','ToolsController@getSlide');
     //endregion
 });
 
@@ -106,8 +117,19 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namesp
     Route::post('video','UploadController@postVideo');
     //endregion
 
-    //region   工具配置        tang
+    //region   工具配置 （附件上传时）       tang
     Route::get('tools/file','ToolsController@getFile');
+    //endregion
+
+    //region   上传文件配置        tang
+    Route::get('file/list','FileController@getList');
+    Route::get('file/create','FileController@getCreate');
+    Route::post('file/create','FileController@postCreate');
+    Route::get('file/edit/{id}','FileController@getEdit');
+    Route::post('file/edit','FileController@postEdit');
+    Route::post('file/del','FileController@postDel');
+    Route::get('file/set_key/{sms_id}','FileKeyController@getSetKey');
+    Route::post('file/set_key','FileKeyController@postSetKey');
     //endregion
 
 });
