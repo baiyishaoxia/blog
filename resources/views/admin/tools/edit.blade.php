@@ -49,7 +49,8 @@
     </script>
 @endsection
 @section('content')
-    {{Form::open(['url'=>URL::action('Admin\ToolsController@postCreate'),'id'=>'form1'])}}
+    {{Form::model($data = \App\Http\Model\Admin\ToolsList::find($id),['url'=>URL::action('Admin\ToolsController@postEdit'),'id'=>'form1'])}}
+    {{Form::hidden('id')}}
     <!--导航栏-->
     <div class="location">
         <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>
@@ -84,7 +85,7 @@
             <dt>类别框</dt>
             <dd>
                 <div class="rule-single-select">
-                    {{Form::select('parent_id',\App\Http\Model\Admin\ToolsList::tree(1),$parent_id)}}
+                    {{Form::select('parent_id',\App\Http\Model\Admin\ToolsList::tree(1))}}
                 </div>
             </dd>
         </dl>
@@ -141,13 +142,13 @@
             <dd>
                 <div class="rule-multi-checkbox">
                         <span>
-                            {{Form::checkbox('is_top',true,null,['id'=>'is_top'])}}
+                            {{Form::checkbox('is_top',true,null,['id'=>'is_top',($data->is_top)?'selected':''])}}
                             {{Form::label('is_top','置顶')}}
-                            {{Form::checkbox('is_red',true,null,['id'=>'is_red'])}}
+                            {{Form::checkbox('is_red',true,null,['id'=>'is_red',($data->is_red)?'selected':''])}}
                             {{Form::label('item1','推荐')}}
-                            {{Form::checkbox('is_hot',true,null,['id'=>'is_hot'])}}
+                            {{Form::checkbox('is_hot',true,null,['id'=>'is_hot',($data->is_hot)?'selected':''])}}
                             {{Form::label('item1','热门')}}
-                            {{Form::checkbox('is_slide',true,null,['id'=>'is_slide'])}}
+                            {{Form::checkbox('is_slide',true,null,['id'=>'is_slide',($data->is_slide)?'selected':''])}}
                             {{Form::label('item1','幻灯片')}}
                         </span>
                 </div>
@@ -199,7 +200,18 @@
                 <div class="upload-box upload-album"></div>
                 <div class="photo-list">
                     <ul>
-
+                        @foreach($imgs as $key => $value)
+                            <li>
+                                <input type="hidden" class="path" name="photo[{{$key}}][path]" value="{{$value}}">
+                                <input type="hidden" class="remark" name="photo[{{$key}}][info]" value="{{$key}}-{{$value}}">
+                                <div class="img-box" onclick="setFocusImg(this);">
+                                    <img src="{{Storage::url($value)}}" bigsrc="{{Storage::url($value)}}">
+                                    <span class="remark"><i>{{$key}}</i></span>
+                                </div>
+                                <a href="javascript:;" onclick="setRemark(this);">描述</a>
+                                <a href="javascript:;" onclick="delImg(this);">删除</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </dd>
@@ -207,7 +219,7 @@
     </div>
     <div class="tab-content" style="display: none">
         <!-- 加载Laravel编辑器的容器 -->
-        <script id="container" name="abstruct" type="text/plain">
+        <script id="container" name="abstruct" type="text/plain">{!! $data->abstruct !!}
         </script>
 
         <!-- 实例化编辑器 -->
