@@ -33,12 +33,12 @@ class SendEmail implements ShouldQueue
     {
         //编辑任务, 在控制器推送队列任务,再执行队列监听器 php artisan queue:listen
 
-        \Mail::raw('队列测试',function ($message){
-            $message->subject('队列主题测试');
-            $message->to($this->email);
-        });
+//        \Mail::raw('队列测试',function ($message){
+//            $message->subject('队列主题测试');
+//            $message->to($this->email);
+//        });
 
-        //\Log::info('已发送邮件 - '.$this->email);
+        \Log::info('已发送邮件 - '.$this->email);
 
     }
 }
