@@ -28,7 +28,7 @@ class File extends Model
     /**
      * 文件上传的类型
      * @return array
-     * @author Ruiec.Simba
+     * @author tangzhifu
      */
     public static function type(){
         return[
@@ -42,9 +42,9 @@ class File extends Model
      * 获取正在启用的一个文件服务商
      * @param $type
      * @return mixed
-     * @author Ruiec.Simba
+     * @author tangzhifu
      */
     public static function enableOne($type){
-        return File::where('is_enable','true')->where('type',$type)->first();
+        return File::where('is_enable',true)->where('type',$type)->first();
     }
 }

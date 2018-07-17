@@ -17,7 +17,7 @@ class Upload
      * @param $request_file
      * @param $type
      * @return array
-     * @author tang
+     * @author tangzhifu
      */
     public static function file(UploadedFile $request_file, $type){
         #获取图片服务商
@@ -61,7 +61,7 @@ class Upload
      * @param $size
      * @param string $type
      * @return string
-     * @author Ruiec.Simba
+     * @author tangzhifu
      */
     private static function converKit($size, $type='byte'){
         if($size>1024){
