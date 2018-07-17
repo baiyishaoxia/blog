@@ -14,7 +14,7 @@
                 $(this).InitUploader({sendurl: "<?php echo e(URL::action('Background\UploadController@postFile')); ?>", swf: "<?php echo e(asset('background/script/webuploader/uploader.swf')); ?>"},1);
             });
             $(".upload-video").each(function () {
-                $(this).InitUploader({sendurl: "<?php echo e(URL::action('Background\UploadController@postImg')); ?>", swf: "<?php echo e(asset('background/script/webuploader/uploader.swf')); ?>" });
+                $(this).InitUploader({sendurl: "<?php echo e(URL::action('Background\UploadController@postVideo')); ?>", swf: "<?php echo e(asset('background/script/webuploader/uploader.swf')); ?>" });
             });
             $(".upload-album").InitUploader({ btntext: "批量上传", multiple: true, sendurl: "<?php echo e(URL::action('Background\UploadController@postImg')); ?>", swf: "<?php echo e(asset('background/script/webuploader/uploader.swf')); ?>" });
             //创建上传附件

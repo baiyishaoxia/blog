@@ -88,9 +88,9 @@
                     <th><?php echo e(($val['files'])?'有':'无'); ?></th>
                     <th><?php echo e(($val['video'])?'有':'无'); ?></th>
                     <th><?php if(is_array($val['imgs'])): ?> <?php $count=0; ?><?php $__currentLoopData = $val['imgs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k=>$v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php $count++; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php echo e($count); ?>张 <?php else: ?>无<?php endif; ?></th>
-                    <th><?php echo $val['abstruct']; ?></th>
-                    <th><?php echo $val['content']; ?></th>
-                    <th><?php echo $val['discription']; ?></th>
+                    <th><?php echo e(str_limit(strip_tags($val['abstruct']),6)); ?></th>
+                    <th><?php echo e(str_limit(strip_tags($val['content']),6)); ?></th>
+                    <th><?php echo e(str_limit(strip_tags($val['discription']),6)); ?></th>
                     <td align="center"><?php echo e(Form::text('data['.$val['id'].'][sort]',$val['sort'],['class'=>'sort'])); ?></td>
                     <th><?php echo $val['created_at']; ?></th>
 

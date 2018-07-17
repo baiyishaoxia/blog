@@ -112,7 +112,9 @@
 
                 <div class="page_list">
                     <div>
-                        <?php echo e($data->links()); ?>
+                        <?php echo e($data->appends(['cate_id'=>Request::get('cate_id'),
+                                          'keywords'=>Request::get('keywords')
+                                         ])->links()); ?>
 
                         <br /><span class="rows"><?php echo e($count); ?></span>
                     </div>
