@@ -6,33 +6,33 @@ use Illuminate\Support\Facades\Storage;
 /**
  * Class File
  * @package App\Common\Api\File
- * Author Ruiec.Simba
+ * Author tang
  */
 class File
 {
     /**
      * 存储类型
      * @var
-     * @author Ruiec.Simba
+     * @author tang
      */
     public $disk;
     /**
      * 存储名称
      * @var
-     * @author Ruiec.Simba
+     * @author tang
      */
     public $file_name;
     /**
      * 存储路径
      * @var
-     * @author Ruiec.Simba
+     * @author tang
      */
     public $file_path;
 
     /**
      * 处理保存
      * @return false|string
-     * @author Ruiec.Simba
+     * @author tang
      */
     public function store(){
         $path='';
