@@ -14,7 +14,8 @@ class FileKeyController extends Controller
     public function getSetKey($file_id)
     {
         $data = FileKey::where('file_id', $file_id)->get();
-        return view('background.file.set_key', compact('data', 'file_id'));
+        $title = ['*文件大小','*可上传类型','*存储格式'];
+        return view('background.file.set_key', compact('data', 'file_id','title'));
     }
     //endregion
 

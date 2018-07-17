@@ -41,6 +41,25 @@ class ToolsController extends Controller
         ];
         $validator = \Validator::make($input,$rules,$message);
         if($validator->passes()){
+            //批量上传
+            if(isset($input['photo'])){
+                $img = array();
+                foreach ($input['photo'] as $key => $val){
+                    $img[]=$val['path'];
+                }
+                $input['imgs']  = json_encode($img);
+                unset($input['photo']);
+            }
+            if(isset($input['Version'])){
+                $input['file_version'] = $input['Version'];
+                $input['file_system'] = $input['System'];
+                $input['file_path'] = $input['Path'];
+                $input['file_log'] = $input['Log'];
+                unset($input['Version']);unset($input['System']);
+                unset($input['Path']);unset($input['Log']);
+                //文件标识
+                $input['files'] = true;
+            }
             $re = ToolsList::create($input);
             if($re){
                 return redirect(\URL::action('Admin\ToolsController@getIndex'))->withSuccess('创建成功');
@@ -83,6 +102,7 @@ class ToolsController extends Controller
         ];
         $validator = \Validator::make($input, $rules, $message);
         if ($validator->passes()) {
+            //批量上传
             if(isset($input['photo'])){
                 $img = array();
                 foreach ($input['photo'] as $key => $val){
@@ -90,6 +110,17 @@ class ToolsController extends Controller
                 }
                 $input['imgs']  = json_encode($img);
                 unset($input['photo']);
+            }
+            //文件上传
+            if(isset($input['Version'])){
+                $input['file_version'] = $input['Version'];
+                $input['file_system'] = $input['System'];
+                $input['file_path'] = $input['Path'];
+                $input['file_log'] = $input['Log'];
+                unset($input['Version']);unset($input['System']);
+                unset($input['Path']);unset($input['Log']);
+                //文件标识
+                $input['files'] = true;
             }
             $re = ToolsList::where('id', $input['id'])->update($input);
             if ($re) {

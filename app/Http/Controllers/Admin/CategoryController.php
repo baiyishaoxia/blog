@@ -13,12 +13,22 @@ use Illuminate\Support\Collection;
 class CategoryController extends CommonController
 {
     //admin.category(get) 全部分类列表
-    public function index()
+    public function index(Request $request)
     {
         //第①种初始化数据(无限级联)
         //$cateInfo = Category::moreTree();
-        $tree = Category::orderBy('cate_order','asc')
-            ->get();
+        $tree = Category::orderBy('cate_order','asc')->get();
+        if($request->get('cate_id')){
+            $cate_id = $request->get('cate_id');
+            $tree = Category::orderBy('cate_order','asc')->whereIn('cate_id', function ($query) use($cate_id) {
+                return $query->from('category')->where('cate_id',$cate_id)->select('cate_id');
+            })->orWhereIn('cate_id',function ($query) use($cate_id) {
+                return $query->from('category')->where('cate_pid', $cate_id)->select('cate_id');
+            })->get();
+        }
+        if($request->get('keywords')){
+            $tree = Category::where('cate_name', 'like','%'.$request->get('keywords').'%')->get();
+        }
         foreach ($tree as $key => $value){
             $tree[$key]['cate_name'] = '<span class="folder-open"></span>'.$value['cate_name'];
         }

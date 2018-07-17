@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Events\hahaEvents;
 use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -118,6 +119,9 @@ class ArticleController extends Controller
     //region   推送队列任务        tang
     public function queue()
     {
+        //执行监听的事件
+        //event(new hahaEvents());
+        //创建分发任务方法
         dispatch(new SendEmail('1174881637@qq.com'));
     }
     //endregion
