@@ -87,9 +87,9 @@
                     <th>{{($val['files'])?'有':'无'}}</th>
                     <th>{{($val['video'])?'有':'无'}}</th>
                     <th>@if(is_array($val['imgs'])) <?php $count=0; ?>@foreach($val['imgs'] as $k=>$v) <?php $count++; ?> @endforeach {{$count}}张 @else无@endif</th>
-                    <th>{!! $val['abstruct'] !!}</th>
-                    <th>{!! $val['content'] !!}</th>
-                    <th>{!! $val['discription'] !!}</th>
+                    <th>{{ str_limit(strip_tags($val['abstruct']),6) }}</th>
+                    <th>{{ str_limit(strip_tags($val['content']),6) }}</th>
+                    <th>{{ str_limit(strip_tags($val['discription']),6) }}</th>
                     <td align="center">{{Form::text('data['.$val['id'].'][sort]',$val['sort'],['class'=>'sort'])}}</td>
                     <th>{!! $val['created_at'] !!}</th>
 

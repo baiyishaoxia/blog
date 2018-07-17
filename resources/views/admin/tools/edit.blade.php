@@ -135,7 +135,12 @@
             </dd>
         </dl>
         <div class="cc">
-
+            @if(!is_null($data->file_version))
+                <dl><dt>版本号  </dt><dd>{{Form::text('Version', $data->file_version, ['class' => 'input normal'])}}</dd></dl>
+                <dl><dt>适应系统</dt><dd>{{Form::text('System', $data->file_system, ['class' => 'input normal'])}}</dd></dl>
+                <dl><dt>版本附件</dt><dd>{{Form::text('Path', $data->file_path, ['class' => 'input normal', 'readonly' => 'true'])}}</dd></dl>
+                <dl><dt>升级日志</dt><dd>{{Form::textarea('Log', $data->file_log, ['class' => 'input normal'])}}</dd></dl>
+            @endif
         </div>
         <dl>
             <dt>推荐类型</dt>

@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="style/css/ch-ui.admin.css">
-	<link rel="stylesheet" href="style/font/css/font-awesome.min.css">
-    <script type="text/javascript" src="style/js/jquery.js"></script>
-    <script type="text/javascript" src="style/js/ch-ui.admin.js"></script>
-</head>
-<body>
+@extends('layouts.admin')
+@section('content')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 商品列表
     </div>
     <!--面包屑导航 结束-->
 
 	<!--结果页快捷搜索框 开始-->
 	<div class="search_wrap">
-        <form action="" method="post">
+        <form action="{{URL::action('Admin\ReadSystemController@getList')}}">
             <table class="search_tab">
                 <tr>
                     <th width="120">选择分类:</th>
@@ -30,7 +22,7 @@
                     </td>
                     <th width="70">关键字:</th>
                     <td><input type="text" name="keywords" placeholder="关键字"></td>
-                    <td><input type="submit" name="sub" value="查询"></td>
+                    <td><input type="submit" name="sub1" value="查询"></td>
                 </tr>
             </table>
         </form>
@@ -163,8 +155,4 @@
         </div>
     </form>
     <!--搜索结果页面 列表 结束-->
-
-
-
-</body>
-</html>
+@endsection

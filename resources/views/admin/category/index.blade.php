@@ -15,15 +15,11 @@
                 <tr>
                     <th width="120">选择分类:</th>
                     <td>
-                        <select onchange="javascript:location.href=this.value;">
-                            <option value="">全部</option>
-                            <option value="http://www.baidu.com">百度</option>
-                            <option value="http://www.sina.com">新浪</option>
-                        </select>
+                        {{Form::select('cate_id',\App\Http\Model\Category::tree2(2),Request::get('cate_id'))}}
                     </td>
                     <th width="70">关键字:</th>
                     <td><input type="text" name="keywords" placeholder="关键字"></td>
-                    <td><input type="submit" name="sub" value="查询"></td>
+                    <td><a class="btn-search" href="javascript:void (0)">查询</a></td>
                 </tr>
             </table>
         </form>
@@ -40,7 +36,7 @@
             <div class="result_content">
                 <div class="short_wrap">
                     <a href="{{url('admin/category/create')}}"><i class="fa fa-plus"></i>添加分类</a>
-                    <a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a>
+                    <a class="all" href="javascript:;" onclick="checkAll(this);"><i class="fa fa-refresh"></i><span>全选</span></a>
                     <a href="{{URL::action('Admin\CategoryController@postDel')}}" class="del btndel" ><i class="fa fa-recycle"></i>批量删除</a>
                 </div>
             </div>
@@ -90,7 +86,9 @@
                 </table>
                 <div class="page_list">
                     <div>
-                        {{$data->links()}}
+                        {{$data->appends(['cate_id'=>Request::get('cate_id'),
+                                          'keywords'=>Request::get('keywords')
+                                         ])->links()}}
                         <br /><span class="rows">{{$count}} </span>
                     </div>
                 </div>

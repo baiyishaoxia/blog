@@ -62,9 +62,8 @@
                 <tbody  id="html">
                 @foreach($data as $key => $val)
                     <tr>
-                        <td align="center">
-                        </td>
-                        <td>{{Form::text('data['.$key.'][name]',$val['name'],['class'=>'input normal','datatype'=>'*'])}}</td>
+                        <td align="center"></td>
+                        <td>{{Form::text('data['.$key.'][name]',$val['name'],['class'=>'input normal','datatype'=>'*'])}}@if($key<3){{$title[$key]}}@endif</td>
                         <td>{{Form::text('data['.$key.'][key]',$val['key'],['class'=>'input normal','datatype'=>'*'])}}</td>
                         <td align="left">
                             <a href="javscript:void(0)" class="remove">删除</a>

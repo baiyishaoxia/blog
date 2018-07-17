@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="style/css/ch-ui.admin.css">
-	<link rel="stylesheet" href="style/font/css/font-awesome.min.css">
-    <script type="text/javascript" src="style/js/jquery.js"></script>
-    <script type="text/javascript" src="style/js/ch-ui.admin.js"></script>
-</head>
-<body>
+@extends('layouts.admin')
+@section('content')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
@@ -49,7 +41,7 @@
                     <td><button onclick="add_attr(this)">添加规格组</button></td>
                 </tr>
 
-                <!-- <tr>
+               <tr>
                     <th width="120"></th>
                     <td>
                         <dl class="attr">
@@ -57,7 +49,7 @@
                             <dd>规格值：<input type="text" name="attr_value[]" onchange="attr_total()"></dd>
                         </dl>
                     </td>
-                </tr> -->
+                </tr>
                 <tr class="attr_price" style="display:none;background:#FCF8E3;">
                     <th width="120">组合价格</th>
                     <td>
@@ -117,7 +109,6 @@
             var input = '<input type="text" name="attr_value[]" onchange="attr_total(this)">';
             $(obj).parents('dl').find('dd').append(input);
         }
-
         //读取全部属性，重组属性数据
         function attr_total(obj){
             //判断当前属性值有对应的属性名称
@@ -125,7 +116,6 @@
                 alert('请先输入属性名');
                 return;
             }
-
             var attrData = {}; //定义空对象保存属性数据
             var attrName = []; //规格名称
             var attrValue = []; //规格值
@@ -146,5 +136,4 @@
         }
 
     </script>
-</body>
-</html>
+@endsection

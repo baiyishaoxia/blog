@@ -3,6 +3,7 @@
 <head>
     <title>后台管理系统</title>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="{{asset('admin/style/img/logo.ico')}}" type="image/x-icon" />
     <link rel="stylesheet" href="{{asset('admin/style/css/ch-ui.admin.css')}}">
     <link rel="stylesheet" href="{{asset('admin/style/css/admin.css')}}">
     <link rel="stylesheet" href="{{asset('admin/style/font/css/font-awesome.min.css')}}">
@@ -23,6 +24,7 @@
 @yield('content')
 
 @include('admin.msg')
+
 
 </body>
 </html>

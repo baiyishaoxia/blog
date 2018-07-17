@@ -106,7 +106,9 @@
 
                 <div class="page_list">
                     <div>
-                        {{$data->links()}}
+                        {{$data->appends(['cate_id'=>Request::get('cate_id'),
+                                          'keywords'=>Request::get('keywords')
+                                         ])->links()}}
                         <br /><span class="rows">{{$count}}</span>
                     </div>
                 </div>
