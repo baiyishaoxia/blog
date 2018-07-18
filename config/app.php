@@ -165,9 +165,10 @@ return [
 
         //Form组件
         Collective\Html\HtmlServiceProvider::class,
-
         //UEditor百度编辑器
-        Stevenyangecho\UEditor\UEditorServiceProvider::class
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
+        //数据填充组件
+        Orangehill\Iseed\IseedServiceProvider::class,
 
     ],
 
