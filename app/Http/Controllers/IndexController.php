@@ -58,10 +58,13 @@ class IndexController extends Controller
         return view('Test.verifycode');
     }
     //生成验证码
-    public function getCreateverify($tmp)
+    public function getCreateverify($tmp,$is_numb=true)
     {
        //生成验证码图片的Builder对象，配置相应属性
         $builder = new CaptchaBuilder();
+        if($is_numb){
+            $builder->setPhrase(rand(100,999));
+        }
        //可以设置图片宽高及字体
         // 设置背景颜色
         $builder->setBackgroundColor(123, 203, 230);
