@@ -29,7 +29,8 @@
 							<input type="text" class="code" name="code"/>
 							<span><i class="fa fa-check-square-o"></i></span>
 							{{--<img src="{{url('/admin/code')}}" alt="" onclick="this.src='{{url('/admin/code')}}?'+ Math.random()">--}}
-							<img src="{{ url('test/getCreateverify')}}/{{rand(1,999)}}" alt="" onclick="this.src='{{url('/test/getCreateverify')}}/'+ Math.random()">
+							{{--<img src="{{ url('test/getCreateverify')}}/{{rand(1,999)}}" alt="" onclick="this.src='{{url('/test/getCreateverify')}}/'+ Math.random()">--}}
+							{!! \App\Http\Model\Common\Captcha::code(200,80) !!}
 						</li>
 						<li>
 							<input type="submit" value="立即登陆"/>
@@ -43,4 +44,11 @@
 	</header>
 	<script type="text/javascript" src="{{asset('admin/theme/login/js/jquery.1.12.4.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('admin/theme/login/js/constellation.js')}}"></script>
+	<script type="text/javascript">
+        var url=$('.captcha').attr('src');
+        $(".captcha").click(function () {
+            url_c = url + "?tmp" + Math.random();
+            this.src=url_c;
+        })
+	</script>
 @endsection
