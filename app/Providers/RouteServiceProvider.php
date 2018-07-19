@@ -39,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
         $this->mapAdminRoutes();
         $this->mapCommonRoutes();
+        $this->mapAppRoutes();
 
 
         //
@@ -89,6 +90,16 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/common.php'));
+    }
+    //endregion
+
+    //region   后台接口路由        tang
+    protected function mapAppRoutes()
+    {
+        Route::prefix('app')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/app.php'));
     }
     //endregion
 
