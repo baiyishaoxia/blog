@@ -1,0 +1,83 @@
+1、配置多个路由
+①：在Providers文件夹的RouteServiceProvider复制一份路由方法
+    protected function mapAdminRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin.php'));
+    }
+②：在map()方法中进行注册
+    $this->mapAdminRoutes();
+
+③：在routes文件夹中新建admin.php并编辑
+	<?php
+	Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=>'Admin'],function () {
+		   .....
+	});
+
+④：多路由配置完成
+
+
+2、事件的使用
+
+①创建一个事件 php artisan make:event hahaEvents
+②监听事件     php artisan make:listener hahaLinstener
+③在hahaLinstener.php的handle方法中编辑 \Log::info('已发送邮件');
+④在Providers文件夹的EventServiceProvider.php的$listen中加入配置
+        //测试事件
+        'App\Events\hahaEvents' => [
+            'App\Listeners\hahaLinstener',
+        ],
+⑤绑定事件完成
+⑥在任意方法中执行 event(new hahaEvents());即可
+
+
+3、服务的使用
+①在Console中新建一个服务MigrationMysqlSecond,可参考(Server.php)
+②在Kernel.php的protected $commands属性中加入 MigrationMysqlSecond::class,注册
+③服务中的protected $signature = 'migration_mysql_second';属性值是执行服务时所需要用到的名称
+④在handle()方法中编辑：
+       //清空表
+       RuiecArticleClass::truncate();
+       //需要迁移来的数据表
+       $data1 =\App\Http\Model\Background\MysqlRuiec\RuiecArticleClass::orderBy('Id','asc')->get()->toArray();
+       //插入到现在的数据表
+       $res1 = RuiecArticleClass::insert($data1);
+       \DB::beginTransaction();
+       if ($res1 && ...){
+           \DB::commit();
+           dump('执行成功');
+       }else{
+           \DB::rollBack();
+           dump('执行失败');
+       }
+⑤其中，在\App\Http\Model\Background\MysqlRuiec\RuiecArticleClass中需要配置如下属性：
+    //需要被连接的数据库
+    protected $connection = 'mysql_ruiec';
+    //指定表
+    protected $table = 'navigation';
+    //指定主键
+    protected $primaryKey = 'Id';
+    protected $guarded = [];
+    public $timestamps = false;
+⑥执行php artisan migration_mysql_second 等待完成
+
+
+4、数据填充
+①安装扩展 composer require orangehill/iseed
+②在你的 config/app.php 文件中添加 Service Provider
+	'providers' => [
+		...
+		Orangehill\Iseed\IseedServiceProvider::class,
+	],
+③使用如下命令可生成 users 表的 seeder 文件:
+   php artisan iseed users
+  也可选择同时生成 users 和 topics seeder 文件:
+   php artisan iseed users,topics
+  在DatabaseSeeder.php的run方法编辑填充顺序
+④在命令行后面带上 force 参数, 将强制覆盖原有生成的 seeder 文件, 如下:
+   php artisan iseed users --force
+⑤使用 database 参数, 可指定数据库里的数据表, 如下:
+   php artisan iseed users --database=mysql2
+⑥使用php artisan db:seed 可运行填充数据,等待完成

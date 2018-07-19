@@ -1,54 +1,54 @@
-1¡¢ÌáÊ¾Óï
+1ã€æç¤ºè¯­
 https://www.cnblogs.com/xuzhengzong/p/8918852.html
 
 
-½â¾ö·½°¸
+è§£å†³æ–¹æ¡ˆ
 
-¢Ùphp artisan ide-helper:generate
+â‘ php artisan ide-helper:generate
 
-¢Úcomposer require barryvdh/laravel-ide-helper
-¢Ûapp/Exception/Handler.php   Ò³ÃæÏÂÃæµÄº¯Êýrender,×¢ÊÍµôÆäÓàµÄÓï¾ä,ÍùÆäÖÐÌí¼Ó:
- return parent::render($request,$exception);¼´¿É½â¾ö
+â‘¡composer require barryvdh/laravel-ide-helper
+â‘¢app/Exception/Handler.php   é¡µé¢ä¸‹é¢çš„å‡½æ•°render,æ³¨é‡ŠæŽ‰å…¶ä½™çš„è¯­å¥,å¾€å…¶ä¸­æ·»åŠ :
+ return parent::render($request,$exception);å³å¯è§£å†³
 
 
-2¡¢Form²å¼þ
+2ã€Formæ’ä»¶
 http://www.bubuko.com/infodetail-2131301.html
 
-½â¾ö·½°¸
+è§£å†³æ–¹æ¡ˆ
 
-¢Ù´ò¿ªconfig/app.php
-¢ÚÒÆ³ýÒÔÏÂ¾ä
-providersÖÐµÄ¡®Illuminate\Html\HtmlServiceProvider¡®
-aliasesÖÐµÄ
-¡®Form¡®      => ¡®Illuminate\Html\FormFacade¡®,
-¡®HTML¡®      => ¡®Illuminate\Html\HtmlFacade
-¢ÛÒÆ³ýilluminate/html°ü
+â‘ æ‰“å¼€config/app.php
+â‘¡ç§»é™¤ä»¥ä¸‹å¥
+providersä¸­çš„â€˜Illuminate\Html\HtmlServiceProviderâ€˜
+aliasesä¸­çš„
+â€˜Formâ€˜      => â€˜Illuminate\Html\FormFacadeâ€˜,
+â€˜HTMLâ€˜      => â€˜Illuminate\Html\HtmlFacade
+â‘¢ç§»é™¤illuminate/htmlåŒ…
 
 composer remove illuminate/html
 composer update
 
-¢Ü´úÌæµÄ°üÎªlaravelcollective/html
+â‘£ä»£æ›¿çš„åŒ…ä¸ºlaravelcollective/html
 
-ËùÒÔ£º
+æ‰€ä»¥ï¼š
 
-°²×°laravelcollective/html
+å®‰è£…laravelcollective/html
 
 composer require laravelcollective/html
-»Øµ½config/app.php
+å›žåˆ°config/app.php
 
-¼ÓÈëÈçÏÂÓï¾ä£º
+åŠ å…¥å¦‚ä¸‹è¯­å¥ï¼š
 
-providersÖÐµÄ
+providersä¸­çš„
 Collective\Html\HtmlServiceProvider::class,
 
-aliasesÖÐµÄ
-¡®Form¡®=>Collective\Html\FormFacade::class,
-¡®Html¡®=>Collective\Html\HtmlFacade::class,
+aliasesä¸­çš„
+â€˜Formâ€˜=>Collective\Html\FormFacade::class,
+â€˜Htmlâ€˜=>Collective\Html\HtmlFacade::class,
 
-¢ÝÎÊÌâ½â¾ö
+â‘¤é—®é¢˜è§£å†³
 
 
-3¡¢laravelÌø×ªÊÓÍ¼
+3ã€laravelè·³è½¬è§†å›¾
 
-¢Ù¹¤¾ßphpstrom
-¢ÚFile->Settings->Languages & Frameworks->Laravel->¹´Ñ¡£¨Enable plugin for this projectÓëUse AutoPopup for completion£©
+â‘ å·¥å…·phpstrom
+â‘¡File->Settings->Languages & Frameworks->Laravel->å‹¾é€‰ï¼ˆEnable plugin for this projectä¸ŽUse AutoPopup for completionï¼‰

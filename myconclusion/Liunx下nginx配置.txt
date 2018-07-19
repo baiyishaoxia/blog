@@ -1,0 +1,136 @@
+﻿①查看是否安装了gcc
+yum list installed | grep "gcc"
+卸载
+rpm -e gcc-* 
+
+②安装依赖
+yum -y install gcc
+yum -y install gcc pcre-devel zlib-devel openssl openssl-devel
+
+③下载nginx
+wget https://nginx.org/download/nginx-1.15.0.tar.gz
+
+④解压
+tar -zxvf nginx-1.15.0.tar.gz
+
+⑤安装
+./configure --prefix=/usr/local/nginx
+make
+make install
+
+
+测试是否安装成功
+# cd到刚才配置的安装目录/usr/loca/nginx/
+./sbin/nginx -t
+
+查看端口是否开启：
+firewall-cmd --query-port=80/tcp
+#no
+
+下面我们开启80端口：
+firewall-cmd --add-port=80/tcp --permanent
+#重启防火墙
+systemctl restart firewalld
+
+
+配置nginx：
+
+编辑nginx配置文件/usr/local/nginx/conf/nginx.conf，主要修改nginx的server {}配置块中的内容，修改location块，追加index.php让nginx服务器默认支持index.php为首页，
+
+然后配置.php请求被传送到后端的php-fpm模块，默认情况下php配置块是被注释的，此时去掉注释并修改为以下内容：
+fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+
+然后重启nginx：/usr/local/nginx/sbin/nginx -s reload
+service nginx stop
+
+2、安装PHP7.1.4（http://cn.php.net/downloads.php/下载的版本）
+
+①下载
+wget -O php-7.1.4.tar.gz http://hk1.php.net/get/php-7.1.4.tar.gz/from/this/mirror
+
+②解压
+tar -zxvf php-7.0.11.tar.gz
+cd php-7.0.11
+
+③安装必要的依赖
+yum -y install bzip2-devel curl-devel freetype-devel gcc libjpeg-devel libpng-devel libxslt-devel libxml2-devel openssl-devel pcre-devel pcre-devel zlib-devel
+
+④配置安装变量
+./configure --prefix=/usr/local/php --with-curl --with-freetype-dir --with-gd --with-gettext --with-iconv-dir --with-kerberos --with-libdir=lib64 --with-libxml-dir --with-mysqli --with-openssl --with-pcre-regex --with-pdo-mysql --with-pdo-sqlite --with-pear --with-png-dir --with-jpeg-dir --with-xmlrpc --with-xsl --with-zlib --with-bz2 --with-mhash --enable-fpm --enable-bcmath --enable-libxml --enable-inline-optimization --enable-gd-native-ttf --enable-mbregex --enable-mbstring --enable-opcache --enable-pcntl --enable-shmop --enable-soap --enable-sockets --enable-sysvsem --enable-sysvshm --enable-xml --enable-zip
+其中，“/usr/local/php”是安装路径，可以改成自己喜欢的安装路径。
+
+⑤源码编译 && 安装
+# 在解压目录执行编译命令：make
+cd php-7.0.11
+make
+make install
+
+⑥配置php
+cp /usr/php-7.1.4/php.ini-development /usr/local/php/php.ini
+cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf
+
+⑦配置php.ini
+“cgi.fix_pathinfo=0”
+
+⑧配置多站点，在/usr/local/nginx/conf/nginx.conf最后加入
+ include /usr/local/nginx/conf/site.d/*.conf;
+
+⑨自定义站点
+
+⑩重启nginx：/usr/local/nginx/sbin/nginx -s reload
+
+查询进程：
+ps -ef |grep redis
+
+结束进程：
+kill -9 端口号
+
+
+安装Mysql（https://dev.mysql.com/downloads/mysql/）
+https://www.cnblogs.com/kyuang/p/6801942.html
+
+①安装mysql5.7
+wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.18-linux-glibc2.5-x86_64.tar.gz
+
+②检查mysql组和用户是否存在，如无创建。
+[root@localhost ~]$ cat /etc/group | grep mysql
+mysql:x:490:
+[root@localhost ~]$ cat /etc/passwd | grep mysql
+mysql:x:496:490::/home/mysql:/bin/bash
+以上为默认存在的情况，如无，执行添加命令：
+
+[root@localhost ~]$groupadd mysql
+[root@localhost ~]$useradd -r -g mysql mysql
+//useradd -r参数表示mysql用户是系统用户，不可用于登录系统。
+
+③解压 移动 更改用户和组
+       tar -zvxf mysql-5.7.12-linux-glibc2.5-x86_64.tar.gz
+       mv mysql-5.7.12-linux-glibc2.5-x86_64 /user/local/mysql
+       chown -R mysql mysql/
+       chgrp -R mysql mysql/
+
+④初始化 bin/mysqld --user=mysql --basedir=/usr/local/mysql-5.7.12 --datadir=/usr/local/mysql-5.7.12/data/  --initialize
+  初始密码 2018-07-19T04:34:59.603082Z 1 [Note] A temporary password is generated for root@localhost: -/g!hjD!p3_j
+
+⑤复制
+[root@localhost mysql]$ cp -a ./support-files/my-default.cnf /etc/my.cnf
+[root@localhost mysql]$ cp -a ./support-files/mysql.server  /etc/init.d/mysqld
+[root@localhost mysql]$ cd bin/
+[root@localhost bin]# ./mysqld_safe --user=mysql &
+
+⑥重启Mysql
+[root@localhost bin]# /etc/init.d/mysqld restart
+
+
+LNMP一键集成(https://lnmp.org/install.html)
+wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh lnmp
+(备用通道: 可以将上述的http://soft.vpser.net/ 替换成 http://202.115.33.13/soft/)
+
+
+
+
+
+
+
+
