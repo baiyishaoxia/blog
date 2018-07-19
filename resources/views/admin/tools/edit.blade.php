@@ -15,7 +15,7 @@
                 $(this).InitUploader({sendurl: "{{URL::action('Background\UploadController@postFile')}}", swf: "{{asset('background/script/webuploader/uploader.swf')}}"},1);
             });
             $(".upload-video").each(function () {
-                $(this).InitUploader({sendurl: "{{URL::action('Background\UploadController@postImg')}}", swf: "{{asset('background/script/webuploader/uploader.swf')}}" });
+                $(this).InitUploader({sendurl: "{{URL::action('Background\UploadController@postVideo')}}", swf: "{{asset('background/script/webuploader/uploader.swf')}}" });
             });
             $(".upload-album").InitUploader({ btntext: "批量上传", multiple: true, sendurl: "{{URL::action('Background\UploadController@postImg')}}", swf: "{{asset('background/script/webuploader/uploader.swf')}}" });
             //创建上传附件
@@ -183,6 +183,7 @@
                 <div class="upload-box upload-img"></div>
             </dd>
         </dl>
+        @if($data->files == null)
         <dl>
             <dt>文件上传</dt>
             <dd>
@@ -190,6 +191,7 @@
                 <div class="upload-box upload-file"></div>
             </dd>
         </dl>
+        @endif
         <dl>
             <dt>视频上传</dt>
             <dd>
