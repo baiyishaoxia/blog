@@ -57,6 +57,7 @@
 					<li><a href="{{URL::action('Admin\ReadSystemController@getElement')}}" target="main"><i class="fa fa-fw fa-tags"></i>其它组件</a></li>
 					<li><a href="{{URL::action('Admin\ReadSystemController@getList')}}" target="main"><i class="fa fa-fw fa-database"></i>商品页模板</a></li>
 					<li><a href="{{URL::action('Admin\ReadSystemController@getTab')}}" target="main"><i class="fa fa-fw fa-font"></i>商品页模板</a></li>
+					<li><a href="{{URL::action('Admin\SystemToolsController@getIndex')}}" target="main"><i class="fa fa-fw fa-font"></i>图片裁剪</a></li>
 				</ul>
 			</li>
 		</ul>
