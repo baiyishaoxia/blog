@@ -12,14 +12,14 @@ class FileKey extends Model
      * 关联到模型的数据表
      *
      * @var string
-     * @author Ruiec.Simba
+     * @author tang
      */
     protected $table = 'file_key';
     /**
      * 不能被批量赋值的属性,如果你想要让所有属性都是可批量赋值的，可以将 $guarded 属性设置为空数组
      *
      * @var array
-     * @author Ruiec.Simba
+     * @author tang
      */
     protected $guarded = [];
 
@@ -27,7 +27,7 @@ class FileKey extends Model
      * 读取KEY
      * @param $name
      * @return mixed
-     * @author Ruiec.Simba
+     * @author tang
      */
     public static function read($name){
         $minutes=Carbon::now()->addMinute(10);
