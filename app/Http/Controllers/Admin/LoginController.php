@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Model\User;
+use App\Http\Model\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
@@ -25,8 +25,8 @@ class LoginController extends CommonController
                 return back()->with('msg','验证码错误!');
             }
             //取一条记录
-            $user = User::first();
-            if($user->user_name != $input['user_name'] || Crypt::decrypt($user->user_pass) != $input['user_pass']){
+            $user = Admin::first();
+            if($user->username != $input['user_name'] || Crypt::decrypt($user->password) != $input['user_pass']){
                 return back()->with('msg','用户名或密码错误!');
             }
             //将登陆信息写入session

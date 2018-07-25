@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Model\User;
+use App\Http\Model\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -37,10 +37,10 @@ class IndexController extends CommonController
             ];
             $validator = \Validator::make($input,$rules,$message);
             if($validator->passes()){
-                $user = User::first();                          //获取信息
-                $_password = \Crypt::decrypt($user->user_pass);//解密
+                $user = Admin::first();                          //获取信息
+                $_password = \Crypt::decrypt($user->password);//解密
                 if($input['password_o'] == $_password){
-                  $user->user_pass = \Crypt::encrypt($input['password']);//加密
+                  $user->password = \Crypt::encrypt($input['password']);//加密
                   $user->update();
                     //return redirect('admin/info'); //跳转
                     //return back()->with('errorss',);
