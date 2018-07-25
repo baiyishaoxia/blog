@@ -61,8 +61,7 @@ class Tree
      * @param string $pid
      * @param int $level
      * @return array
-     * @author Panjunwei
-     * @date 2016年7月12日10:50:45
+     * @author tang
      */
     public static function unlimitedForLevel ($cate, $html = '--', $pid = '0', $level = 0) {
         $arr = array();
@@ -87,7 +86,7 @@ class Tree
      * @param string $name
      * @param string $pid
      * @return array
-     * @author Ruiec.Simba
+     * @author tang
      */
     public static function unlimitedForLayer ($cate, $name = 'child', $pid = '0') {
         $arr = array();
@@ -109,7 +108,7 @@ class Tree
      * @param string $name
      * @param string $pid
      * @return array
-     * @author Ruiec.Simba
+     * @author tang
      */
     public static function unlimitedForLayerForArea ($cate, $name = 'child', $pid = '0') {
         $arr = array();
