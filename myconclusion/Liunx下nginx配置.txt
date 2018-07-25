@@ -126,6 +126,32 @@ mysql:x:496:490::/home/mysql:/bin/bash
 LNMP一键集成(https://lnmp.org/install.html)
 wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh lnmp
 (备用通道: 可以将上述的http://soft.vpser.net/ 替换成 http://202.115.33.13/soft/)
+wget http://202.115.33.13/soft/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh lnmp
++------------------------------------------------------------------------+
+|    lnmp status manage: lnmp {start|stop|reload|restart|kill|status}    |
++------------------------------------------------------------------------+
+|  phpMyAdmin: http://IP/phpmyadmin/                                     |
+|  phpinfo: http://IP/phpinfo.php                                        |
+|  Prober:  http://IP/p.php                                              |
++------------------------------------------------------------------------+
+|  Add VirtualHost: lnmp vhost add                                       |
++------------------------------------------------------------------------+
+|  Default directory: /home/wwwroot/default                              |
++------------------------------------------------------------------------+
+|  MySQL/MariaDB root password: tzf521                          |
++------------------------------------------------------------------------+
++-------------------------------------------+
+|    Manager for LNMP, Written by Licess    |
++-------------------------------------------+
+|              https://lnmp.org             |
++-------------------------------------------+
+
+Linux配置远程连接Mysql
+①查看端口:  show global variables like 'port';
+②查看ip访问: SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
+③新建一个所有ip可访问的用户baiyishaoxia密码tzf521:  GRANT ALL PRIVILEGES ON *.* TO 'baiyishaoxia'@'%' IDENTIFIED BY 'tzf521' WITH GRANT OPTION;
+④查看是否创建: SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
+⑤重启Mysql:service mysql restart
 
 
 

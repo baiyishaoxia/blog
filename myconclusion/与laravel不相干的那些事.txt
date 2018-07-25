@@ -1,3 +1,19 @@
 1、phpstorm激活码：http://180.76.140.202:9123
 
+2、vimplus的使用
+①安装
+git clone https://github.com/chxuan/vimplus.git ~/.vimplus
+cd ~/.vimplus
+sudo ./install.sh
+
+②快捷键
+1、ctrl+w(2) 目录与文件之间的切换 （ctrl + hjkl）
+2、ctrl+6    文件与文件之间的切换
+3、:bn       上一个文件
+4、:bp       下一个文件
+5、逗号+n    目录结构
+6、ctrl+n    当前活动下切换
+7、冒号+n    跳到第n行
+8、qa        全部关闭
+9、取消高亮  :noh
 

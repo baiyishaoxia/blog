@@ -32,6 +32,19 @@
 ⑤绑定事件完成
 ⑥在任意方法中执行 event(new hahaEvents());即可
 
+2.1、队列的使用
+①php artisan queue:table
+②运行数据迁移 php artisan migrate
+③创建队列 php artisan make:job SendEmail
+④失败的队列  php artisan queue:failed-table
+⑤监听     php artisan queue:listen
+⑥查看失败的表 php artisan queue:failed
+⑦重新执行指定行 php artisan queue:retry 1
+⑦重新执行指定所有 php artisan queue:retry all
+⑧忘记执行失败的指定行 php artisan queue:forget 1
+⑧忘记执行失败的所有行 php artisan queue:flush
+
+
 
 3、服务的使用
 ①在Console中新建一个服务MigrationMysqlSecond,可参考(Server.php)
