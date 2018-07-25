@@ -169,6 +169,8 @@ return [
         Stevenyangecho\UEditor\UEditorServiceProvider::class,
         //数据填充组件
         Orangehill\Iseed\IseedServiceProvider::class,
+        //图片处理组件
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -224,7 +226,10 @@ return [
         'Html'=>Collective\Html\HtmlFacade::class,
 
         //UEditor百度编辑器
-        'UEditor'=>Stevenyangecho\UEditor\UEditorServiceProvider::class
+        'UEditor'=>Stevenyangecho\UEditor\UEditorServiceProvider::class,
+
+        //图片处理组件
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 
