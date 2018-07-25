@@ -20,6 +20,7 @@ class CreateLinksTable extends Migration
             $table->string('link_title')->default('')->comment('标题');
             $table->string('link_url')->default('')->comment('链接');
             $table->integer('link_order')->default(0)->comment('排序');
+            $table->tinyInteger('link_isdel')->comment('0未删除1已删除');
         });
     }
 
