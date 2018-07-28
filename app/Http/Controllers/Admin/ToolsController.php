@@ -12,14 +12,37 @@ use Illuminate\Support\Facades\URL;
 class ToolsController extends Controller
 {
     //region   工具类        tang
-    public function getIndex()
+    public function getIndex(Request $request)
     {
-        $tree =ToolsList::orderBy('sort','asc')->get()->toArray();
+        $data = ToolsList::orderBy('sort','asc')->orderBy('id','desc');
+        if($request->get('field')=='red'){
+            $data = $data->where('is_red', true);
+        }elseif ($request->get('field')=='top'){
+            $data = $data->where('is_top', true);
+        }elseif ($request->get('field')=='hot'){
+            $data = $data->where('is_hot', true);
+        }elseif ($request->get('field')=='slide'){
+            $data = $data->where('is_slide', true);
+        }
+        if($request->get('id')){
+            $id = $request->get('id');
+            $data = $data->whereIn('id', function ($query) use($id) {
+                return $query->from('tools_list')->where('id',$id)->select('id');
+            })->orWhereIn('id',function ($query) use($id) {
+                return $query->from('tools_list')->where('parent_id', $id)->select('id');
+            });
+        }
+        if($request->get('keywords')){
+            $data = $data->where('text', 'like','%'.$request->get('keywords').'%');
+        }
+        $tree = $data->get()->toArray();
+        //$tree =ToolsList::orderBy('sort','asc')->get()->toArray();
         foreach ($tree as $key => $value){
             $tree[$key]['text'] = '<span class="folder-open"></span>'.$value['text'];
         }
         $data = Tree::getCateTrees($tree,'text','parent_id','id','<span class="folder-line"></span>');
-        return view('admin.tools.list',compact('data'));
+        $type = 'soft';
+        return view('admin.tools.list',compact('data','type'));
     }
     //endregion
 
@@ -154,7 +177,8 @@ class ToolsController extends Controller
             if(ToolsList::whereIn('parent_id',$input['id'])->count()>0){
                 return back()->withInput()->withErrors("该父级有子级,请先删除子级后删除");
             }
-            $re = ToolsList::whereIn('id',$input['id'])->delete();
+            //$re = ToolsList::whereIn('id',$input['id'])->delete();                  //未开启软删除可直接使用删除
+            $re = ToolsList::whereIn('id',$request->get('id'))->forceDelete(); //此写法为开启了软删除
             if($re){
                 return back()->withErrors("删除成功");
             }else{
@@ -166,6 +190,7 @@ class ToolsController extends Controller
     }
     //endregion
 
+    //region      选项[置顶/推荐/热门/幻灯片]        tang
     public function getTop($id){
         $content=ToolsList::find($id);
         $content->is_top=$content->is_top?false:true;
@@ -210,4 +235,53 @@ class ToolsController extends Controller
             return back()->withErrors("添加失败");
         }
     }
+    //endregion
+
+    //region   移动到回收站        tang
+    public function postSoftDel(Request $request)
+    {
+        try {
+            $input = $request->all();
+            ToolsList::destroy($input['id']);
+            return redirect(\URL::action('Admin\ToolsController@getIndex'))->withSuccess("软删除成功");
+        }catch (\Exception $e){
+            return back()->withErrors("操作异常");
+        }
+    }
+    //endregion
+
+    //region   回收站列表        tang
+    public function getRecycleList()
+    {
+        $tree =ToolsList::onlyTrashed()->orderBy('id', 'desc')->get()->toArray();
+        foreach ($tree as $key => $value){
+            $tree[$key]['text'] = '<span class="folder-open"></span>'.$value['text'];
+        }
+        $data = Tree::getCateTrees($tree,'text','parent_id','id','<span class="folder-line"></span>');
+        $type=  'del';
+        return view('admin.tools.list',compact('data','type'));
+    }
+    //endregion
+
+    //region   回收站内数据彻底删除        tang
+    public function postRecycleDel(Request $request)
+    {
+        ToolsList::whereIn('id',$request->get('id'))->forceDelete();
+        ToolsList::whereIn('parent_id',$request->get('id'))->update(['parent_id'=>null]);
+        return redirect(\URL::action('Admin\ToolsController@getRecycleList'))->withSuccess("删除成功");
+    }
+    //endregion
+
+    //region   回收站内数据还原        tang
+    public function postRestore(Request $request)
+    {
+        $ids = $request->get('id');
+        if($ids){
+            ToolsList::withTrashed()->whereIn('id',$ids)->restore();
+            return redirect(\URL::action('Admin\ToolsController@getRecycleList'))->withErrors('还原成功');
+        }else{
+            return back()->withErrors('还原失败,请选择需要还原的数据');
+        }
+    }
+    //endregion
 }

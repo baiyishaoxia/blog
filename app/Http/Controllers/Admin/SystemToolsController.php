@@ -15,7 +15,9 @@ class SystemToolsController extends Controller
 
     public function create(Request $request)
     {
-        dd($request->all());
+        //$request->only('img','width','height','news_img','myFilePath');
+        $input = $request->except('_token');
+        dd($input);
     }
 
     //region   图片裁剪        tang
