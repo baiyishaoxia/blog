@@ -34,7 +34,7 @@ Route::get('admin/getcode', 'Admin\LoginController@getcode');
 //Route::any('admin/index', 'Admin\IndexController@index');
 //Route::any('admin/info', 'Admin\IndexController@info');
 
-//路由分组
+//后台admin路由分组,会走admin.login中间件验证
 Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=>'Admin'],function (){
     Route::get('index', 'IndexController@index');
     Route::get('info', 'IndexController@info');
@@ -106,6 +106,10 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::get('tools/list/red/{id}','ToolsController@getRed');
     Route::get('tools/list/hot/{id}','ToolsController@getHot');
     Route::get('tools/list/slide/{id}','ToolsController@getSlide');
+    Route::post('tools/list/softdel','ToolsController@postSoftDel');
+    Route::get('tools/list/recycle/list','ToolsController@getRecycleList');
+    Route::post('tools/list/recycle/del','ToolsController@postRecycleDel');
+    Route::post('tools/list/recycle/restore','ToolsController@postRestore');
     //endregion
 });
 
@@ -134,6 +138,9 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namesp
 
 });
 
+
+
+//前台路由
 Auth::routes();
 
 Route::get('/front', 'HomeController@index');
