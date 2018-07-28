@@ -19,9 +19,9 @@ class AdminTableSeeder extends Seeder
         \DB::table('admin')->insert(array (
             0 => 
             array (
-                'user_id' => 1,
-                'user_name' => 'admin',
-                'user_pass' => Crypt::encrypt('admin'),
+                'id' => 1,
+                'username' => 'admin',
+                'password' => Crypt::encrypt('admin'),
             ),
         ));
         

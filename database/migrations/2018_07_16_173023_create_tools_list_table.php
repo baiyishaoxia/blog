@@ -45,6 +45,7 @@ class CreateToolsListTable extends Migration
             $table->string('seo_keywords',255)->nullable();
             $table->string('seo_description',255)->nullable();
 
+            $table->softDeletes();                               //软删除
             $table->timestamps();
         });
     }

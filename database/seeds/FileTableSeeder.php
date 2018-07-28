@@ -48,6 +48,9 @@ class FileTableSeeder extends Seeder
                 'updated_at' => '2018-07-17 11:01:04',
             ),
         ));
+        $id = \DB::table('file')->max('id');
+        $id= $id+1;
+        \DB::statement('alter table file AUTO_INCREMENT = '.$id);
         
         
     }
