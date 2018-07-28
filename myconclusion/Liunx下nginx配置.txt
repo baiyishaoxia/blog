@@ -43,6 +43,7 @@ fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
 然后重启nginx：/usr/local/nginx/sbin/nginx -s reload
 service nginx stop
 
+##################################################################################
 2、安装PHP7.1.4（http://cn.php.net/downloads.php/下载的版本）
 
 ①下载
@@ -86,7 +87,7 @@ ps -ef |grep redis
 结束进程：
 kill -9 端口号
 
-
+##################################################################################
 安装Mysql（https://dev.mysql.com/downloads/mysql/）
 https://www.cnblogs.com/kyuang/p/6801942.html
 
@@ -122,7 +123,7 @@ mysql:x:496:490::/home/mysql:/bin/bash
 ⑥重启Mysql
 [root@localhost bin]# /etc/init.d/mysqld restart
 
-
+##################################################################################
 LNMP一键集成(https://lnmp.org/install.html)
 wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh lnmp
 (备用通道: 可以将上述的http://soft.vpser.net/ 替换成 http://202.115.33.13/soft/)
@@ -152,11 +153,121 @@ Linux配置远程连接Mysql
 ③新建一个所有ip可访问的用户baiyishaoxia密码tzf521:  GRANT ALL PRIVILEGES ON *.* TO 'baiyishaoxia'@'%' IDENTIFIED BY 'tzf521' WITH GRANT OPTION;
 ④查看是否创建: SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
 ⑤重启Mysql:service mysql restart
+##################################################################################
 
+二安装Redis (官网https://redis.io/)
+1.获取redis资源
+　　wget http://download.redis.io/releases/redis-4.0.8.tar.gz
+2.解压
+　　tar xzvf redis-4.0.8.tar.gz
+3.安装
+　　cd redis-4.0.8
+　　make
+　　cd src
+　　make install PREFIX=/usr/local/redis
+4.移动配置文件到安装目录下
+　　cd ../
+　　mkdir /usr/local/redis/etc
+　　mv redis.conf /usr/local/redis/etc
+5.配置redis为后台启动
+　　vi /usr/local/redis/etc/redis.conf //将daemonize no 改成daemonize yes
+6.将redis加入到开机启动
+　　vi /etc/rc.local //在里面添加内容：/usr/local/redis/bin/redis-server /usr/local/redis/etc/redis.conf (意思就是开机调用这段开启redis的命令)
+7.查看redis进程
+    ps aux|grep redis
+8.常用命令　　
+　　redis-server /usr/local/redis/etc/redis.conf //启动redis
+　　pkill redis  //停止redis
+　　卸载redis：
+　　　　rm -rf /usr/local/redis //删除安装目录
+　　　　rm -rf /usr/bin/redis-* //删除所有redis相关命令脚本
+　　　　rm -rf /root/download/redis-4.0.4 //删除redis解压文件夹
+9.测试是否成功安装
+$ /usr/local/redis/bin/redis-server /etc/redis/redis.conf
+$ /usr/local/redis/bin/redis-cli set foo bar   #输出内容 OK
+$ /usr/local/redis/bin/redis-cli get foo       #输出内容 "bar"
+10.补充:
+Redis-cli
+    [root@localhost bin]# ./redis-cli
+    默认连接localhost运行在6379端口的redis服务。
+    [root@localhost bin]# ./redis-cli -h 192.168.25.153 -p 6379
+    -h：连接的服务器的地址
+    -p：服务的端口号
+    关闭redis：[root@localhost bin]# ./redis-cli shutdown
+参数[--raw可打印显示中文]
+属性:
+String：key-value（做缓存）Redis中所有的数据都是字符串。命令不区分大小写，key是区分大小写的。Redis是单线程的。Redis中不适合保存内容大的数据。
+    (设置/取值       查看所有  自加     自减         删除  )
+    [set/get(参数)] [keys *] [incr (key)/decr (key)] [del (key)]
+Hash：key-fields-values（做缓存）相当于一个key对于一个map，map中还有key-value,使用hash对key进行归类。
+    (设置/取值                   查看键        查看值)
+    [hset/hget 名称(参数-数组)] [hkeys (名称)] [hvals (名称)]
+List: 有顺序可重复。
+    (写入                   查看              从右侧冒一个  从左侧冒一个)
+    [lpush 名称 (参数...)] [lrange 名称 0 -1] [lpop 名称] [rpop 名称]
+Set：元素无顺序，不能重复。
+    (写入                   查看              删除               名称1中独有的元素      交集                 并集)
+    [sadd 名称 (参数...)]  [smembers 名称]   [srem 名称 (参数)] [sdiff 名称1 名称2] [sinter 名称1 名称2]  [sunion 名称1 名称2]
+SortedSet（zset）：有顺序，不能重复。
+    [zadd 名称 (位置 参数...)]
+##################################################################################
+CentOS7为php7.2安装php-redis扩展
+先下载phpredis-develop
+   cd /tmp
+   wget https://codeload.github.com/phpredis/phpredis/zip/develop
+安装unzip、zip解压工具
+   yum -y install unzip zip
+解压
+   unzip develop
+解压后会多了个phpredis-develop的目录。进入目录
+   cd phpredis-develop
+安装phpize模块
+   yum -y install php-devel
+执行 phpize
+    sudo phpize
+查找php-config路径
+    find / -name php-config
+    例如：我的是：/usr/local/php/bin/php-config
+配置环境
+    ./configure --with-php-config=/usr/local/php/bin/php-config
+编译安装
+    sudo make && make install
+成功后会告诉你生成的redis.so扩展文件在哪个目录
+    Installing shared extensions:     /usr/local/php/lib/php/extensions/no-debug-zts-20170718/
+最后修改php.ini文件
+    vim /usr/local/php/etc/php.ini
+添加
+    extension=/usr/local/php/lib/php/extensions/no-debug-zts-20170718/redis.so
+最后重启php-fpm，在输出phpinfo()查看redis信息
+    systemctl stop php-fpm
+    systemctl start php-fpm
+##################################################################################
+关于CenterOs7安装php7.2.1后出现php5.4的解决方法:
+①查找系统里PHP相关的目录或文件
+   find / -name php
+②查看列出的php的版本信息
+   [root@localhost /]/usr/local/bin/php -v
+   PHP 5.4.17 (cli) (built: Sep 21 2017 10:27:13)
+③[root@localhost /]# /usr/local/php/bin/php -v
+   PHP 7.2.6 (cli) (built: Jul 28 2018 18:29:01) ( NTS )
+④因为5.4.17版本php在/usr/local/bin/下，所以删除/usr/local/bin/目录下的所有PHP相关的目录或文件
+  cd /usr/local/bin/
+  ls
+  rm -rf ./php
+  rm -rf ./php-cgi
+  rm -rf ./php-config
+⑤环境变量中加上正确PHP版本的路径
+  [root@localhost /]vim /etc/profile
+  文件末尾加上?export PATH="/usr/local/php/bin:$PATH"
+⑥执行
+  [root@localhost /]source /etc/profile
+⑦如果不出错则再次查看php版本如果是7则说明成功了
+  [root@localhost /]php -v
+  PHP 7.2.6 (cli) (built: Jun ?2 2018 07:49:42) ( NTS )
+  Copyright (c) 1997-2018 The PHP Group
+  Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
+  with Zend OPcache v7.2.6, Copyright (c) 1999-2018, by Zend Technologies
+⑧如果报错没有sokcet函数，stream_socket_server() has been disabled for security...
+  编辑php.ini把disable_functions=...中找到stream_socket_server()、stream_socket_client，删除掉，重新启动web组件
 
-
-
-
-
-
-
+##################################################################################
