@@ -174,7 +174,7 @@ class Tree
             $tree=[''=>'所有分类']+$tree;
         }
         if($type==3){
-            $tree = ['new'=>'最新','hot'=>'热门','top'=>'头条'];
+            $tree = ['title'=>'标题','top'=>'置顶','hot'=>'热门','red'=>'推荐','slide'=>'幻灯片'];
         }
         return $tree;
     }
