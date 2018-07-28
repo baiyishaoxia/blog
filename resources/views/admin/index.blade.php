@@ -28,7 +28,7 @@
 				<ul class="sub_menu">
 					<li><a href="{{Url('admin/category/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加分类</a></li>
 					<li><a href="{{Url('admin/category')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>分类列表</a></li>
-					<li><a href="{{Url('admin/article/create')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>添加文章</a></li>
+					<li><a href="{{Url('admin/article/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加文章</a></li>
 					<li><a href="{{Url('admin/article')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>文章列表</a></li>
 					<li><a href="{{url('admin/links')}}" target="main"><i class="fa fa-fw fa-chain"></i>友情链接</a></li>
 					<li><a href="{{URL::action('Admin\ImagesListController@index')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>图片分类</a></li>
@@ -40,7 +40,8 @@
 				<ul class="sub_menu">
 					<li><a href="{{URL::action('Background\FileController@getList')}}" target="main"><i class="fa fa-fw fa-cubes"></i>上传配置</a></li>
 					<li><a href="{{URL::action('Admin\IndexController@info')}}" target="main"><i class="fa fa-fw fa-database"></i>备份还原</a></li>
-					<li><a href="{{URL::action('Admin\ToolsController@getIndex')}}" target="main"><i class="fa fa-fw fa-font"></i>工具类</a></li>
+					<li><a href="{{URL::action('Admin\ToolsController@getIndex')}}" target="main"><i class="fa fa-home fa-google"></i>工具类</a></li>
+					<li><a href="{{URL::action('Admin\ToolsController@getRecycleList')}}" target="main"><i class="fa fa-home fa-refresh"></i><span>进入回收站</span></a></li>
 				</ul>
 			</li>
 			<li>
@@ -55,9 +56,9 @@
 				<h3><i class="fa fa-fw fa-cog"></i>系统工具</h3>
 				<ul class="sub_menu">
 					<li><a href="{{URL::action('Admin\ReadSystemController@getElement')}}" target="main"><i class="fa fa-fw fa-tags"></i>其它组件</a></li>
-					<li><a href="{{URL::action('Admin\ReadSystemController@getList')}}" target="main"><i class="fa fa-fw fa-database"></i>商品页模板</a></li>
-					<li><a href="{{URL::action('Admin\ReadSystemController@getTab')}}" target="main"><i class="fa fa-fw fa-font"></i>商品页模板</a></li>
-					<li><a href="{{URL::action('Admin\SystemToolsController@getIndex')}}" target="main"><i class="fa fa-fw fa-font"></i>图片裁剪</a></li>
+					<li><a href="{{URL::action('Admin\ReadSystemController@getList')}}" target="main"><i class="fa fa-home fa-file-text"></i>商品页模板</a></li>
+					<li><a href="{{URL::action('Admin\ReadSystemController@getTab')}}" target="main"><i class="fa fa-home fa-file-o"></i>商品页模板</a></li>
+					<li><a href="{{URL::action('Admin\SystemToolsController@getIndex')}}" target="main"><i class="fa fa-home fa-file"></i>图片裁剪</a></li>
 				</ul>
 			</li>
 		</ul>

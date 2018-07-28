@@ -22,11 +22,28 @@
                 <a class="menu-btn"></a>
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="add" href="{{URL::action('Admin\ToolsController@getCreate')}}"><i></i><span>新增</span></a></li>
-                        <li><a href="{{URL::action('Admin\ToolsController@postSave')}}"  class="save btnsave" ><i></i><span>保存</span></a></li>
-                        <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
-                        <li><a href="{{URL::action('Admin\ToolsController@postDel')}}" class="del btndel" ><i></i><span>删除</span></a></li>
+                        @if($type=='del')
+                            <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
+                            <li><a href="{{URL::action('Admin\ToolsController@postRecycleDel')}}" class="del btndel" ><i></i><span>彻底删除</span></a></li>
+                            <li><a href="{{URL::action('Admin\ToolsController@postRestore')}}" class="del btnsave" ><i></i><span>还原</span></a></li>
+                        @else
+                            <li><a class="add" href="{{URL::action('Admin\ToolsController@getCreate')}}"><i></i><span>新增</span></a></li>
+                            <li><a href="{{URL::action('Admin\ToolsController@postSave')}}"  class="save btnsave" ><i></i><span>保存</span></a></li>
+                            <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
+                            <li><a href="{{URL::action('Admin\ToolsController@postDel')}}" class="del btndel" ><i></i><span>删除</span></a></li>
+                            <li><a href="{{URL::action('Admin\ToolsController@postSoftDel')}}" class="del btndel" ><i></i><span>移动到回收站</span></a></li>
+                        @endif
                     </ul>
+                </div>
+                <div class="r-list">
+                    <div class="rule-single-select">
+                        {{Form::select('id',\App\Http\Model\Admin\ToolsList::tree(2),Request::get('id'))}}
+                    </div>
+                    <div class="rule-single-select">
+                        {{Form::select('field',\App\Http\Model\Admin\ToolsList::tree(3),Request::get('field'))}}
+                    </div>
+                    {{Form::text('keywords',Request::get('keywords',''),['class'=>'keyword'])}}
+                    <a class="btn-search" href="javascript:void (0)">查询</a>
                 </div>
             </div>
         </div>
@@ -37,8 +54,9 @@
     <div class="table-container">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
             <tr>
-                <th width="6%">选择</th>
-                <th width="6%">ID</th>
+                <th width="3%">选择</th>
+                <th width="3%">ID</th>
+                <th width="3%">所属ID</th>
                 <th>分类名称</th>
                 <th>复文本</th>
                 <th>是否为系统分类</th>
@@ -67,6 +85,7 @@
                                 </span>
                     </td>
                     <th>{!! $val['id'] !!}</th>
+                    <th>@if($val['parent_id']){{$val['parent_id']}}@else顶级@endif</th>
                     <th>{!! $val['text'] !!}</th>
                     <th>{!! $val['textarea'] !!}</th>
                     <th>@if($val['is_sys'])是@else否@endif</th>
@@ -82,21 +101,24 @@
                             <a title="{{$val['is_slide']?"取消幻灯片":"设置幻灯片"}}" class="pic {{$val['is_slide']?"selected":""}}" href="{{URL::action('Admin\ToolsController@getSlide',['id'=>$val['id']])}}"></a>
                         </div>
                     </td>
-                    <th>{{$val['redio']}}</th>
+                    <th>{{($val['redio'])?$val['redio']:'未选'}}</th>
                     <th>{{($val['img'])?'有':'无'}}</th>
                     <th>{{($val['files'])?'有':'无'}}</th>
                     <th>{{($val['video'])?'有':'无'}}</th>
-                    <th>@if(is_array($val['imgs'])) <?php $count=0; ?>@foreach($val['imgs'] as $k=>$v) <?php $count++; ?> @endforeach {{$count}}张 @else无@endif</th>
-                    <th>{{ str_limit(strip_tags($val['abstruct']),6) }}</th>
-                    <th>{{ str_limit(strip_tags($val['content']),6) }}</th>
-                    <th>{{ str_limit(strip_tags($val['discription']),6) }}</th>
+                    <th>@if(is_array($val['imgs'])) <?php $count=0; ?>@foreach($val['imgs'] as $k=>$v) <?php $count++; ?> @endforeach {{$count}}张 @else 0张 @endif</th>
+                    <th>{{ (strip_tags($val['abstruct']))?str_limit(strip_tags($val['abstruct']),6):'无' }}</th>
+                    <th>{{ (strip_tags($val['content']))?str_limit(strip_tags($val['content']),6):'无' }}</th>
+                    <th>{{ (strip_tags($val['discription']))?str_limit(strip_tags($val['discription']),6):'无' }}</th>
                     <td align="center">{{Form::text('data['.$val['id'].'][sort]',$val['sort'],['class'=>'sort'])}}</td>
                     <th>{!! $val['created_at'] !!}</th>
-
-                    <td align="center">
-                        <a href="{{URL::action('Admin\ToolsController@getCreate',['parent_id'=>$val['id']])}}">添加子栏目</a>
-                        <a href="{{URL::action('Admin\ToolsController@getEdit',['id'=>$val['id']])}}">编辑</a>
-                    </td>
+                    @if($type=='soft')
+                        <td align="center">
+                            <a href="{{URL::action('Admin\ToolsController@getCreate',['parent_id'=>$val['id']])}}">添加子栏目</a>
+                            <a href="{{URL::action('Admin\ToolsController@getEdit',['id'=>$val['id']])}}">编辑</a>
+                        </td>
+                    @else
+                        <td align="center">无</td>
+                    @endif
                 </tr>
             @endforeach
         </table>

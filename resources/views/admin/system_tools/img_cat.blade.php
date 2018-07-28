@@ -133,14 +133,14 @@
                 'multi': true,  //是否多文件上传
                 'auto' : false,//自动上传
                 'displayData ': 'speed ',//进度条的显示方式
-                'fileSizeLimit': '2MB',//限制文件大小
+                'fileSizeLimit': '100MB',//限制文件大小
                 'simUploadLimit' :3, //并发上传数据
-                'queueSizeLimit' :5, //可上传的文件个数
+                'queueSizeLimit' :15, //可上传的文件个数
                 'width ': 80,//buttonImg的大小
                 'height': 24,
                 'rollover ': true,//button是否变换
                 'uploader': '{{URL::action('Admin\CommonController@upload')}}',
-                'fileTypeExts': '*.png;*.jpg;*.jpeg;*.gif',
+                'fileTypeExts': '*.png;*.jpg;*.jpeg;*.gif;*.zip',
                 'onUploadSuccess': function (file, data, response) {
                         var board = document.getElementById("divTxt");
                         board.style.display = "";
@@ -149,8 +149,11 @@
                         newInput.size = "45";
                         newInput.name = "myFilePath[]";
                         var obj = board.appendChild(newInput);
-                        var br = document.createElement("br");
-                        board.appendChild(br);
+                        var count = document.getElementById("divTxt").getElementsByTagName("input").length
+                        if(count % 5 == 0){
+                            var br = document.createElement("br");
+                            board.appendChild(br);
+                        }
                         obj.value = data;
                 }
             });
@@ -169,7 +172,7 @@
     {{Form::open(['url'=>URL::action('Admin\SystemToolsController@create'),'id'=>'form1'])}}
         <div id="divTxt" style="display:none">
                 <span style="color:red">
-                    <strong>已经上传的图片有：</strong>
+                    <strong>已经上传的文件有(可上传:图片/文件/视频)：</strong>
                 </span><br>
         </div>
         <br>
