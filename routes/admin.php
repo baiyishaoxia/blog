@@ -12,6 +12,16 @@ Route::group(['middleware'=>['web','admin.login'],'namespace'=>'Admin'],function
     Route::get('img/imgcat', 'SystemToolsController@imgCat');
     //endregion
 
+    //region   手机api        tang
+    Route::get('mobile/login', 'MobileApi\MemberController@login');
+    Route::post('mobile/login', 'MobileApi\MemberController@login');
+    Route::get('mobile/register', 'MobileApi\MemberController@register');
+    Route::post('mobile/register', 'MobileApi\MemberController@postRegister');
+    Route::get('mobile/validate', 'MobileApi\ValidateController@create');
+    Route::get('mobile/sendsms', 'MobileApi\ValidateController@sendSMS');
+    Route::get('mobile/sendemail', 'MobileApi\ValidateController@validateEmail');
+    //endregion
+
 
 
 
