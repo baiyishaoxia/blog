@@ -59,6 +59,7 @@
 					<li><a href="{{URL::action('Admin\ReadSystemController@getList')}}" target="main"><i class="fa fa-home fa-file-text"></i>商品页模板</a></li>
 					<li><a href="{{URL::action('Admin\ReadSystemController@getTab')}}" target="main"><i class="fa fa-home fa-file-o"></i>商品页模板</a></li>
 					<li><a href="{{URL::action('Admin\SystemToolsController@getIndex')}}" target="main"><i class="fa fa-home fa-file"></i>图片裁剪</a></li>
+					<li><a href="{{URL::action('Admin\MobileApi\MemberController@login')}}" target="main"><i class="fa fa-home fa-check"></i>移动接口</a></li>
 				</ul>
 			</li>
 		</ul>

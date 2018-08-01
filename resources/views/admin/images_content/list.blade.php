@@ -1,5 +1,6 @@
 @extends('background.layouts.main')
 @section('css')
+	{{Html::style('admin/style/css/lightbox.min.css')}}
 @endsection
 @section('js')
     @include('background.layouts.btnsave')
@@ -59,7 +60,17 @@
                                 </span>
 						</div>
 						<div class="img-box" onclick="setFocusImg(this);">
-							<img src="{{Storage::url($val->Icon)}}" bigsrc="{{Storage::url($val->path)}}">
+                            <?php
+                                 $info= GetImageSize('storage\\'.$val['Icon']);
+								 $val['Width']=$info['0'];
+								 $val['Height']=$info['1'];
+							     $width=floor($val['Width']*300/$val['Height']);
+							?>
+							<div class="item" data-w="{{$width}}" data-h="300">
+								<a href="{{Storage::url($val->Icon)}}" data-lightbox="lbx" target="_blank" style="display: block" class="lightbox" >
+									<img class="example-image" src="{{Storage::url($val->Icon)}}" bigsrc="{{Storage::url($val->path)}}">
+								</a>
+							</div>
 						</div>
 						<a href="javascript:void(0)" onclick="delCate({{$val->Id}})">删除</a>
 					</li>
@@ -71,6 +82,7 @@
 	<span class="page_total">共{{$data->total()}}条记录</span>
 	{{$data->links()}}
     {{Form::close()}}
+{{Html::script('admin/style/js/lightbox-plus-jquery.min.js')}}
 <script>
     function delCate(id){
         layer.confirm('您确定要删除这个照片吗？', {
