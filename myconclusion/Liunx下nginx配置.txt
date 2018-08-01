@@ -258,7 +258,7 @@ CentOS7为php7.2安装php-redis扩展
   rm -rf ./php-config
 ⑤环境变量中加上正确PHP版本的路径
   [root@localhost /]vim /etc/profile
-  文件末尾加上?export PATH="/usr/local/php/bin:$PATH"
+  文件末尾加上?export PATH="/usr/local/php/bin:$PATH" 或者 PATH=$PAHT:/usr/server/php/bin
 ⑥执行
   [root@localhost /]source /etc/profile
 ⑦如果不出错则再次查看php版本如果是7则说明成功了
