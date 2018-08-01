@@ -24,7 +24,10 @@ class AdminTableSeeder extends Seeder
                 'password' => Crypt::encrypt('admin'),
             ),
         ));
-        
+        //重置自增长
+        $id = \DB::table('admin')->max('id');
+        $id= $id+1;
+        \DB::statement("alter table blog_admin AUTO_INCREMENT = ".$id);
         
     }
 }

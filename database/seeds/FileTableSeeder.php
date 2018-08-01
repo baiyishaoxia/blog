@@ -50,7 +50,7 @@ class FileTableSeeder extends Seeder
         ));
         $id = \DB::table('file')->max('id');
         $id= $id+1;
-        \DB::statement('alter table file AUTO_INCREMENT = '.$id);
+        \DB::statement("alter table blog_file AUTO_INCREMENT = ".$id);
         
         
     }

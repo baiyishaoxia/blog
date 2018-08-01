@@ -99,7 +99,9 @@ class FileKeyTableSeeder extends Seeder
                 'updated_at' => NULL,
             ),
         ));
-        
+        $id = \DB::table('file_key')->max('id');
+        $id= $id+1;
+        \DB::statement("alter table blog_file_key AUTO_INCREMENT = ".$id);
         
     }
 }
