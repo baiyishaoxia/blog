@@ -63,7 +63,7 @@ class ValidateController extends Controller
     }
     //endregion
 
-    //region   发送邮箱        tang
+    //region   验证邮箱激活账号        tang
     public function validateEmail(Request $request)
     {
         $member_id = $request->input('member_id', '');
@@ -75,7 +75,6 @@ class ValidateController extends Controller
         if($tempEmail == null) {
             return '此记录不存在，验证异常';
         }
-
         if($tempEmail->code == $code) {
             if(time() > strtotime($tempEmail->deadline)) {
                 return '该链接已失效';

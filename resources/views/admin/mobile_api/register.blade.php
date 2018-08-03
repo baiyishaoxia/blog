@@ -6,7 +6,7 @@
 <div class="weui_cells_title">注册方式</div>
 <div class="weui_cells weui_cells_radio">
   <label class="weui_cell weui_check_label" for="x11">
-      <div class="weui_cell_bd weui_cell_primary">
+      <div class="weui_cell_bd weui_cell_primary" id="phone">
           <p>手机号注册</p>
       </div>
       <div class="weui_cell_ft">
@@ -15,7 +15,7 @@
       </div>
   </label>
   <label class="weui_cell weui_check_label" for="x12">
-      <div class="weui_cell_bd weui_cell_primary">
+      <div class="weui_cell_bd weui_cell_primary" id="email">
           <p>邮箱注册</p>
       </div>
       <div class="weui_cell_ft">
@@ -28,7 +28,7 @@
   <div class="weui_cell">
       <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
       <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="number" placeholder="" name="phone"/>
+          <input class="weui_input" type="number" placeholder="手机号" name="phone"/>
       </div>
   </div>
   <div class="weui_cell">
@@ -46,7 +46,7 @@
   <div class="weui_cell">
       <div class="weui_cell_hd"><label class="weui_label">手机验证码</label></div>
       <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="number" placeholder="" name='phone_code'/>
+          <input class="weui_input" type="number" placeholder="验证码" name='phone_code'/>
       </div>
       <p class="bk_important bk_phone_code_send">发送验证码</p>
       <div class="weui_cell_ft">
@@ -57,7 +57,7 @@
   <div class="weui_cell">
       <div class="weui_cell_hd"><label class="weui_label">邮箱</label></div>
       <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="text" placeholder="" name='email'/>
+          <input class="weui_input" type="text" placeholder="邮箱" name='email'/>
       </div>
   </div>
   <div class="weui_cell">
@@ -91,6 +91,7 @@
 
 @section('my-js')
 <script type="text/javascript">
+  $('#phone').addClass('bk_important');
   $('#x12').next().hide();
   $('input:radio[name=register_type]').click(function(event) {
     $('input:radio[name=register_type]').attr('checked', false);
@@ -98,9 +99,13 @@
     if($(this).attr('id') == 'x11') {
       $('#x11').next().show();
       $('#x12').next().hide();
+      $('#phone').addClass('bk_important');
+      $('#email').removeClass('bk_important');
       $('.weui_cells_form').eq(0).show();
       $('.weui_cells_form').eq(1).hide();
     } else if($(this).attr('id') == 'x12') {
+      $('#phone').removeClass('bk_important');
+      $('#email').addClass('bk_important');
       $('#x12').next().show();
       $('#x11').next().hide();
       $('.weui_cells_form').eq(1).show();
@@ -153,9 +158,10 @@
     //异步请求
     $.ajax({
       url: '{{URL::action('Admin\MobileApi\ValidateController@sendSMS')}}',
+      type:'POST',
       dataType: 'json',
       cache: false,
-      data: {phone: phone},
+      data: {phone: phone,_token:"{{csrf_token()}}"},
       success: function(data) {
         if(data == null) {
           $('.bk_toptips').show();
@@ -236,6 +242,7 @@
             $('.bk_toptips').show();
             $('.bk_toptips span').html('注册成功');
             setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+            location.href = '{{URL::action('Admin\MobileApi\MemberController@login')}}';
           },
           error: function(xhr, status, error) {
             console.log(xhr);

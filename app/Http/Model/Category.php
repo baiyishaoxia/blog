@@ -111,6 +111,9 @@ class Category extends Model
         if($type==2){
             $tree=[''=>'所有分类']+$tree;
         }
+        if($type==3){
+            $tree=['0'=>'所有分类']+$tree;
+        }
         return $tree;
     }
 

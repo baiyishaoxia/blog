@@ -16,11 +16,41 @@ class MemberController extends Controller
     //region   登录        tang
     public function login(Request $request)
     {
-        if($request->post()){
-           $input = $request->only('account','password','valicode');
-           dd($input);
+        $return_url =  $request->get('return_url','');
+        if(\Request::ajax()){
+           $m3_result = new M3Result();
+           //接收数据
+           $input = $request->only('account','password','validate_code');
+           $valicode_session = $request->session()->get('validate_code');
+           if(strtolower($input['validate_code']) != $valicode_session ){
+               $m3_result->status = 1;
+               $m3_result->message = '验证码不正确！';
+               return $m3_result->toJson();
+           }
+           if(strpos($input['account'],'@') == true){
+               $member = MobileMember::where('email',$input['account'])->first();
+           }else{
+               $member = MobileMember::where('phone',$input['account'])->first();
+           }
+           if($member == null){
+               $m3_result->status = 2;
+               $m3_result->message = '该用户不存在！';
+               return $m3_result->toJson();
+           }else{
+               if(\Crypt::decrypt($member->password) != $input['password']){
+                   $m3_result->status = 3;
+                   $m3_result->message = '用户密码不正确！';
+                   return $m3_result->toJson();
+               }
+           }
+
+        \Session::put('member',$member);
+        //$request->session()->put('member',$member);
+        $m3_result->status = 0;
+        $m3_result->message = '登录成功！';
+        return $m3_result->toJson();
         }
-        return view('admin.mobile_api.login');
+        return view('admin.mobile_api.login',compact('return_url'));
     }
     //endregion
 
@@ -132,9 +162,9 @@ class MemberController extends Controller
             $m3_email->to = $email;
             $m3_email->cc = '1174881637@qq.com';
             $m3_email->subject = '邮箱验证';
-            $m3_email->content = '请于24小时点击该链接完成验证. '. \URL::action('Admin\MobileApi\ValidateController@validateEmail')
-                . '?member_id=' . $member->id
-                . '&code=' . $uuid;
+            $m3_email->content = '请于24小时点击该链接完成验证. ';
+            $m3_email->url = \URL::action('Admin\MobileApi\ValidateController@validateEmail').'?member_id='.$member->id.'&code='.$uuid;
+
             //如果该邮箱的用户不存在，就创建一条记录，否则修改该记录
             $tempEmail = MobileEmail::where('member_id', $member->id)->first();
             if($tempEmail == null){
@@ -155,10 +185,20 @@ class MemberController extends Controller
             });
 
             $m3_result->status = 0;
-            $m3_result->message = '注册成功';
+            $m3_result->message = '注册成功，请登录邮箱及时激活账号！';
             return $m3_result->toJson();
         }
     }
     //endregion
+
+    //region   登出        tang
+    public function logout()
+    {
+        session(['member'=>null]);
+        return redirect(\URL::action('Admin\MobileApi\MemberController@login'));
+    }
+    //endregion
+
+
 
 }
