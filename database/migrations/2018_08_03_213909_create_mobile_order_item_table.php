@@ -18,7 +18,7 @@ class CreateMobileOrderItemTable extends Migration
             $table->integer('order_id')->comment('订单ID');
             $table->integer('product_id')->comment('产品ID');
             $table->integer('count')->comment('产品数量');
-
+            $table->text('pdt_snapshot')->nullable()->comment('快照');
         });
     }
 
