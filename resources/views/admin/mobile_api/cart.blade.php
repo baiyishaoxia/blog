@@ -25,11 +25,14 @@
             @endforeach
         </div>
     </div>
-    {{-- <form action="/order_commit" id="order_commit" method="post">
+
+    {{--POST提交 对应下面的 _toCharge方法 --}}
+     <form action="{{URL::action('Admin\MobileApi\OrderController@getOrderCommit')}}" id="order_commit" method="post">
       {{ csrf_field() }}
       <input type="hide" name="product_ids" value="" />
       <input type="hide" name="is_wx" value="" />
-    </form> --}}
+    </form>
+
     <div class="bk_fix_bottom">
         <div class="bk_half_area">
             <button class="weui_btn weui_btn_primary" onclick="_toCharge();">结算</button>
@@ -77,11 +80,10 @@
             if (ua.match(/MicroMessenger/i) == "micromessenger") {
                 is_wx = 1;
             }
-
-            location.href = '{{URL::action('Admin\MobileApi\OrderController@getOrderCommit')}}'+'/' + product_ids_arr + '/' + is_wx;
-            // $('input[name=product_ids]').val(product_ids_arr+'');
-            // $('input[name=is_wx]').val(is_wx+'');
-            // $('#order_commit').submit();
+            //location.href = '{{URL::action('Admin\MobileApi\OrderController@getOrderCommit')}}'+'/' + product_ids_arr + '/' + is_wx;
+            $('input[name=product_ids]').val(product_ids_arr+'');
+            $('input[name=is_wx]').val(is_wx+'');
+            $('#order_commit').submit();
         }
 
         //删除
