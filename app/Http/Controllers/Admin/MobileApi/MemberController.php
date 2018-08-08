@@ -50,6 +50,9 @@ class MemberController extends Controller
         $m3_result->message = '登录成功！';
         return $m3_result->toJson();
         }
+        if(session('member')){
+            return redirect('admin/mobile/category');
+        }
         return view('admin.mobile_api.login',compact('return_url'));
     }
     //endregion

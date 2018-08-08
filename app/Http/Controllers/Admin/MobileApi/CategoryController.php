@@ -8,6 +8,8 @@ use App\Http\Model\Article;
 use App\Http\Model\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryController extends Controller
 {
@@ -21,7 +23,7 @@ class CategoryController extends Controller
     public function getInfo($parent_id)
     {
         //所有分类时 根据排序获取 12 条记录
-        if($parent_id == 0){
+        if($parent_id == 0 || $parent_id == null){
             $tree = Category::orderBy('cate_order','asc')->limit(12)->get();
             $cateInfo = Category::getCateTree($tree,'|-');
             $m3_result = new M3Result();
@@ -45,13 +47,37 @@ class CategoryController extends Controller
     //region  文章列表         tang
     public function getProduct($cate_id)
     {
-        $products = Article::where('cate_id',$cate_id)->get();
-        $pid = Category::where('cate_id',$cate_id)->value('cate_pid');
-        if($pid == null || $pid == 0){
-            $cate_ids = Category::where('cate_pid',$cate_id)->pluck('cate_id');
-            $products = Article::whereIn('cate_id',$cate_ids)->get();
+        $products_c = Article::where('cate_id',$cate_id)->get();
+        $cate_ids = Category::where('cate_pid',$cate_id)->pluck('cate_id');
+        $child_products = Article::whereIn('cate_id',$cate_ids)->get();
+        $products = array();
+        foreach ($products_c as $key => $val){
+            $products[$key]['art_title'] = $val->art_title;
+            $products[$key]['art_id'] = $val->art_id;
+            $products[$key]['art_order'] = $val->art_order;
+            $products[$key]['art_discription'] = $val->art_discription;
+            $products[$key]['art_thumb'] = $val->art_thumb;
         }
-        return view('admin.mobile_api.product',compact('products'));
+        $child_products_c = array();
+        foreach ($child_products as $key => $val){
+            $child_products_c[$key]['art_title'] = $val->art_title;
+            $child_products_c[$key]['art_id'] = $val->art_id;
+            $child_products_c[$key]['art_order'] = $val->art_order;
+            $child_products_c[$key]['art_discription'] = $val->art_discription;
+            $child_products_c[$key]['art_thumb'] = $val->art_thumb;
+            if($child_products_c[$key]){
+                array_push($products,$child_products_c[$key]);
+            }
+        }
+        //以下与分页有关
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $collection = new Collection($products);
+        $perPage = 10;
+        $currentPageSearchResults = $collection->slice(($currentPage-1) * $perPage, $perPage)->all();
+        $paginatedSearchResults= new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
+        $products = $paginatedSearchResults->setPath('/admin/mobile/product/cate_id/'.$cate_id);
+        $count = '当前第'.$products->currentPage().'页，每页'.$products->perPage().'条数据,'.'总共'.$products->total().'条数据。';
+        return view('admin.mobile_api.product',compact('products','count'));
     }
     //endregion
 
@@ -89,7 +115,6 @@ class CategoryController extends Controller
                 }
             }
         }
-
        return view('admin.mobile_api.pdt_content',compact('product','imgs','count'));
     }
     //endregion

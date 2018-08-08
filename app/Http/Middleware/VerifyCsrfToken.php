@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        //除去例外csrf验证
+        'admin/mobile/alipay/notify',
     ];
 }
