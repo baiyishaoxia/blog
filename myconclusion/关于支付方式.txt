@@ -1,0 +1,54 @@
+支付宝支付
+
+必备条件
+1、实名认证的企业账户
+2、签约手机支付功能
+
+步骤：
+1、RSA私钥及公钥生成 https://docs.open.alipay.com/58/103242/
+
+2、首先进入OpenSSL工具，再输入以下命令。
+  OpenSSL> genrsa -out rsa_private_key.pem   1024  #生成私钥
+  OpenSSL> pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt -out rsa_private_key_pkcs8.pem #Java开发者需要将私钥转换成PKCS8格式
+  OpenSSL> rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem #生成公钥
+  OpenSSL> exit #退出OpenSSL程序
+
+3、上传RSA公钥 得到 开发者 公钥。  https://docs.open.alipay.com/58/103578/
+
+4、将私钥和得到的公钥加入配置即可。
+
+
+##################################################################################
+微信支付 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842 [微信网页开发]
+
+必备条件
+1、必须为服务号(企业)
+2、认证(300/年)
+3、开通微信支付功能
+
+步骤：
+1.获取openid
+  a.获取code
+  b.根据code换取openid
+
+2.验证JSSDK(第一次签名) [发起微信支付请求]
+  a.获取access_token
+  b.签名
+  c.返回参数
+
+3.获取预处理prepay_id(第二次签名)
+  a.获取open_id
+  b.回调notify_url
+  c.签名
+  d.获取prepay_id
+
+4.返回微信支付参数(第三次签名)
+  a.获取prepay_id
+  b.签名
+  c.返回参数
+
+开始：
+1、在需要调用JS接口的页面引入如下JS文件，（支持https）：http://res.wx.qq.com/open/js/jweixin-1.2.0.js
+2、通过config接口注入权限验证配置
+3、通过ready接口处理成功验证
+4、通过error接口处理失败验证
