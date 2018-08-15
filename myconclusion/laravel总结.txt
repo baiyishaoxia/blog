@@ -94,3 +94,14 @@
 ⑤使用 database 参数, 可指定数据库里的数据表, 如下:
    php artisan iseed users --database=mysql2
 ⑥使用php artisan db:seed 可运行填充数据,等待完成
+
+5、laravel5 添加全局自定义函数
+①在app目录新建 Helpers/function.php
+②在composer.json文件加入如下配置
+    "autoload": {
+        ...
+        "files": [
+            "app/Helpers/function.php"
+        ]
+    },
+③执行 composer dump-auto，就能在任何地方引用函数
