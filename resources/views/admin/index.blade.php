@@ -5,14 +5,15 @@
 		<div class="top_left">
 			<div class="logo">后台管理中心</div>
 			<ul>
-				<li><a href="#" class="active">首页</a></li>
+				<li><a href="#" class="active">{{lang('Home')}}</a></li>
 				<li><a href="#">管理页</a></li>
 				<li><a href="{{URL::action('HomeController@index')}}" target="_blank">预览前台</a></li>
+				<span><a href="{{URL::action('IndexController@changeSession',['lang'=>'cn'])}}">中</a>/<a href="{{URL::action('IndexController@changeSession',['lang'=>'en'])}}">EN</a></span>
 			</ul>
 		</div>
 		<div class="top_right">
 			<ul>
-				<li>管理员：{{session('user.user_name')}}</li>
+				<li>管理员：{{session('admin.username')}}</li>
 				<li><a href="{{url('admin/pass')}}" target="main">修改密码</a></li>
 				<li><a href="{{url('admin/quit')}}">退出</a></li>
 			</ul>
