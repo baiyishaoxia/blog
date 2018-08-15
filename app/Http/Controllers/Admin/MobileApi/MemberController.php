@@ -29,6 +29,11 @@ class MemberController extends Controller
            }
            if(strpos($input['account'],'@') == true){
                $member = MobileMember::where('email',$input['account'])->first();
+               if($member->active == 0){
+                   $m3_result->status = 1;
+                   $m3_result->message = '你还未激活账号，请登录邮箱激活账号！';
+                   return $m3_result->toJson();
+               }
            }else{
                $member = MobileMember::where('phone',$input['account'])->first();
            }
@@ -123,6 +128,7 @@ class MemberController extends Controller
                     $member = new MobileMember();
                 }
                 $member->phone = $phone;
+                $member->active = 1;
                 $member->password = \Crypt::encrypt($password);
                 $member->save();
                 //注册成功

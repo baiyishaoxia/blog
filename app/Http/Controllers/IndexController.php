@@ -97,4 +97,15 @@ class IndexController extends Controller
         }
     }
 
+    //region 语言切换 session值   tang
+    public function changeSession(Request $request)
+    {
+        //cn or en
+        $lang = $request->get('lang');
+        //写入session
+        \Session::put('language',$lang);
+        return redirect(\URL::action('Admin\IndexController@index'));
+    }
+    //endregion
+
 }

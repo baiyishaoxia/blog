@@ -25,16 +25,16 @@ class LoginController extends CommonController
                 return back()->with('msg','验证码错误!');
             }
             //取一条记录
-            $user = Admin::first();
-            if($user->username != $input['user_name'] || Crypt::decrypt($user->password) != $input['user_pass']){
+            $admin = Admin::first();
+            if($admin->username != $input['user_name'] || Crypt::decrypt($admin->password) != $input['user_pass']){
                 return back()->with('msg','用户名或密码错误!');
             }
             //将登陆信息写入session
-            session(['user'=>$user]);
+            session(['admin'=>$admin]);
             return redirect('admin/index');
         }else{
             //删除session
-            session(['user'=>null]);
+            session(['admin'=>null]);
             //服务器信息
             //dd($_SERVER);
             return view('admin/login');
@@ -49,7 +49,7 @@ class LoginController extends CommonController
     //退出
     public function quit()
     {
-        session(['user'=>null]);
+        session(['admin'=>null]);
         return redirect('admin/login');
     }
     

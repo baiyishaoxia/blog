@@ -71,17 +71,18 @@ class Category extends Model
     public static function getCateTree($data,$html = '--',$pid=0,$level=0)
     {
         static $cate_list = array();
-        foreach ($data as $row){
+        foreach ($data as $key => $row){
             if($row['cate_pid'] == $pid){
                 $row['level'] = $level;
                 $row['html']  = str_repeat($html, $level);
                 $row['cate_name']  = $row['html'].$row['cate_name'];
                 $cate_list[] = $row;
+                //把这个节点从数组中移除,减少后续递归消耗
+                unset($data[$key]);
                 self::getCateTree($data,$html,$row['cate_id'],$level+1);
             }
         }
         return $cate_list;
-
     }
 
     //region   $data数组  (键值)$index => $val       tang
