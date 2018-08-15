@@ -14,3 +14,7 @@
 Route::get('/captcha/{width}/{height}', function ($width,$height){
     return \App\Http\Model\Common\Captcha::build($width,$height,true);
 });
+
+//region   中英文切换        tang
+Route::get('/change/language','IndexController@changeSession');
+//endregion
