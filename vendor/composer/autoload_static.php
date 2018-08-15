@@ -20,6 +20,7 @@ class ComposerStaticInit298b804ea6e21e34df9ccfdc536aa0b4
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '841780ea2e1d6545ea3a253239d59c05' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/functions.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
+        '52f761907697a3c33c9a4d3c6cb760d4' => __DIR__ . '/../..' . '/app/Helpers/function.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -399,6 +400,7 @@ class ComposerStaticInit298b804ea6e21e34df9ccfdc536aa0b4
         'App\\Common\\Tree' => __DIR__ . '/../..' . '/app/Common/Tree.php',
         'App\\Common\\UUID' => __DIR__ . '/../..' . '/app/Common/UUID.php',
         'App\\Common\\ValidateCode' => __DIR__ . '/../..' . '/app/Common/ValidateCode.php',
+        'App\\Common\\wxpay\\WXTool' => __DIR__ . '/../..' . '/app/Common/wxpay/WXTool.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\hahaEvents' => __DIR__ . '/../..' . '/app/Events/hahaEvents.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -415,6 +417,7 @@ class ComposerStaticInit298b804ea6e21e34df9ccfdc536aa0b4
         'App\\Http\\Controllers\\Admin\\MobileApi\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MobileApi/CategoryController.php',
         'App\\Http\\Controllers\\Admin\\MobileApi\\MemberController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MobileApi/MemberController.php',
         'App\\Http\\Controllers\\Admin\\MobileApi\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MobileApi/OrderController.php',
+        'App\\Http\\Controllers\\Admin\\MobileApi\\PayController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MobileApi/PayController.php',
         'App\\Http\\Controllers\\Admin\\MobileApi\\ValidateController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MobileApi/ValidateController.php',
         'App\\Http\\Controllers\\Admin\\ReadSystemController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ReadSystemController.php',
         'App\\Http\\Controllers\\Admin\\SystemToolsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SystemToolsController.php',
@@ -445,7 +448,10 @@ class ComposerStaticInit298b804ea6e21e34df9ccfdc536aa0b4
         'App\\Http\\Model\\Admin\\MobileApi\\MobileCartItem' => __DIR__ . '/../..' . '/app/Http/Model/Admin/MobileApi/MobileCartItem.php',
         'App\\Http\\Model\\Admin\\MobileApi\\MobileEmail' => __DIR__ . '/../..' . '/app/Http/Model/Admin/MobileApi/MobileEmail.php',
         'App\\Http\\Model\\Admin\\MobileApi\\MobileMember' => __DIR__ . '/../..' . '/app/Http/Model/Admin/MobileApi/MobileMember.php',
+        'App\\Http\\Model\\Admin\\MobileApi\\MobileOrder' => __DIR__ . '/../..' . '/app/Http/Model/Admin/MobileApi/MobileOrder.php',
+        'App\\Http\\Model\\Admin\\MobileApi\\MobileOrderItem' => __DIR__ . '/../..' . '/app/Http/Model/Admin/MobileApi/MobileOrderItem.php',
         'App\\Http\\Model\\Admin\\MobileApi\\MobilePhone' => __DIR__ . '/../..' . '/app/Http/Model/Admin/MobileApi/MobilePhone.php',
+        'App\\Http\\Model\\Admin\\MobileApi\\WXJsConfig' => __DIR__ . '/../..' . '/app/Http/Model/Admin/MobileApi/WXJsConfig.php',
         'App\\Http\\Model\\Admin\\ToolsList' => __DIR__ . '/../..' . '/app/Http/Model/Admin/ToolsList.php',
         'App\\Http\\Model\\Article' => __DIR__ . '/../..' . '/app/Http/Model/Article.php',
         'App\\Http\\Model\\Background\\File' => __DIR__ . '/../..' . '/app/Http/Model/Background/File.php',
