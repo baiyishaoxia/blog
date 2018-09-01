@@ -111,6 +111,25 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::post('tools/list/recycle/del','ToolsController@postRecycleDel');
     Route::post('tools/list/recycle/restore','ToolsController@postRestore');
     //endregion
+
+
+    //region   工具类 - 内容管理        tang
+    Route::get('tools/content','ToolsContentController@getIndex');
+    Route::get('tools/content/create','ToolsContentController@getCreate');
+    Route::post('tools/content/create','ToolsContentController@postCreate');
+    Route::get('tools/content/edit/{id}','ToolsContentController@getEdit');
+    Route::post('tools/content/edit','ToolsContentController@postEdit');
+    Route::get('tools/content/top/{id}','ToolsContentController@getTop');
+    Route::get('tools/content/red/{id}','ToolsContentController@getRed');
+    Route::get('tools/content/hot/{id}','ToolsContentController@getHot');
+    Route::get('tools/content/slide/{id}','ToolsContentController@getSlide');
+    Route::get('tools/content/download/{id}','ToolsContentController@getDownLoad');
+    Route::post('tools/content/save','ToolsContentController@postSave');
+    Route::post('tools/content/del','ToolsContentController@postDel');
+    Route::post('tools/content/softdel','ToolsContentController@postSoftDel');
+    Route::get('tools/content/recycle/list','ToolsContentController@getRecycleList');
+    Route::post('tools/content/restore','ToolsContentController@postRestore');
+    //endregion
 });
 
 Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namespace'=>'Background'],function (){
