@@ -63,6 +63,12 @@
 					<li><a href="{{URL::action('Admin\MobileApi\MemberController@login')}}" target="main"><i class="fa fa-home fa-check"></i>移动接口</a></li>
 				</ul>
 			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-cog"></i>VIP专区</h3>
+				<ul class="sub_menu">
+					<li><a href="{{URL::action('Admin\ToolsContentController@getIndex')}}" target="main"><i class="fa fa-fw fa-tags"></i>内容管理</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 	<!--左侧导航 结束-->

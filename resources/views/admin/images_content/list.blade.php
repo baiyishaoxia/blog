@@ -78,10 +78,11 @@
 			</ul>
 		</div>
 	</div>
+	{{Form::close()}}
 	<!--/列表-->
 	<span class="page_total">共{{$data->total()}}条记录</span>
 	{{$data->links()}}
-    {{Form::close()}}
+@section('js')
 {{Html::script('admin/style/js/lightbox-plus-jquery.min.js')}}
 <script>
     function delCate(id){

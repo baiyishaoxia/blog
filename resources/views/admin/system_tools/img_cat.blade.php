@@ -1,5 +1,8 @@
 @extends('layouts.admin')
-@section('js')
+@section('css')
+    <style type="text/css">
+        #SOHUCS #SOHU_MAIN .module-cmt-footer .section-service-w .service-wrap-w a{display: none!important;}
+    </style>
 @endsection
 @section('content')
     <!--面包屑导航 开始-->
@@ -134,7 +137,7 @@
                         newInput.size = "45";
                         newInput.name = "myFilePath[]";
                         var obj = board.appendChild(newInput);
-                        var count = document.getElementById("divTxt").getElementsByTagName("input").length
+                        var count = document.getElementById("divTxt").getElementsByTagName("input").length;
                         if(count % 5 == 0){
                             var br = document.createElement("br");
                             board.appendChild(br);
@@ -145,23 +148,40 @@
         });
 
  </script>
-    <fieldset style="border: 1px solid #CDCDCD; padding: 8px; padding-bottom:0px; margin: 8px 0">
-        <legend>
-            <strong>多文件上传</strong></legend>
-        <div>
-            <input id="fileInput2" name="fileInput2" type="file" />
-            <input type="button" value="确定上传" onclick="javascript:$('#fileInput2').uploadify('upload','*');">
-        </div>
-        <p></p>
-    </fieldset>
     {{Form::open(['url'=>URL::action('Admin\SystemToolsController@create'),'id'=>'form1'])}}
+        <fieldset style="border: 1px solid #CDCDCD; padding: 8px; padding-bottom:0px; margin: 8px 0">
+            <legend>
+                <strong>多文件上传</strong></legend>
+            <div>
+                <input id="fileInput2" name="fileInput2" type="file" />
+                <input type="button" value="确定上传" onclick="javascript:$('#fileInput2').uploadify('upload','*');">
+                {{Form::submit('提交',['class'=>'btn'])}}
+            </div>
+        </fieldset>
         <div id="divTxt" style="display:none">
                 <span style="color:red">
                     <strong>已经上传的文件有(可上传:图片/文件/视频)：</strong>
                 </span><br>
         </div>
-        <br>
-    {{Form::submit('提交',['class'=>'btn'])}}
     {{Form::close()}}
+
+    <fieldset style="border: 1px solid #CDCDCD; padding: 8px; padding-bottom:0px; margin: 8px 0">
+        <legend><strong>视频播放demo</strong></legend>
+        <div class="video" id="video" style="position: relative; width: 600px; height: 300px; overflow:hidden;"></div>
+    </fieldset>
+@section('my-js')
+    <script src="/admin/style/js/ckplayer/ckplayer/ckplayer.js"></script>
+    <script type="text/javascript">
+        var videoObject = {
+            container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
+            variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
+            autoplay: true,    //自动播放
+            flashplayer:false,//如果强制使用flashplayer则设置成true
+            video: "http://vjs.zencdn.net/v/oceans.mp4"//视频地址
+            {{--video: "{{Storage::url($data->video_url)}}"--}}
+        };
+        var player = new ckplayer(videoObject);
+    </script>
+@endsection
 
 @endsection

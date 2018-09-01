@@ -24,7 +24,7 @@
 @yield('content')
 
 @include('admin.msg')
-
+@yield('my-js')
 
 </body>
 </html>
