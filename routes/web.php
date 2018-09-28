@@ -163,6 +163,9 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namesp
 Auth::routes();
 
 Route::get('/front', 'HomeController@index');
+Route::get('/index', 'Home\TestController@GetTestList');
+
+
 
 Route::group(['middleware'=>['web'],'prefix'=>'home','namespace'=>'Home'],function () {
     Route::any('/upload', 'ArticleController@upload');
