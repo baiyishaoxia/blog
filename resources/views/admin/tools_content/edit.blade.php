@@ -46,6 +46,29 @@
         function delAttachNode(obj) {
             $(obj).parent().remove();
         }
+        //时间日期插件
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#date_start', //指定元素
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#date_end', //指定元素
+                type: 'datetime'
+            });
+            $(document).ready(function(){
+                $("#form1").bind("submit", function(){
+                    var start_time = document.getElementById("date_start").value;
+                    var end_time = document.getElementById("date_end").value;
+                    if (start_time > end_time) {
+                        layer.msg('结束时间小于开始时间!');
+                        return false;
+                    }
+                })
+            });
+        });
     </script>
 @endsection
 @section('content')
@@ -193,9 +216,17 @@
 
         <div class="tab-content" style="display: none">
             <dl>
-                <dt>前台显示时间</dt>
+                <dt>前台显示开始时间</dt>
                 <dd>
-                    {{Form::text('show_time',null,['class'=>'input d-time normal','datatype'=>'*'])}}
+                    {{Form::text('start_time',null,['class'=>'input normal data','id'=>'date_start','placeholder'=>'请选择开始日期'])}}
+                    <span class="Validform_checktip"></span>
+                </dd>
+            </dl>
+            <dl>
+                <dt>前台显示结束时间</dt>
+                <dd>
+                    {{Form::text('end_time',null,['class'=>'input normal data','id'=>'date_end','placeholder'=>'请选择结束日期'])}}
+                    <span class="Validform_checktip"></span>
                 </dd>
             </dl>
             <dl>

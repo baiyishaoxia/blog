@@ -10,7 +10,7 @@
     {{Html::style('background/script/layui/css/layui.css')}}
     {{Html::script('background/script/jquery/jquery-3.1.1.min.js')}}
     {{Html::script('background/script/layer/layer.js')}}
-    {{Html::script('background/script/layui/layui.js')}}
+    {{Html::script('background/script/layui/layui.all.js')}}
     {{Html::script('background/script/validform_v5.3.2/Validform_v5.3.2.js')}}
     {{Html::script('background/script/webuploader/webuploader.min.js')}}
     {{Html::script('background/script/common.js')}}
