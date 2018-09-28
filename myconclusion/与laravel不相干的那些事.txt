@@ -1,5 +1,34 @@
 1、phpstorm激活码：http://180.76.140.202:9123
-
+   phpstorm插件完美破解: 
+       ①打开E:/my componet/PhpStorm 2018.1.5/bin
+       ②修改 phpstorm.exe.vmoptions  与  phpstorm64.exe.vmoptions  在其最后加入:-javaagent:E:/my componet/PhpStorm 2018.1.5/bin/JetbrainsCrack-2.8-release-enc.jar                   
+       ③启动phpstrom,在密钥框粘贴:
+            ThisCrackLicenseId-{??
+			"licenseId":"ThisCrackLicenseId",??
+			"licenseeName":"idea",??
+			"assigneeName":"",??
+			"assigneeEmail":"idea@163.com",??
+			"licenseRestriction":"For?This?Crack,?Only?Test!?Please?support?genuine!!!",??
+			"checkConcurrentUse":false,??
+			"products":[??
+			{"code":"II","paidUpTo":"2099-12-31"},??
+			{"code":"DM","paidUpTo":"2099-12-31"},??
+			{"code":"AC","paidUpTo":"2099-12-31"},??
+			{"code":"RS0","paidUpTo":"2099-12-31"},??
+			{"code":"WS","paidUpTo":"2099-12-31"},??
+			{"code":"DPN","paidUpTo":"2099-12-31"},??
+			{"code":"RC","paidUpTo":"2099-12-31"},??
+			{"code":"PS","paidUpTo":"2099-12-31"},??
+			{"code":"DC","paidUpTo":"2099-12-31"},??
+			{"code":"RM","paidUpTo":"2099-12-31"},??
+			{"code":"CL","paidUpTo":"2099-12-31"},??
+			{"code":"PC","paidUpTo":"2099-12-31"}??
+			],??
+			"hash":"2911276/0",??
+			"gracePeriodDays":7,??
+			"autoProlongated":false}??	   
+   
+   
 2、vimplus的使用
 ①安装
 git clone https://github.com/chxuan/vimplus.git ~/.vimplus
