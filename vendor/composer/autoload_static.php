@@ -454,6 +454,7 @@ class ComposerStaticInit298b804ea6e21e34df9ccfdc536aa0b4
         'App\\Http\\Model\\Admin\\MobileApi\\MobilePhone' => __DIR__ . '/../..' . '/app/Http/Model/Admin/MobileApi/MobilePhone.php',
         'App\\Http\\Model\\Admin\\MobileApi\\WXJsConfig' => __DIR__ . '/../..' . '/app/Http/Model/Admin/MobileApi/WXJsConfig.php',
         'App\\Http\\Model\\Admin\\ToolsContent' => __DIR__ . '/../..' . '/app/Http/Model/Admin/ToolsContent.php',
+        'App\\Http\\Model\\Admin\\ToolsContentAttache' => __DIR__ . '/../..' . '/app/Http/Model/Admin/ToolsContentAttache.php',
         'App\\Http\\Model\\Admin\\ToolsList' => __DIR__ . '/../..' . '/app/Http/Model/Admin/ToolsList.php',
         'App\\Http\\Model\\Article' => __DIR__ . '/../..' . '/app/Http/Model/Article.php',
         'App\\Http\\Model\\Background\\File' => __DIR__ . '/../..' . '/app/Http/Model/Background/File.php',

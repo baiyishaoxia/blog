@@ -13,7 +13,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //开启用户登录验证
+        //$this->middleware('auth');
     }
 
     /**
