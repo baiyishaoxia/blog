@@ -68,6 +68,7 @@ return array(
     'App\\Http\\Model\\Admin\\MobileApi\\MobilePhone' => $baseDir . '/app/Http/Model/Admin/MobileApi/MobilePhone.php',
     'App\\Http\\Model\\Admin\\MobileApi\\WXJsConfig' => $baseDir . '/app/Http/Model/Admin/MobileApi/WXJsConfig.php',
     'App\\Http\\Model\\Admin\\ToolsContent' => $baseDir . '/app/Http/Model/Admin/ToolsContent.php',
+    'App\\Http\\Model\\Admin\\ToolsContentAttache' => $baseDir . '/app/Http/Model/Admin/ToolsContentAttache.php',
     'App\\Http\\Model\\Admin\\ToolsList' => $baseDir . '/app/Http/Model/Admin/ToolsList.php',
     'App\\Http\\Model\\Article' => $baseDir . '/app/Http/Model/Article.php',
     'App\\Http\\Model\\Background\\File' => $baseDir . '/app/Http/Model/Background/File.php',
