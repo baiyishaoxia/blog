@@ -69,6 +69,14 @@
 					<li><a href="{{URL::action('Admin\ToolsContentController@getIndex')}}" target="main"><i class="fa fa-fw fa-tags"></i>内容管理</a></li>
 				</ul>
 			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-cog"></i>管理员管理</h3>
+				<ul class="sub_menu">
+					<li><a href="{{URL::action('Background\AdminController@getList')}}" target="main"><i class="fa fa-fw fa-tags"></i>管理员列表</a></li>
+					<li><a href="{{URL::action('Background\AdminRoleController@getList')}}" target="main"><i class="fa fa-fw fa-tags"></i>角色列表</a></li>
+					<li><a href="{{URL::action('Background\AdminNavigationController@getList')}}" target="main"><i class="fa fa-fw fa-tags"></i>权限列表</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 	<!--左侧导航 结束-->

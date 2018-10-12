@@ -27,7 +27,7 @@
     </div>
     <div class="cw404_nr">
         <div class="nr_top">Ooops:the pcman has eaten this page</div>
-
+        <div class="nr_top">您没有权限访问当前页,请向管理员申请授权!</div>
         <div class="nr_min">
             <div class="min_top">You can choose:</div>
 

@@ -155,6 +155,30 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namesp
     Route::post('file/set_key','FileKeyController@postSetKey');
     //endregion
 
+    //region   管理员管理        tang
+    Route::get('admin/list','AdminController@getList');
+    Route::get('admin/create','AdminController@getCreate');
+    Route::post('admin/create','AdminController@postCreate');
+    Route::get('admin/edit/{id}','AdminController@getEdit');
+    Route::post('admin/edit','AdminController@postEdit');
+    Route::post('admin/del','AdminController@postDel');
+    Route::get('admin/auth_login/{admin_id}/{super_id?}','AdminController@getAuthorizedLogin');
+
+    Route::get('admin_role/list','AdminRoleController@getList');
+    Route::get('admin_role/create','AdminRoleController@getCreate');
+    Route::post('admin_role/create','AdminRoleController@postCreate');
+    Route::get('admin_role/edit/{id}','AdminRoleController@getEdit');
+    Route::post('admin_role/edit','AdminRoleController@postEdit');
+    Route::post('admin_role/del','AdminRoleController@postDel');
+
+    Route::get('admin_navigation/list','AdminNavigationController@getList');
+    Route::get('admin_navigation/create/{id?}','AdminNavigationController@getCreate');
+    Route::post('admin_navigation/create','AdminNavigationController@postCreate');
+    Route::get('admin_navigation/edit/{id}','AdminNavigationController@getEdit');
+    Route::post('admin_navigation/edit','AdminNavigationController@postEdit');
+    Route::post('admin_navigation/save','AdminNavigationController@postSave');
+    Route::post('admin_navigation/del','AdminNavigationController@postDel');
+    //endregion
 });
 
 

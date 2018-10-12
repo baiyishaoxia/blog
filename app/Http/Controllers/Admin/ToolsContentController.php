@@ -48,7 +48,6 @@ class ToolsContentController extends Controller
     }
     public function postCreate(Request $request)
     {
-        dd($request->all());
         if(!isset($request->list_id)){
             return back()->withInput()->withErrors('请选择所属分类');
         }

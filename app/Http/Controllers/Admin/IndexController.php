@@ -38,12 +38,12 @@ class IndexController extends CommonController
             $validator = \Validator::make($input,$rules,$message);
             if($validator->passes()){
                 $user = Admin::first();                          //获取信息
-                $_password = \Crypt::decrypt($user->password);//解密
+                ///$_password = \Crypt::decrypt($user->password); //解密(定义修改器后无需解密)
+                $_password = $user->password;
                 if($input['password_o'] == $_password){
-                  $user->password = \Crypt::encrypt($input['password']);//加密
-                  $user->update();
-                    //return redirect('admin/info'); //跳转
-                    //return back()->with('errorss',);
+                  //$user->password = \Crypt::encrypt($input['password']);//加密(定义修改器后无需加密)
+                    $user->password = $input['password'];
+                    $user->update();
                     return back()->withErrors('密码修改成功！');
                 }else{
                     return back()->withErrors('原密码错误！');

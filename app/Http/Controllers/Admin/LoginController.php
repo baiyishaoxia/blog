@@ -25,12 +25,18 @@ class LoginController extends CommonController
                 return back()->with('msg','验证码错误!');
             }
             //取一条记录
-            $admin = Admin::first();
-            if($admin->username != $input['user_name'] || Crypt::decrypt($admin->password) != $input['user_pass']){
+            $admin = Admin::where("username",$input['user_name'])->first();
+            if($admin->username != $input['user_name'] || $admin->password != $input['user_pass']){
                 return back()->with('msg','用户名或密码错误!');
             }
+            if($admin->is_lock==true){
+                return back()->withInput()->withErrors("账户已被锁定");
+            }
+            $admin->login_count=$admin->login_count+1;
+            $admin->save();
             //将登陆信息写入session
-            session(['admin'=>$admin]);
+            //session(['admin'=>$admin]);
+            \Session::put('admin_id',$admin->id);
             return redirect('admin/index');
         }else{
             //删除session

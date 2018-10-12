@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Model\Admin;
 use Closure;
 
 class AdminLogin
@@ -15,8 +16,17 @@ class AdminLogin
      */
     public function handle($request, Closure $next)
     {
-        if(!session('admin')){
-           return redirect('admin/login');
+        if (!\Session::has('admin_id')) {
+           return redirect(\URL::action('Admin\LoginController@login'));
+        }
+        //是否锁定
+        if(Admin::info()->is_lock){
+            return redirect(\URL::action('Admin\LoginController@getLogin'))->withErrors("账户被锁定");
+        }
+        //权限验证
+        if(Admin::adminAuth()==false){
+            abort(500);
+            return back()->withErrors("您没有权限访问");
         }
         return $next($request);
     }

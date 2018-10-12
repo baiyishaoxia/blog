@@ -67,10 +67,10 @@
                     <label>北京时间</label><span>{{date('Y年m月d日 H时i分s秒')}}</span>
                 </li>
                 <li>
-                    <label>服务器域名/IP</label><span>{{$_SERVER['SERVER_NAME']}} [{{$_SERVER['LOCAL_ADDR']}}]</span>
+                    <label>服务器域名/IP</label><span>{{$_SERVER['SERVER_NAME']}} [{{$_SERVER['REMOTE_ADDR']}}]</span>
                 </li>
                 <li>
-                    <label>Host</label><span>{{$_SERVER['LOCAL_ADDR']}}</span>
+                    <label>Host</label><span>{{$_SERVER['REMOTE_ADDR']}}</span>
                 </li>
             </ul>
         </div>
