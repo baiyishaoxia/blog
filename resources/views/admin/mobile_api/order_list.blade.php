@@ -40,15 +40,19 @@
         </div>
     @endforeach
 
-     @foreach($orders as $key => $val )
-         <?php $i=0; ?>
-         @if($val->status == 1)
-             <?php $name[$i]= $val->name; $order_no[$i] = $val->order_no; $total_price[$i] = $val->total_price;$i++;  ?>
-         @else
-             <?php $name = null; $order_no = null; $total_price = null; ?>
-         @endif
-     @endforeach
-
+    @if(count($orders))
+         @foreach($orders as $key => $val )
+             <?php $i=0; ?>
+             @if($val->status == 1)
+                 <?php $name[$i]= $val->name; $order_no[$i] = $val->order_no; $total_price[$i] = $val->total_price;$i++;  ?>
+             @else
+                 <?php $name = null; $order_no = null; $total_price = null; ?>
+             @endif
+         @endforeach
+    @else
+       <?php $name = null; $order_no = null; $total_price = null; ?>
+    @endif 
+    
     <div class="bk_fix_bottom">
         <div class="bk_half_area">
             @if(count(\App\Http\Model\Admin\MobileApi\MobileOrder::where('status',1)->get()))
