@@ -37,7 +37,7 @@
 						</li>
 					</ul>
 				</form>
-				<p><a href="#">返回首页</a> &copy; {{date('Y')}} Powered by <a href="http://www.houdunwang.com" target="_blank">http://www.houdunwang.com</a></p>
+				<p><a href="#">返回首页</a> &copy; {{date('Y')}} Powered by <a href="http://www.houdunwang.com" target="_blank">白衣少侠</a></p>
 			</div>
 		</div>
 	</div>

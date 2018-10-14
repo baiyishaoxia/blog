@@ -15,7 +15,7 @@
 			<ul>
 				<li>管理员：{{session('admin.username')}}</li>
 				<li><a href="{{url('admin/pass')}}" target="main">修改密码</a></li>
-				<li><a href="{{url('admin/quit')}}">退出</a></li>
+				<li><a href="{{URL::action('Admin\LoginController@quit')}}">退出</a></li>
 			</ul>
 		</div>
 	</div>
@@ -89,7 +89,7 @@
 
 	<!--底部 开始-->
 	<div class="bottom_box">
-		CopyRight © 2015. Powered By <a href="http://www.houdunwang.com">http://www.houdunwang.com</a>.
+		CopyRight © {{date('Y',time())}}. Powered By <a href="http://www.houdunwang.com"> 白衣少侠</a>.
 	</div>
 	<!--底部 结束-->
 

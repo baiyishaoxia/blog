@@ -35,12 +35,13 @@ class LoginController extends CommonController
             $admin->login_count=$admin->login_count+1;
             $admin->save();
             //将登陆信息写入session
-            //session(['admin'=>$admin]);
+            session(['admin'=>$admin]);
             \Session::put('admin_id',$admin->id);
             return redirect('admin/index');
         }else{
             //删除session
             session(['admin'=>null]);
+            \Session::put('admin_id',null);
             //服务器信息
             //dd($_SERVER);
             return view('admin/login');
