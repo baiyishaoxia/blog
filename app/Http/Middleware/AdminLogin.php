@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Http\Model\Admin;
+use App\Http\Model\Background\AdminLog;
 use Closure;
 
 class AdminLogin
@@ -28,6 +29,8 @@ class AdminLogin
             abort(500);
             return back()->withErrors("您没有权限访问");
         }
+        //生成日志
+        AdminLog::log();
         return $next($request);
     }
 }

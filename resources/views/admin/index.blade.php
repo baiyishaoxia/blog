@@ -15,6 +15,7 @@
 			<ul>
 				<li>管理员：{{session('admin.username')}}</li>
 				<li><a href="{{url('admin/pass')}}" target="main">修改密码</a></li>
+				<li><a href="{{URL::action('Admin\IndexController@getClear')}}" target="main">清理缓存</a></li>
 				<li><a href="{{URL::action('Admin\LoginController@quit')}}">退出</a></li>
 			</ul>
 		</div>
@@ -64,17 +65,17 @@
 				</ul>
 			</li>
 			<li>
-				<h3><i class="fa fa-fw fa-cog"></i>VIP专区</h3>
+				<h3><i class="fa fa-fw fa-adn"></i>VIP专区</h3>
 				<ul class="sub_menu">
-					<li><a href="{{URL::action('Admin\ToolsContentController@getIndex')}}" target="main"><i class="fa fa-fw fa-tags"></i>内容管理</a></li>
+					<li><a href="{{URL::action('Admin\ToolsContentController@getIndex')}}" target="main"><i class="fa fa-fw fa-list"></i>内容管理</a></li>
 				</ul>
 			</li>
 			<li>
-				<h3><i class="fa fa-fw fa-cog"></i>管理员管理</h3>
+				<h3><i class="fa fa-fw fa-arrows"></i>管理员管理</h3>
 				<ul class="sub_menu">
-					<li><a href="{{URL::action('Background\AdminController@getList')}}" target="main"><i class="fa fa-fw fa-tags"></i>管理员列表</a></li>
-					<li><a href="{{URL::action('Background\AdminRoleController@getList')}}" target="main"><i class="fa fa-fw fa-tags"></i>角色列表</a></li>
-					<li><a href="{{URL::action('Background\AdminNavigationController@getList')}}" target="main"><i class="fa fa-fw fa-tags"></i>权限列表</a></li>
+					<li><a href="{{URL::action('Background\AdminController@getList')}}" target="main"><i class="fa fa-fw fa-list-ol"></i>管理员列表</a></li>
+					<li><a href="{{URL::action('Background\AdminRoleController@getList')}}" target="main"><i class="fa fa-fw fa-undo"></i>角色列表</a></li>
+					<li><a href="{{URL::action('Background\AdminNavigationController@getList')}}" target="main"><i class="fa fa-fw fa-repeat"></i>权限列表</a></li>
 				</ul>
 			</li>
 		</ul>

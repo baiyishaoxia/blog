@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
@@ -57,5 +58,15 @@ class IndexController extends CommonController
             return view('admin/pass');
         }
     }
+
+    //region   清理缓存        tang
+    public function getClear(){
+        Artisan::call('cache:clear'); // 清空应用缓存
+        Artisan::call('config:clear');// 移除配置缓存文件
+        Artisan::call('route:clear'); // 移除路由缓存文件
+        Artisan::call('clear-compiled'); // 移除编译优化过的文件 (storage/frameworks/compiled.php)
+        return back()->withErrors("清空成功");
+    }
+    //endregion
 
 }

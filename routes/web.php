@@ -42,6 +42,8 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::get('quit', 'LoginController@quit');
     //修改密码
     Route::any('pass','IndexController@pass');
+    //清空缓存
+    Route::get('clear','IndexController@getClear');
     //分类
     Route::resource('category','CategoryController');
     Route::post('cate/changeOrder','CategoryController@changeOrder');
