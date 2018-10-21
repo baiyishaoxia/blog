@@ -38,4 +38,14 @@ class ArrayTools extends Controller
         }
         return $array;
     }
+
+    //region   是否有效ip        tang
+    public static function isIp($ip){
+        if(filter_var($ip, FILTER_VALIDATE_IP)) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+    //endregion
 }
