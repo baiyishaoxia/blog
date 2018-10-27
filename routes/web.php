@@ -42,6 +42,8 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::get('quit', 'LoginController@quit');
     //修改密码
     Route::any('pass','IndexController@pass');
+    //清空缓存
+    Route::get('clear','IndexController@getClear');
     //分类
     Route::resource('category','CategoryController');
     Route::post('cate/changeOrder','CategoryController@changeOrder');
@@ -75,7 +77,7 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::post('links/delAll','LinksController@delLinkAll');
     Route::post('links/restoreAll','LinksController@restoreAll');
     Route::post('link/changeOrder','LinksController@changeOrder');
-
+    //by 资源路由
     Route::resource('links','LinksController');
 
     //图片分类
@@ -95,7 +97,7 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
 
     //region   工具类        tang
     Route::get('tools/list','ToolsController@getIndex');
-
+    //by 操作
     Route::get('tools/list/create/{parent_id?}','ToolsController@getCreate');
     Route::post('tools/list/create','ToolsController@postCreate');
     Route::get('tools/list/edit/{id}','ToolsController@getEdit');
@@ -163,14 +165,14 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namesp
     Route::post('admin/edit','AdminController@postEdit');
     Route::post('admin/del','AdminController@postDel');
     Route::get('admin/auth_login/{admin_id}/{super_id?}','AdminController@getAuthorizedLogin');
-
+    //by 角色管理
     Route::get('admin_role/list','AdminRoleController@getList');
     Route::get('admin_role/create','AdminRoleController@getCreate');
     Route::post('admin_role/create','AdminRoleController@postCreate');
     Route::get('admin_role/edit/{id}','AdminRoleController@getEdit');
     Route::post('admin_role/edit','AdminRoleController@postEdit');
     Route::post('admin_role/del','AdminRoleController@postDel');
-
+    //by 权限控制
     Route::get('admin_navigation/list','AdminNavigationController@getList');
     Route::get('admin_navigation/create/{id?}','AdminNavigationController@getCreate');
     Route::post('admin_navigation/create','AdminNavigationController@postCreate');
@@ -178,6 +180,48 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namesp
     Route::post('admin_navigation/edit','AdminNavigationController@postEdit');
     Route::post('admin_navigation/save','AdminNavigationController@postSave');
     Route::post('admin_navigation/del','AdminNavigationController@postDel');
+    //endregion
+
+    //region   邮件设置        tang
+    //by 服务器管理
+    Route::get('email/smtp/list','EmailController@getList');
+    Route::get('email/smtp/create','EmailController@getCreate');
+    Route::post('email/smtp/create','EmailController@postCreate');
+    Route::get('email/smtp/edit/{id}','EmailController@getEdit');
+    Route::post('email/smtp/edit','EmailController@postEdit');
+    Route::post('email/smtp/del','EmailController@postDel');
+    Route::get('email/test','EmailController@getTestEmail');
+    Route::post('email/test','EmailController@postTestEmail');
+    //by配置服务器
+    Route::get('key/set_email/{sms_id}','EmailKeyController@getSetKey');
+    Route::post('key/set_email','EmailKeyController@postSetKey');
+    //by邮件日志列表
+    Route::get('email/log/list','EmailLogController@getList');
+    //endregion
+
+    //region   系统配置        tang
+    Route::get('config','ConfigController@getConfig');
+    Route::post('config','ConfigController@postConfig');
+    //endregion
+
+    //region   黑白名单        tang
+    //by黑名单
+    Route::get('ip/black/list','IpBlacklistsController@getList');
+    Route::get('ip/black/create','IpBlacklistsController@getCreate');
+    Route::post('ip/black/create','IpBlacklistsController@postCreate');
+    Route::get('ip/black/edit/{id}','IpBlacklistsController@getEdit');
+    Route::post('ip/black/edit','IpBlacklistsController@postEdit');
+    Route::post('ip/black/del','IpBlacklistsController@postDel');
+    //by白名单
+    Route::get('ip/white/list','IpWhitelistsController@getList');
+    Route::get('ip/white/create','IpWhitelistsController@getCreate');
+    Route::post('ip/white/create','IpWhitelistsController@postCreate');
+    Route::get('ip/white/edit/{id}','IpWhitelistsController@getEdit');
+    Route::post('ip/white/edit','IpWhitelistsController@postEdit');
+    Route::post('ip/white/del','IpWhitelistsController@postDel');
+    //by限制名单
+    Route::get('iplimit','ConfigController@getIpLimit');
+    Route::post('iplimit','ConfigController@postIpLimit');
     //endregion
 });
 

@@ -15,6 +15,7 @@
 			<ul>
 				<li>管理员：{{session('admin.username')}}</li>
 				<li><a href="{{url('admin/pass')}}" target="main">修改密码</a></li>
+				<li><a href="{{URL::action('Admin\IndexController@getClear')}}" target="main">清理缓存</a></li>
 				<li><a href="{{URL::action('Admin\LoginController@quit')}}">退出</a></li>
 			</ul>
 		</div>
@@ -29,8 +30,8 @@
 				<ul class="sub_menu">
 					<li><a href="{{Url('admin/category/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加分类</a></li>
 					<li><a href="{{Url('admin/category')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>分类列表</a></li>
-					<li><a href="{{Url('admin/article/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加文章</a></li>
-					<li><a href="{{Url('admin/article')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>文章列表</a></li>
+					<li><a href="{{Url('admin/article/create')}}" target="main"><i class="fa fa-fw fa-eyedropper"></i>添加文章</a></li>
+					<li><a href="{{Url('admin/article')}}" target="main"><i class="fa fa-fw fa-folder-open"></i>文章列表</a></li>
 					<li><a href="{{url('admin/links')}}" target="main"><i class="fa fa-fw fa-chain"></i>友情链接</a></li>
 					<li><a href="{{URL::action('Admin\ImagesListController@index')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>图片分类</a></li>
 					<li><a href="{{URL::action('Admin\ImagesContentController@index')}}" target="main"><i class="fa fa-fw fa-image"></i>图片列表</a></li>
@@ -64,17 +65,24 @@
 				</ul>
 			</li>
 			<li>
-				<h3><i class="fa fa-fw fa-cog"></i>VIP专区</h3>
+				<h3><i class="fa fa-fw fa-adn"></i>VIP专区</h3>
 				<ul class="sub_menu">
-					<li><a href="{{URL::action('Admin\ToolsContentController@getIndex')}}" target="main"><i class="fa fa-fw fa-tags"></i>内容管理</a></li>
+					<li><a href="{{URL::action('Admin\ToolsContentController@getIndex')}}" target="main"><i class="fa fa-fw fa-table"></i>内容管理</a></li>
+					<li><a href="{{URL::action('Background\EmailController@getList')}}" target="main"><i class="fa fa-fw fa-align-right"></i>服务器列表</a></li>
+					<li><a href="{{URL::action('Background\EmailController@getTestEmail')}}" target="main"><i class="fa fa-fw fa-send"></i>发送测试邮件</a></li>
+					<li><a href="{{URL::action('Background\EmailLogController@getList')}}" target="main"><i class="fa fa-fw fa-comment-o"></i>邮件日志列表</a></li>
+					<li><a href="{{URL::action('Background\ConfigController@getConfig')}}" target="main"><i class="fa fa-fw fa-wrench"></i>系统参数设置</a></li>
+					<li><a href="{{URL::action('Background\IpBlacklistsController@getList')}}" target="main"><i class="fa fa-fw fa-bell"></i>黑名单管理</a></li>
+					<li><a href="{{URL::action('Background\IpWhitelistsController@getList')}}" target="main"><i class="fa fa-fw fa-bell-o"></i>白名单管理</a></li>
+					<li><a href="{{URL::action('Background\ConfigController@getIpLimit')}}" target="main"><i class="fa fa-fw fa-bell-slash-o"></i>IP限制设置</a></li>
 				</ul>
 			</li>
 			<li>
-				<h3><i class="fa fa-fw fa-cog"></i>管理员管理</h3>
+				<h3><i class="fa fa-fw fa-arrows"></i>管理员管理</h3>
 				<ul class="sub_menu">
-					<li><a href="{{URL::action('Background\AdminController@getList')}}" target="main"><i class="fa fa-fw fa-tags"></i>管理员列表</a></li>
-					<li><a href="{{URL::action('Background\AdminRoleController@getList')}}" target="main"><i class="fa fa-fw fa-tags"></i>角色列表</a></li>
-					<li><a href="{{URL::action('Background\AdminNavigationController@getList')}}" target="main"><i class="fa fa-fw fa-tags"></i>权限列表</a></li>
+					<li><a href="{{URL::action('Background\AdminController@getList')}}" target="main"><i class="fa fa-fw fa-list-ol"></i>管理员列表</a></li>
+					<li><a href="{{URL::action('Background\AdminRoleController@getList')}}" target="main"><i class="fa fa-fw fa-undo"></i>角色列表</a></li>
+					<li><a href="{{URL::action('Background\AdminNavigationController@getList')}}" target="main"><i class="fa fa-fw fa-repeat"></i>权限列表</a></li>
 				</ul>
 			</li>
 		</ul>
