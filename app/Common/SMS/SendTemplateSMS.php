@@ -25,7 +25,7 @@ class SendTemplateSMS
   private $softVersion='2013-12-26';
 
   /**
-    * 发送模板短信
+    * 发送模板短信  [------基于容联云通讯平台------]
     * @param to 手机号码集合,用英文逗号分开
     * @param datas 内容数据 格式为数组 例如：array('Marry','Alon')，如不需替换请填 null
     * @param $tempId 模板Id
