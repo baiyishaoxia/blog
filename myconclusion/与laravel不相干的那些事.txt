@@ -41,7 +41,7 @@ sudo ./install.sh (安装初始化vimplus)
 ⑤快捷键
 1、ctrl+w(2次w) 目录与文件之间的切换 （ctrl + hjkl）
 2、ctrl+6       文件与文件之间的切换
-3、:bn          上一个文件
+3、:bn          上一个文件  [ctrl+n 可来回切换]
 4、:bp          下一个文件
 5、逗号+n       目录结构
 6、ctrl+n       当前活动下切换

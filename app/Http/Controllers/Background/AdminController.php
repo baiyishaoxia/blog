@@ -78,11 +78,11 @@ class AdminController extends Controller
     //endregion
 
     //region   授权        tang
-    public function getAuthorizedLogin()
+    public function getAuthorizedLogin($admin_id, $super_id)
     {
-        dd("还未开发!");
-        $super_id =$admin_id= 1;
-        return redirect(\URL::action('Background\LoginController@getAuthorizedLogin',['super_id'=>$super_id,'admin_id'=>$admin_id]));
+       //$admin_id   要授权登录的管理员的ID（Crypt::decrypt加密）
+       //$super_id   当前管理员的ID(Crypt::decrypt加密)
+        return redirect(\URL::action('Admin\LoginController@getAuthorizedLogin',['super_id'=>$super_id,'admin_id'=>$admin_id]));
     }
     //endregion
 }

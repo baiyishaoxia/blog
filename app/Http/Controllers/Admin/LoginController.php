@@ -59,8 +59,21 @@ class LoginController extends CommonController
         session(['admin'=>null]);
         return redirect('admin/login');
     }
-    
-    
+
+    //region   管理员授权登录        tang
+    public function getAuthorizedLogin($admin_id,$super_id=''){
+        if(\Session::has('admin_id')){
+            \Session::put('admin_id',\Crypt::decrypt($admin_id));
+            if($super_id==''){
+                \Session::forget('super_id');
+            }else{
+                \Session::put('super_id',\Crypt::decrypt($super_id));
+            }
+            return redirect(\URL::action('Admin\IndexController@index'));
+        }
+
+    }
+    //endregion
     
     
     
