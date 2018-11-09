@@ -2,6 +2,7 @@
 @section('css')
     <style type="text/css">
         #SOHUCS #SOHU_MAIN .module-cmt-footer .section-service-w .service-wrap-w a{display: none!important;}
+        .img_show table{width: 500px;height: 200px;}
     </style>
 @endsection
 @section('content')
@@ -80,6 +81,23 @@
                 </tbody>
             </table>
         {{Form::close()}}
+        <div class="img_show">
+            <table style="margin: auto;">
+                <tr>
+                    <?php $user_id = rand(1,1000); ?>
+                    <td rowspan="2">
+                        <input type="text" class="text" autocomplete="off" id="basicinfo" readonly value="{{URL::action('Admin\IndexController@index').'/'.$user_id}}" style="width: 200px">
+                    </td>
+                    <td rowspan="2">
+                        <a href="javascript:void(0);" class="copy" onclick="copyinfo()">复制链接</a><br/>
+                        <a href="javascript:void(0)"  class="btn qrcode" data="{{$user_id}}">生成二维码</a>
+                    </td>
+                    <td rowspan="2">
+                        <img id="img_qrcode" src="{{\App\Http\Controllers\Common\QrcodeImgController::getShareQrcode(URL::action('Admin\IndexController@index').'/'.$user_id,$user_id)}}" height="100px">
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -169,6 +187,7 @@
         <legend><strong>视频播放demo</strong></legend>
         <div class="video" id="video" style="position: relative; width: 600px; height: 300px; overflow:hidden;"></div>
     </fieldset>
+@endsection
 @section('my-js')
     <script src="/admin/style/js/ckplayer/ckplayer/ckplayer.js"></script>
     <script type="text/javascript">
@@ -182,6 +201,34 @@
         };
         var player = new ckplayer(videoObject);
     </script>
-@endsection
-
+    <script>
+        /*复制效果*/
+        function copyinfo() {
+            var Url2 = document.getElementById("basicinfo");
+            Url2.select();                  // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+            layer.msg('复制成功！');
+        }
+        $('.qrcode').click(function () {
+           var value = $('#basicinfo').val();
+           var file_name = $(this).attr("data");
+           var url = "{{URL::action('Common\QrcodeImgController@getAjaxQrcode')}}";
+           $.ajax({
+               'url':url,
+               'type':'get',
+               'dataType':'json',
+               'data':{urls:value,user_id:file_name},
+               'success':function (data) {
+                   if(data.status == 200){
+                       $("#img_qrcode").attr("src",data.url);
+                       setTimeout(function () {
+                           layer.msg(data.msg,{icon:6});
+                       },1000)
+                   }else {
+                       layer.msg(data.msg,{icon:5});
+                   }
+               }
+           })
+        });
+    </script>
 @endsection

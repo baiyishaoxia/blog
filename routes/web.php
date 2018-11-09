@@ -30,6 +30,10 @@ Route::any('admin/login', 'Admin\LoginController@login');
 //验证码
 Route::get('admin/code', 'Admin\LoginController@code');
 Route::get('admin/getcode', 'Admin\LoginController@getcode');
+//导出数据
+Route::get('link/export','Common\ExcelController@getExportLink');
+//生成二维码
+Route::get('create/qrcode','Common\QrcodeImgController@getAjaxQrcode');
 //后台主页
 //Route::any('admin/index', 'Admin\IndexController@index');
 //Route::any('admin/info', 'Admin\IndexController@info');

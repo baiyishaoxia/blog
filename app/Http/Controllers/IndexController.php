@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Common\EncryptController;
 use App\Http\Model\User;
 use Gregwar\Captcha\CaptchaBuilder;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -14,6 +13,10 @@ class IndexController extends Controller
     //admin.index(get)  列表
     public function index()
     {
+      $mm = new  EncryptController();
+      $jiami = $mm->encrypt_c('6666666');
+      $jiemi = $mm->decrypt_c($jiami);
+      var_dump($jiemi);
       dd(\DB::connection()->getPdo());
       echo 'index';
     }

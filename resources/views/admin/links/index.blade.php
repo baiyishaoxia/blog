@@ -10,8 +10,9 @@
 
     <!--结果页快捷搜索框 开始-->
     <div class="search_wrap">
-        <form  action="{{url('admin/delAll')}}" method="POST" >
+        <form  action="{{url('admin/delAll')}}" method="POST" id="form1">
             {{csrf_field()}}
+            <input type="hidden" name="id" class="export_ids" value="">
             <table class="search_tab">
                 <tr>
                     <th width="120">选择分类:</th>
@@ -23,7 +24,7 @@
                         </select>
                     </td>
                     <th width="70">关键字:</th>
-                    <td><input type="text" name="keywords" placeholder="关键字"></td>
+                    <td><input type="text" name="keywords" value="{{Request::get("keywords", "")}}" placeholder="关键字"></td>
                     <td><input type="submit" name="sub" value="查询"></td>
                 </tr>
             </table>
@@ -32,7 +33,7 @@
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
-    <form  method="POST" name="dereform">
+    <form  method="POST" name="dereform" id="form2">
         {{ csrf_field() }}
         <div class="result_wrap">
             <div class="result_title">
@@ -44,6 +45,7 @@
                     <a href="{{url('admin/links/create')}}"><i class="fa fa-plus"></i>添加链接</a>
                     <a href="javascript:void(0)" id="btnDel"><i class="fa fa-recycle"></i>批量删除</a>
                     <a href="{{URL::action('Admin\LinksController@recycle')}}"><i class="fa fa-recycle"></i>回收站</a>
+                    <a href="javascript:;" url="{{ URL::action('Common\ExcelController@getExportLink') }}" class="fa export">导出</a>
                 </div>
             </div>
             <!--快捷导航 结束-->
@@ -149,8 +151,22 @@
         $("#btnDel").click(function () {
             document.dereform.action="{{url('admin/links/delAll')}}";
             document.dereform.submit();
+        });
+        //导出数据
+        $(".export").click(function () {
+            var data = $("#form1").serialize();
+            var str = '';
+            $("input[type='checkbox']").each(function () {
+                if ($(this).is(":checked")) {
+                    str+= $(this).val() + ','
+                }
+            });
+            $(".export_ids").attr('value', str);
+            var url = $(this).attr('url');
+            $('#form1').attr('action',url);
+            $('#form1').attr('method','get');
+            $('#form1').submit();
         })
-
 
     </script>
 

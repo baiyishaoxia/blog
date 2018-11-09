@@ -18,7 +18,7 @@ class ToolsContent extends Model
     //region   关联所属分类表        tang
     public function category()
     {
-        return $this->belongsTo('App\Http\Model\Admin\ToolsList', 'list_id');
+        return $this->belongsTo('App\Http\Model\Admin\ToolsList', 'list_id','id');
     }
     //endregion
 

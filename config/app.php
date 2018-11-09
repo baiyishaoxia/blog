@@ -171,6 +171,8 @@ return [
         Orangehill\Iseed\IseedServiceProvider::class,
         //图片处理组件
         Intervention\Image\ImageServiceProvider::class,
+        //二维码生成组件
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
 
     ],
 
@@ -229,7 +231,10 @@ return [
         'UEditor'=>Stevenyangecho\UEditor\UEditorServiceProvider::class,
 
         //图片处理组件
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+
+        //二维码处理组件
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
 
     ],
 
