@@ -75,5 +75,6 @@
         </table>
     </div>
     <!--/列表-->
+    <span class="page_total">共{{count($data)}}条记录</span>
     {{Form::close()}}
 @endsection

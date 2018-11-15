@@ -85,6 +85,15 @@
 					<li><a href="{{URL::action('Background\AdminNavigationController@getList')}}" target="main"><i class="fa fa-fw fa-repeat"></i>权限列表</a></li>
 				</ul>
 			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-group"></i>活动管理</h3>
+				<ul class="sub_menu">
+					<li><a href="{{URL::action('Admin\ArticleTmpController@getIndex',['status'=>0])}}" target="main"><i class="fa fa-fw fa-list-ul"></i>活动待审核</a></li>
+					<li><a href="{{URL::action('Admin\ArticleTmpController@getIndex',['status'=>1])}}" target="main"><i class="fa fa-fw fa-list-ul"></i>活动已通过</a></li>
+					<li><a href="{{URL::action('Admin\ArticleTmpController@getIndex',['status'=>2])}}" target="main"><i class="fa fa-fw fa-list-ul"></i>活动已拒绝</a></li>
+					<li><a href="{{URL::action('Admin\ArticleTmpActivityController@getIndex')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>活动参与情况</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 	<!--左侧导航 结束-->

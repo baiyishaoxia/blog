@@ -1,0 +1,47 @@
+/*活动创建 || 编辑*/
+.templateTitle{height:75px;}
+.templateTitle ul {float: left;}
+.templateTitle ul li{float: left;height:47px; position: relative;}
+.templateTitle ul li>a{display:block;float: left;height:47px;line-height:47px;width:100px;text-align:center;font-size:14px;color:#666; overflow: hidden;}
+.templateTitle ul li>a:hover,.templateTitle ul li.active>a{background-color:#FF9C30;color:#fff;}
+.templateTitle ul li .hideItem, .templateTitle ul li .deleteItem{top:47px;position: absolute;display:none; cursor: pointer;   padding:16px 36px;   background-color:#f4f5f9;  font-size:14px; color:#999;  }
+.templateTitle ul li .hideItem:hover, .templateTitle ul li .deleteItem:hover{background-color: #e7e8ea;}
+.templateTitle ul li:hover .hideItem, .templateTitle ul li:hover .deleteItem{display: block;}
+.templateTitle ul li>a{text-decoration: none;}
+
+.tilTop>a{margin-left:70px;color:#b62c2c;overflow: hidden;}
+.tilTop>a:hover{color:#e62d31;}
+.templateTab p{color:#e62d31;font-size:12px;margin-top:20px; padding-left:20px;}
+.userDefined-form{float: left;width:48%;overflow: hidden;}
+.definedTem.create-form{overflow: hidden;}
+.definedTem.create-form dl dt，
+.moreCh.create-form dl dt{ width:150px;}
+.create-form dl dt label{text-align: left;float: left;font-size:14px;color:#999; padding-left:20px;overflow: hidden;}
+.create-form dl dt .chk{vertical-align: middle;}
+.definedTem.create-form dl dd{margin-left:0px;}
+.definedTem.create-form dl dd .text_in{width:290px;height:25px;font-size:12px;color:#999;}
+.create-form dl dd .iconfont{cursor: pointer;}
+.create-form.moreCh .text_in{width:290px;}
+.definedTem.create-form dl dd{margin-left:160px;}
+.definedTem.create-form dl dd>span{display:block;height:37px;line-height:37px;font-size:14px;color:#666; text-align:center; margin-left: 28px;width:160px;border-radius:3px;border:1px dashed #dddddd;}
+.definedTem.create-form dl dd>span>i{ margin-right: 15px;}
+.addOption{margin-left:10px;overflow: hidden;}
+.addOption label{display:block;margin-top:10px;overflow: hidden;}
+.addOption label .txt{width:250px;height:27px;line-height:27px;border-radius:3px;margin-left:17px;}
+.addOption label .deleteAdd{ display:inline-block;width:19px;height:20px;background: url(../images/post_delete_ico.png) repeat;}
+.addOption .addItem{display:block;cursor: pointer; font-size:20px;color:#999; margin:10px 0 0 30px;overflow: hidden;}
+.addOption .addDMore,
+.addOption .addMore{font-size:20px; margin-left:35px;display: inline-block;margin-top:10px;color:#999999;}
+.moreChoose{width:592px;height:398px; padding:30px 80px 0 55px; float:right;border:1px solid #dddddd;}
+.moreChoose h3{font-size:14px;font-weight:500;margin-bottom:20px; color:#666;}
+.moreChoos-Iitem{margin-bottom:80px;overflow: hidden;}
+.moreChoos-Iitem span,
+.moreChoos-Iitem1 span{display:block;float: left;cursor: pointer; margin-bottom:20px;font-size:12px;color:#999; background-color:#f3f3f3;width:75px;height:25px;line-height:25px; margin-right:15px;border:1px dashed #ddd; text-align:center;overflow: hidden;}
+.moreChoos-Iitem1 span{width:96px;}
+.moreChoos-Iitem span i,
+.moreChoos-Iitem1 span i{font-size:14px;margin-right:8px; color:#bbbbbb;}
+.moreChoos-Iitem span.active,
+.moreChoos-Iitem1 span.active{border:1px dashed #b62c2c; color:#b62c2c;}
+.moreChoos-Iitem span.active i,
+.moreChoos-Iitem1 span.active i{color:#b62c2c;}
+.userDefined-box{margin-top:40px;overflow: hidden;}

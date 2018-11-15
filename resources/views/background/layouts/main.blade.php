@@ -16,6 +16,14 @@
     {{Html::script('background/script/common.js')}}
     {{Html::script('background/js/uploader.js')}}
     {{Html::script('background/js/laymain.js')}}
+    {{--summernote文本编辑器插件--}}
+    {{Html::style('admin/tmp/summernote/summernote.css')}}
+    {{Html::style('admin/tmp/tagsinput/bootstrap-tagsinput.css')}}
+    {{Html::script('admin/tmp/summernote/summernote.js')}}
+    {{Html::script('admin/tmp/summernote/lang/summernote-zh-CN.js')}}
+    {{Html::script('admin/tmp/summernote/bootstrap.min.js')}}
+    {{Html::script('admin/tmp/tagsinput/bootstrap-tagsinput.js')}}
+    {{Html::style('admin/tmp/css/tmp_create.css')}}
     @include('UEditor::head')
     @yield('css')
 </head>

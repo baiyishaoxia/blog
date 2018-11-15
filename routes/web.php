@@ -136,6 +136,24 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::get('tools/content/recycle/list','ToolsContentController@getRecycleList');
     Route::post('tools/content/restore','ToolsContentController@postRestore');
     //endregion
+
+    //region   活动管理        tang
+    Route::get('tmp/list/{status?}','ArticleTmpController@getIndex');
+    Route::get('tmp/check/{id}','ArticleTmpController@getCheck');
+    Route::post('tmp/check','ArticleTmpController@postCheck');
+    Route::get('tmp/create','ArticleTmpController@getCreate');
+    Route::post('tmp/create','ArticleTmpController@postCreate');
+    Route::get('template/{id?}','ArticleTmpController@getTemplatePage');
+    Route::get('template_detail/{id}','ArticleTmpController@getArticleTmpPage');
+    Route::get('is_able_del_field','ArticleTmpController@isAbleDelField');
+    Route::get('tmp/edit/{id}','ArticleTmpController@getEdit');
+    Route::post('tmp/edit','ArticleTmpController@postEdit');
+    Route::get('tmp/to_activity/{id}','ArticleTmpController@getToActivity');
+    Route::post('tmp/to_activity','ArticleTmpController@postToActivity');
+    Route::get('tmp/activity/list','ArticleTmpActivityController@getIndex');
+    Route::get('tmp/activity/detail/{user_id}/{article_tmp_id}','ArticleTmpActivityController@getDetail');
+    Route::post('tmp/activity/del','ArticleTmpActivityController@postDel');
+    //endregion
 });
 
 Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namespace'=>'Background'],function (){

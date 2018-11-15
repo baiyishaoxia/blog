@@ -125,6 +125,8 @@
                         parentObj.siblings(".upload-name").val(data.name);
                     } else {
                         addImage(parentObj, data.path, data.url,data.name);
+                        //给予活动banner图的上传文件参数
+                        appendAttachHtml_heying(parentObj,file.id,file.name,data.path,"zip",data.size,data.size,data.url);
                     }
                     var progressObj = parentObj.children(".upload-progress");
                     progressObj.children(".txt").html("上传成功：" + file.name);
@@ -276,4 +278,36 @@ function delImg(obj) {
         firtImgBox.addClass("selected");
         focusPhotoObj.val(firtImgBox.children("img").attr("src")); //重新给封面的隐藏域赋值
     }
+}
+
+
+/*活动banner图处理事件
+=====================================================*/
+function appendAttachHtml_heying(targetObj,fileId,fileName, filePath, fileExt, fileSize, fileSizeStr,img_url) {
+    var rand=Math.random();
+    var _thisTime=_thisDate();
+    var newLi = $('<li>'
+        +'<input class="filename" name="logo['+rand+'][filename]" type="hidden" value="'+ fileName +'" />'
+        +'<input class="filepath" name="logo['+rand+'][filepath]" type="hidden" value="'+ filePath +'" />'
+        +'<input class="filesize" name="logo['+rand+'][filesize]" type="hidden" value="'+ fileSize +'" />'
+        +'<input class="filetime" name="logo['+rand+'][filetime]" type="hidden" value="'+ _thisTime +'" />'
+        // +'<input class="fileId" type="hidden" value="'+ fileId +'" />'
+        // +'<img src="'+img_url+'">'
+        // +'<label class="iconfont delete">&#xe64d;</label>'
+        +'</li>');
+    newLi.appendTo(targetObj.siblings(".logo-list").children("ul"));
+}
+//获取当前时间
+function  _thisDate() {
+    var _thisDate = new Date();
+    var _thisYear = _thisDate.getFullYear();    //获取完整的年份(4位,1970-????)
+    var _thisMonth = _thisDate.getMonth() +1;       //获取当前月份(0-11,0代表1月)
+    var _thisDate = _thisDate.getDate();        //获取当前日(1-31)
+    var _thisTime = _thisYear +"-"+_thisMonth+"-"+_thisDate;
+    return _thisTime;
+}
+// 负责view的销毁
+function removeFile( fileId ) {
+    uploader1.removeFile(fileId);
+/*=====活动banner图处理事件结束==================*/
 }

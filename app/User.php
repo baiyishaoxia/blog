@@ -18,6 +18,21 @@ class User extends Model implements AuthenticatableContract
     public $timestamps = true;
     // 这个参数是关于软删除的，如果你有软删除需要，那么你可以加上
     // use SoftDeletes;
+
+    public static function info($user_id = '')
+    {
+        if ($user_id == '') {
+            $user_id = \Session::get('user_id');
+        }
+        $cache_time = \Carbon\Carbon::now()->addMinutes(10);
+        $info=\Cache::remember("user:info:".$user_id,$cache_time,function ()use($user_id){
+            return self::where('id',$user_id)->lockForUpdate()->first();
+        });
+        if(empty($info)){
+            $info['id'] = 1;
+        }
+        return $info;
+    }
 }
 
 
