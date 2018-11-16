@@ -58,6 +58,8 @@ class ArticleTmpExtraFieldData extends Model
                     $fields[$key]['value'] = "";
                 }
             }
+        }else{
+            return ['status' => 0, 'info' => '活动未设置可填信息,暂时无法参与!'];
         }
         return $fields;
     }

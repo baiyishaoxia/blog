@@ -2,6 +2,10 @@
 @section('css')
     {{Html::style('admin/tmp/summernote/bootstrap.css')}}
     {{Html::style('admin/tmp/css/common.css')}}
+    <style>
+        .boxwrap{height: 35px}
+        .boxwrap .select-tit{height: 30px}
+    </style>
 @endsection
 @section('js')
     @include('background.layouts.btnsave')

@@ -56,6 +56,7 @@ class ArticleTmpController extends Controller
         $tmp->end_time = $data['end_time'];
         $tmp->logo = $banner['images_id'];
         $tmp->number  = $data['number'];
+        $tmp->status = 0; //[0待审核 1审核通过 2审核拒绝]
         if($data['article_template'] == "4"){
             //表示自定义模板
             $tmp->tmp_detail = isset($data['define_template'])?json_encode($data['define_template']):"";
@@ -75,7 +76,7 @@ class ArticleTmpController extends Controller
         }
         if($res && $res1 && $res2){
             \DB::commit();
-            return ['status'=>200,'info'=>'提交成功','url'=>\URL::action('Admin\ArticleTmpController@getIndex')];
+            return ['status'=>200,'info'=>'提交成功','url'=>\URL::action('Admin\ArticleTmpController@getIndex',['status'=>$tmp->status])];
         }else{
             \DB::rollBack();
             return ['status'=>0,'info'=>'系统繁忙,请稍后再试'];
@@ -177,8 +178,8 @@ class ArticleTmpController extends Controller
         }
         $data->tmp_detail = $data->tmp_detail?json_decode($data->tmp_detail):"";
         $data->extra_field = ArticleTmpExtraField::getArticleTmpExtraField($data->id);
-        $data->start_time = \Carbon\Carbon::parse($data['start_time'])->format('Y-m-d');
-        $data->end_time = \Carbon\Carbon::parse($data['end_time'])->format('Y-m-d');
+        $data->start_time = \Carbon\Carbon::parse($data['start_time'])->format('Y-m-d H:i:s');
+        $data->end_time = \Carbon\Carbon::parse($data['end_time'])->format('Y-m-d H:i:s');
         //处理单选和多选的数据
         if($data->extra_field){
             foreach ($data['extra_field'] as $key=>$val){
@@ -331,6 +332,7 @@ class ArticleTmpController extends Controller
         }
         $res2 = ArticleTmp::where('id',$tmp->id)->increment('sign_up_num');
         if($res1 && $res2){
+            dd(1);
              \DB::commit();
             return ['status'=>200,'info'=>'参与成功','url'=>\URL::action('Admin\ArticleTmpController@getIndex',['status'=>$tmp->status])];
         }else{

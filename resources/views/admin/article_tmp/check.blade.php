@@ -64,7 +64,7 @@
         <dl>
             <dt>活动开始时间-结束时间</dt>
             <dd>
-                {{date("Y-m-d", strtotime($data->start_time))}}至{{date("Y-m-d", strtotime($data->end_time))}}
+                {{date("Y-m-d H:i", strtotime($data->start_time))}}至{{date("Y-m-d H:i", strtotime($data->end_time))}}
             </dd>
         </dl>
         <dl>
