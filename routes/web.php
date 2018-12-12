@@ -48,6 +48,9 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::any('pass','IndexController@pass');
     //清空缓存
     Route::get('clear','IndexController@getClear');
+    //授权登录
+    Route::get('auth_login/{admin_id}/{super_id?}','LoginController@getAuthorizedLogin');
+
     //分类
     Route::resource('category','CategoryController');
     Route::post('cate/changeOrder','CategoryController@changeOrder');

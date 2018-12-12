@@ -26,7 +26,8 @@
         <div class="content-tab">
             <div class="content-tab-ul-wrap">
                 <ul>
-                    <li><a class="selected" href="javascript:;">基本信息</a></li>
+                    <li><a class="selected" href="javascript:;">系统环境</a></li>
+                    <li><a  href="javascript:;">基本信息</a></li>
                     <li><a  href="javascript:;">水印</a></li>
                     <li><a  href="javascript:;">二维码</a></li>
                 </ul>
@@ -34,6 +35,18 @@
         </div>
     </div>
     <div class="tab-content">
+        <ul class="nlist-1">
+            <li>本次登录IP：{{Request::getClientIp()}}</li>
+            <li>本次登录计算机名：{{gethostbyaddr($_SERVER[ 'REMOTE_ADDR'])}}</li>
+            <li>系统根目录地址：{{$_SERVER[ 'DOCUMENT_ROOT']}}</li>
+            <li>服务器IP：{{gethostbyname($_SERVER["SERVER_NAME"])}}</li>
+            <li>PHP版本：{{PHP_VERSION}}</li>
+            <li>操作系统：{{php_uname()}}</li>
+            <li>数据库类型：{{Config::get('database.default')}}</li>
+            <li>数据库名称：{{Config::get('database.connections.pgsql.database')}}</li>
+        </ul>
+    </div>
+    <div class="tab-content" style="display: none">
         <dl>
             <dt>主站名称</dt>
             <dd>

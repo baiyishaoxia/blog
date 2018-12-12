@@ -204,3 +204,10 @@ RewriteEngine on
 
  RewriteRule . index.php
 ##################################################################################
+
+ps -aux|grep php      查看CMD是php的进程的所有状态信息
+netstat -ap|grep php  显示所有建立相关链接的程序名
+ps -ef | grep nginx   查询是否启动
+
+3dd   剪切3行  p粘贴
+3yy   复制3行  u撤销
