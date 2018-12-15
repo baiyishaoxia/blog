@@ -7,7 +7,7 @@ use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ArticleController extends Controller
+class FunctionController extends Controller
 {
     //region   文件上传        tang
     public function upload(Request $request)
@@ -33,7 +33,7 @@ class ArticleController extends Controller
                }
            }
         }
-        return view('home.article.upload');
+        return view('home.function.upload');
     }
     //endregion
 
@@ -47,7 +47,7 @@ class ArticleController extends Controller
       });
       echo '发送成功';
 
-//        \Mail::send('home.article.mail',['name'=>'baiyishaoxia'],function($message){
+//        \Mail::send('home.function.mail',['name'=>'baiyishaoxia'],function($message){
 //            $message->to('1174881637@qq.com');
 //        });
     }
@@ -96,7 +96,7 @@ class ArticleController extends Controller
     {
         //$name = '白衣少侠';
         //dd($name);
-        //return view('home.article.error');
+        //return view('home.function.error');
 
         $article = null;
         if($article == null){

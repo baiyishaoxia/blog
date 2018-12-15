@@ -261,13 +261,13 @@ Route::get('/index', 'Home\TestController@GetTestList');
 
 
 Route::group(['middleware'=>['web'],'prefix'=>'home','namespace'=>'Home'],function () {
-    Route::any('/upload', 'ArticleController@upload');
-    Route::any('/mail', 'ArticleController@mail');
+    Route::any('/upload', 'FunctionController@upload');
+    Route::any('/mail', 'FunctionController@mail');
 
-    Route::get('cache1','ArticleController@cache1');
-    Route::get('cache2','ArticleController@cache2');
+    Route::get('cache1','FunctionController@cache1');
+    Route::get('cache2','FunctionController@cache2');
 
-    Route::get('error','ArticleController@error');
-    Route::get('log','ArticleController@log');
-    Route::get('queue','ArticleController@queue');
+    Route::get('error','FunctionController@error');
+    Route::get('log','FunctionController@log');
+    Route::get('queue','FunctionController@queue');
 });
