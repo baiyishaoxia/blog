@@ -95,7 +95,7 @@
 				</ul>
 			</li>
 		</ul>
-		<ul>
+		<ul style="display: none">
 			<li>
 				<h3><i class="fa fa-fw fa-clipboard"></i>常用操作</h3>
 				<ul class="sub_menu">

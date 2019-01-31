@@ -57,7 +57,7 @@ class Upload
     }
 
     /**
-     * 返回大小，从byte的大小满1024自动进1伟
+     * 返回大小，从byte的大小满1024自动进1位
      * @param $size
      * @param string $type
      * @return string
@@ -84,5 +84,46 @@ class Upload
         }else{
             return $size.$type;
         }
+    }
+
+    //视频上传--------------------配置文件未指定 fileVal属性将默认 file
+    public static function videoFile(UploadedFile $request_file, $type){
+        #获取图片服务商
+        $file           = File::enableOne($type);
+        $file_size      = '104857600';//100M
+        $file_type      = 'mp4,MP4,AVI,avi,RMVB,rmvb,3gp,3GP';
+        $file_savetype  = FileKey::read('savetype.'.$file->id);
+        #判断大小是否超出
+        if($request_file->getClientSize()>$file_size){
+            return [
+                'status'=>'0',
+//                'msg'=>'大小超出允许范围，现在大小：'.$request_file->getClientSize().'，要求大小：'.$file_size,
+                'msg'=>'大小超出允许范围，要求大小：100M',
+            ];
+        }
+        #判断后缀格式是否正确
+        if(!in_array($request_file->getClientOriginalExtension(),explode(',',$file_type))){
+            return [
+                'status'=>'0',
+                'msg'=>'不允许该后缀',
+            ];
+        }
+        #上传
+        $files=new \App\Common\Api\File\File();
+
+
+        $files->disk='local';
+        $files->file_path=$type.'/'.date($file_savetype);
+        $files->file_name=$request_file;
+        $path=$files->store();
+
+        return[
+            'status'=>'1',
+            'name'=>$request_file->getClientOriginalName(),
+            'size'=>self::converKit($request_file->getClientSize()),
+            'path'=>$path,
+            'url'=>Storage::url($path),
+            'msg'=>'上传成功'
+        ];
     }
 }

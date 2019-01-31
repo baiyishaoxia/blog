@@ -39,7 +39,9 @@ class UploadController extends Controller
     public function postVideo(Request $request){
         return Upload::file($request_file=$request->file('Filedata'),'video');
     }
-
+    public function postVideoFile(Request $request){
+        return Upload::videoFile($request_file=$request->file('file'),'file');
+    }
     /**
      * 编辑器上传图片
      * @param Request $request
