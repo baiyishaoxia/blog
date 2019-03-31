@@ -64,7 +64,7 @@
 					</ul>
 				</div>
 				<div class="r-list">
-					<div class="rule-single-select">
+					<div class="single-select">
 						{{Form::select('ImgClass_Id',\App\Http\Model\Background\ImagesClass::tree(2),Request::get('ImgClass_Id'))}}
 					</div>
 					<input name="keywords" placeholder="请输入关键词" class="keyword normal" value="{{Request::get('keywords','')}}" type="text">

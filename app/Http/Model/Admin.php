@@ -74,6 +74,7 @@ class Admin extends Model
                return false;
             }
             //地址栏路由
+            //$now_url    =$_SERVER["REQUEST_URI"];
             $now_url    ='/'.\Request::path();
             foreach ($route_id as $key => $val){
                 if($val->parameter==null){
@@ -84,7 +85,7 @@ class Admin extends Model
                     if($this_url==$now_url){
                         $route_id=$val;
                     }
-                    if(strstr($now_url,$this_url)){
+                    if(strstr($this_url,$now_url) || strstr($now_url,$this_url)){
                         $route_id=$val;
                         break;
                     }
