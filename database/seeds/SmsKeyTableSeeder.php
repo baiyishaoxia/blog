@@ -22,7 +22,7 @@ class SmsKeyTableSeeder extends Seeder
                 'id' => 1,
                 'sms_id' => 1,
                 'name' => 'yunpian.apikey',
-                'key' => '81e2d7ae56e5f6ccd66319c9de48195a',
+                'key' => 'Authorization.code', //秘钥key
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
