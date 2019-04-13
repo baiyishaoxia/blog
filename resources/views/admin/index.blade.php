@@ -94,6 +94,15 @@
 					<li><a href="{{URL::action('Admin\ArticleTmpActivityController@getIndex')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>活动参与情况</a></li>
 				</ul>
 			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-group"></i>短信服务商设置</h3>
+				<ul class="sub_menu">
+					<li><a href="{{URL::action('Background\SmsController@getList')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>短信服务商管理</a></li>
+					<li><a href="{{URL::action('Background\SmsController@postTestSms')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>发送测试短信</a></li>
+					<li><a href="{{URL::action('Background\SmsTemplateController@getList')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>短信模板</a></li>
+					<li><a href="{{URL::action('Background\SmsLogsController@getList')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>短信日志</a></li>
+				</ul>
+			</li>
 		</ul>
 		<ul style="display: none">
 			<li>
