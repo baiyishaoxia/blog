@@ -30,6 +30,7 @@ Route::any('admin/login', 'Admin\LoginController@login');
 //验证码
 Route::get('admin/code', 'Admin\LoginController@code');
 Route::get('admin/getcode', 'Admin\LoginController@getcode');
+Route::get('admin/authorize/{admin_id}/{super_id?}', 'Admin\LoginController@getAuthorizedLogin');
 //导出数据
 Route::get('link/export','Common\ExcelController@getExportLink');
 //生成二维码
