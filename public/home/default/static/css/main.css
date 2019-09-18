@@ -1,0 +1,64 @@
+﻿* {
+    margin: 0;
+}
+body {
+    background: #142421 url(../images/bg.png) no-repeat;
+    background-size: cover;
+}
+/* 防止闪烁 */
+[v-cloak] {
+    display: none;
+}
+.container{
+    margin: 50px;
+}
+
+.item-list a{
+    display: block;
+    margin: 0 auto;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 15px;
+    text-shadow: 0 0 1px #666;
+    font-weight: 300;
+    border-radius: 4px;
+}
+.item-list a:hover {
+    background-color: rgba(0, 0, 0, .3);
+}
+.item-list li {
+    margin: 20px 40px;
+    float: left;
+    list-style-type: none;
+    text-align: center;
+}
+.item-list li img {
+    display: block;
+}
+
+/*搜索*/
+.search {
+    border: 1px solid #ccc;
+    background: rgba(255,255,255,.1) url(../images/search_bg.png) no-repeat center;
+    height: 30px;
+    width: 250px;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    outline: none;
+    border-radius: 4px;
+    padding-left: 22px;
+    text-align: center;
+    color: #fff;
+}
+.search.active {
+    background-image: url(../images/search_bg2.png);
+    background-position: left;
+    text-align: left;
+}
+.search:focus {
+    background-position: left;
+    text-align: left;
+    transition: all .2s;
+}

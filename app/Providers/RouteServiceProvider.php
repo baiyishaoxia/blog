@@ -40,6 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminRoutes();
         $this->mapCommonRoutes();
         $this->mapAppRoutes();
+        $this->mapHomeRoutes();
 
 
         //
@@ -100,6 +101,14 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/app.php'));
+    }
+    //endregion
+
+    //region   前台路由        tang
+    protected function mapHomeRoutes()
+    {
+        Route::namespace($this->namespace)
+            ->group(base_path('routes/home.php'));
     }
     //endregion
 

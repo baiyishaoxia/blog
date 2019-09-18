@@ -49,3 +49,14 @@ sudo ./install.sh (安装初始化vimplus)
 8、qa           全部关闭
 9、取消高亮     :noh
 
+
+
+3.phpstorm一些常用快捷键
+
+ctrl+shift+n  搜索目录中的文件名
+
+
+
+4.laravel谷歌验证码安装与使用
+https://laravelacademy.org/post/7989.html
+

@@ -85,7 +85,7 @@
         {{--                            swf: '{{URL::asset('js/webuploader/Uploader.swf')}}',--}}
         swf: '{{URL::asset('home/script/webuploader/Uploader.swf')}}',
         // 文件接收服务端。
-        server: '{{URL::action('Common\UploadController@postImg')}}',
+        server: '{{URL::action('Background\UploadController@postImg')}}',
         // 选择文件的按钮。可选。
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
         pick: '#upload_images',

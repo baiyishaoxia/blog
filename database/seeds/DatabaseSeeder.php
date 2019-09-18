@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminRoleNodeRoutesTableSeeder::class);//权限节点路由初始化
         $this->call(EmailTableSeeder::class);    //Email服务器初始化
         $this->call(EmailKeyTableSeeder::class); //Email服务器配置初始化
+        $this->call(SmsTableSeeder::class);      //短信服务商
+        $this->call(SmsKeyTableSeeder::class);   //短信配置
     }
 }

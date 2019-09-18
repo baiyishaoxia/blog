@@ -15,4 +15,10 @@ Route::group(['middleware'=>['web'],'namespace'=>'Admin'],function () {
     Route::post('users','AppController@postCheckUser');
     //获取文章
     Route::get('article','AppController@getArticle');
+
+});
+//Home相关Api接口
+Route::group(['namespace'=>'Api'],function () {
+    Route::get('/typing/score','IndexNavController@getUserScore');//打字成绩
+    Route::post('/typing/score','IndexNavController@postUserScore');//提交打字
 });

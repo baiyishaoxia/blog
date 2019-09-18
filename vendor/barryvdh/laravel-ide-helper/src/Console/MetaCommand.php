@@ -122,7 +122,11 @@ class MetaCommand extends Command
         $abstracts = $this->laravel->getBindings();
 
         // Return the abstract names only
-        return array_keys($abstracts);
+        $keys = array_keys($abstracts);
+
+        sort($keys);
+
+        return $keys;
     }
 
     /**
@@ -131,7 +135,7 @@ class MetaCommand extends Command
     protected function registerClassAutoloadExceptions()
     {
         spl_autoload_register(function ($class) {
-            throw new \Exception("Class '$class' not found.");
+            throw new \ReflectionException("Class '$class' not found.");
         });
     }
 

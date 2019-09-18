@@ -19,12 +19,38 @@
     @yield('css')
     @yield('js')
 </head>
-
+<style>
+    .active{background-color: #0C4B77; }
+</style>
 <body>
 @yield('content')
 
 @include('admin.msg')
 @yield('my-js')
-
+<script>
+        $(document).ready(function(){
+            $("#menu-nav li").eq(0).addClass("active");
+            var oUl = document.getElementById("menu-nav");
+            var aLi = oUl.getElementsByTagName("li");
+            var mUl = document.getElementById("menu_box");
+            oUl.onclick = function(ev){
+                var target = ev.target || ev.srcElement;
+                if(target.nodeName.toLowerCase() == "a"){
+                    var that=target;
+                    var index;
+                    for(var i=0;i<aLi.length;i++){
+                        if($(aLi[i]).find("a").eq(0).attr("href") == target)index=i;
+                    }
+                    $(mUl).find("ul").hide();
+                    $(oUl).find("li").removeClass();
+                    if(index>=0){
+                        index = index+1;
+                        $("#menu-nav li:nth-child("+index+")").addClass("active");
+                        $("#menu_box ul:nth-child("+index+")").css("display","block");
+                    }
+                }
+            }
+        })
+</script>
 </body>
 </html>

@@ -4,12 +4,39 @@
 @endsection
 @section('js')
     @include('background.layouts.btnsave')
+	{{Html::script('admin/style/js/lightbox-plus-jquery.min.js')}}
 	<script type="text/javascript">
 		$('.channel_category_id').change(function () {
 			var the_form=$(this).parents('form').eq(0);
 			the_form.attr('method','get');
 			the_form.submit();
 		})
+	</script>
+	<script>
+        function alertImg(url) {
+            layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 1,
+                shadeClose: true,
+                maxmin: false,
+                content: "<img alt=\"\"  src=\""+url+"\" />",
+            });
+        }
+        function delCate(id){
+            layer.confirm('您确定要删除这个照片吗？', {
+                btn: ['确定','取消']
+            }, function(){
+                $.get('{{URL::action('Admin\ImagesContentController@del')}}',{'_method':'get','_token':"{{csrf_token()}}",'id':id},function(data){
+                    if(data.status == 0){
+                        layer.msg(data.msg, {icon: 6});
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+            });
+        }
 	</script>
 @endsection
 @section('content')
@@ -37,10 +64,10 @@
 					</ul>
 				</div>
 				<div class="r-list">
-					<div class="rule-single-select">
+					<div class="single-select">
 						{{Form::select('ImgClass_Id',\App\Http\Model\Background\ImagesClass::tree(2),Request::get('ImgClass_Id'))}}
 					</div>
-					{{Form::text('keywords',Request::get('keywords',''),['class'=>'keyword'])}}
+					<input name="keywords" placeholder="请输入关键词" class="keyword normal" value="{{Request::get('keywords','')}}" type="text">
 					<a class="btn-search" href="javascript:void (0)">查询</a>
 				</div>
 			</div>
@@ -67,7 +94,7 @@
 							     $width=floor($val['Width']*300/$val['Height']);
 							?>
 							<div class="item" data-w="{{$width}}" data-h="300">
-								<a href="{{Storage::url($val->Icon)}}" data-lightbox="lbx" target="_blank" style="display: block" class="lightbox" >
+								<a href="{{Storage::url($val->Icon)}}" data-lightbox="lbx" target="_blank" style="display: block" class="lightbox">
 									<img class="example-image" src="{{Storage::url($val->Icon)}}" bigsrc="{{Storage::url($val->path)}}">
 								</a>
 							</div>
@@ -82,22 +109,4 @@
 	<!--/列表-->
 	<span class="page_total">共{{$data->total()}}条记录</span>
 	{{$data->links()}}
-@section('js')
-{{Html::script('admin/style/js/lightbox-plus-jquery.min.js')}}
-<script>
-    function delCate(id){
-        layer.confirm('您确定要删除这个照片吗？', {
-            btn: ['确定','取消']
-        }, function(){
-            $.get('{{URL::action('Admin\ImagesContentController@del')}}',{'_method':'get','_token':"{{csrf_token()}}",'id':id},function(data){
-                if(data.status == 0){
-                    layer.msg(data.msg, {icon: 6});
-                    location.reload();
-                }else{
-                    layer.msg(data.msg, {icon: 5});
-                }
-            });
-    });
-}
-</script>
 @endsection

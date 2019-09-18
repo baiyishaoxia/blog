@@ -74,16 +74,25 @@ class Admin extends Model
                return false;
             }
             //地址栏路由
+            //$now_url    =$_SERVER["REQUEST_URI"];
             $now_url    ='/'.\Request::path();
             foreach ($route_id as $key => $val){
                 if($val->parameter==null){
                     $route_id=$val;
+                    break;
                 }else{
                     $this_url   =\URL::action($now_route,json_decode($val->parameter,true),false);
                     if($this_url==$now_url){
                         $route_id=$val;
                     }
+                    if(strstr($this_url,$now_url) || strstr($now_url,$this_url)){
+                        $route_id=$val;
+                        break;
+                    }
                 }
+            }
+            if (!isset($route_id->id)){
+                return false;
             }
             $r1=AdminRoleNodeRoute::where("admin_navigation_node_id",$route_id->id)->first();
             if($r1!=null){

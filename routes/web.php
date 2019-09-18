@@ -49,6 +49,9 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'admin','namespace'=
     Route::any('pass','IndexController@pass');
     //清空缓存
     Route::get('clear','IndexController@getClear');
+    //授权登录
+    Route::get('auth_login/{admin_id}/{super_id?}','LoginController@getAuthorizedLogin');
+
     //分类
     Route::resource('category','CategoryController');
     Route::post('cate/changeOrder','CategoryController@changeOrder');
@@ -246,6 +249,31 @@ Route::group(['middleware'=>['web','admin.login'],'prefix'=>'background','namesp
     Route::get('iplimit','ConfigController@getIpLimit');
     Route::post('iplimit','ConfigController@postIpLimit');
     //endregion
+
+    //region   短信配置        tang
+    //by短信服务商
+    Route::get('sms/list','SmsController@getList');
+    Route::get('sms/create','SmsController@getCreate');
+    Route::post('sms/create','SmsController@postCreate');
+    Route::get('sms/edit/{sms_id}','SmsController@getEdit');
+    Route::post('sms/edit','SmsController@postEdit');
+    Route::post('sms/del','SmsController@postDel');
+    Route::get('sms/test','SmsController@getTestSms');
+    Route::post('sms/test','SmsController@postTestSms');
+    Route::get('sms/surplus_num/{sms_id}','SmsController@getSurplusNum');
+    //by 设置key
+    Route::get('sms/set_key/{sms_id}','SmsKeyController@getSetKey');
+    Route::post('sms/set_key','SmsKeyController@postSetKey');
+    //by 短信模板
+    Route::get('sms/template/list','SmsTemplateController@getList');
+    Route::get('sms/template/create','SmsTemplateController@getCreate');
+    Route::post('sms/template/create','SmsTemplateController@postCreate');
+    Route::get('sms/template/edit/{id}','SmsTemplateController@getEdit');
+    Route::post('sms/template/edit','SmsTemplateController@postEdit');
+    Route::post('sms/template/del','SmsTemplateController@postDel');
+    //by 短信日志
+    Route::get('sms/log/list','SmsLogsController@getList');
+    //endregion
 });
 
 
@@ -259,13 +287,13 @@ Route::get('/index', 'Home\TestController@GetTestList');
 
 
 Route::group(['middleware'=>['web'],'prefix'=>'home','namespace'=>'Home'],function () {
-    Route::any('/upload', 'ArticleController@upload');
-    Route::any('/mail', 'ArticleController@mail');
+    Route::any('/upload', 'FunctionController@upload');
+    Route::any('/mail', 'FunctionController@mail');
 
-    Route::get('cache1','ArticleController@cache1');
-    Route::get('cache2','ArticleController@cache2');
+    Route::get('cache1','FunctionController@cache1');
+    Route::get('cache2','FunctionController@cache2');
 
-    Route::get('error','ArticleController@error');
-    Route::get('log','ArticleController@log');
-    Route::get('queue','ArticleController@queue');
+    Route::get('error','FunctionController@error');
+    Route::get('log','FunctionController@log');
+    Route::get('queue','FunctionController@queue');
 });

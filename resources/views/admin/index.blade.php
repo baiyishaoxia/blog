@@ -4,18 +4,18 @@
 	<div class="top_box">
 		<div class="top_left">
 			<div class="logo">后台管理中心</div>
-			<ul>
-				<li><a href="#" class="active">{{lang('Home')}}</a></li>
-				<li><a href="#">管理页</a></li>
+			<ul id="menu-nav">
+				<li><a href="javascript:void(0)">{{lang('Home')}}</a></li>
+				<li><a href="javascript:void(1)">管理页</a></li>
 				<li><a href="{{URL::action('HomeController@index')}}" target="_blank">预览前台</a></li>
 				<span><a href="{{URL::action('IndexController@changeSession',['lang'=>'cn'])}}">中</a>/<a href="{{URL::action('IndexController@changeSession',['lang'=>'en'])}}">EN</a></span>
 			</ul>
 		</div>
 		<div class="top_right">
 			<ul>
-				<li>管理员：{{session('admin.username')}}</li>
+				<li>管理员：{{\App\Http\Model\Admin::info()->username}}【{{\App\Http\Model\Admin::info()->role->role_name}}】</li>
 				<li><a href="{{url('admin/pass')}}" target="main">修改密码</a></li>
-				<li><a href="{{URL::action('Admin\IndexController@getClear')}}" target="main">清理缓存</a></li>
+				<li><a href="{{URL::action('Admin\IndexController@getClear')}}">清理缓存</a></li>
 				<li><a href="{{URL::action('Admin\LoginController@quit')}}">退出</a></li>
 			</ul>
 		</div>
@@ -23,7 +23,7 @@
 	<!--头部 结束-->
 
 	<!--左侧导航 开始-->
-	<div class="menu_box">
+	<div class="menu_box" id="menu_box">
 		<ul>
 			<li>
 				<h3><i class="fa fa-fw fa-clipboard"></i>常用操作</h3>
@@ -92,6 +92,29 @@
 					<li><a href="{{URL::action('Admin\ArticleTmpController@getIndex',['status'=>1])}}" target="main"><i class="fa fa-fw fa-list-ul"></i>活动已通过</a></li>
 					<li><a href="{{URL::action('Admin\ArticleTmpController@getIndex',['status'=>2])}}" target="main"><i class="fa fa-fw fa-list-ul"></i>活动已拒绝</a></li>
 					<li><a href="{{URL::action('Admin\ArticleTmpActivityController@getIndex')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>活动参与情况</a></li>
+				</ul>
+			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-group"></i>短信服务商设置</h3>
+				<ul class="sub_menu">
+					<li><a href="{{URL::action('Background\SmsController@getList')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>短信服务商管理</a></li>
+					<li><a href="{{URL::action('Background\SmsController@postTestSms')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>发送测试短信</a></li>
+					<li><a href="{{URL::action('Background\SmsTemplateController@getList')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>短信模板</a></li>
+					<li><a href="{{URL::action('Background\SmsLogsController@getList')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>短信日志</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ul style="display: none">
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>常用操作</h3>
+				<ul class="sub_menu">
+					<li><a href="{{Url('admin/category/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加分类</a></li>
+					<li><a href="{{Url('admin/category')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>分类列表</a></li>
+					<li><a href="{{Url('admin/article/create')}}" target="main"><i class="fa fa-fw fa-eyedropper"></i>添加文章</a></li>
+					<li><a href="{{Url('admin/article')}}" target="main"><i class="fa fa-fw fa-folder-open"></i>文章列表</a></li>
+					<li><a href="{{url('admin/links')}}" target="main"><i class="fa fa-fw fa-chain"></i>友情链接</a></li>
+					<li><a href="{{URL::action('Admin\ImagesListController@index')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>图片分类</a></li>
+					<li><a href="{{URL::action('Admin\ImagesContentController@index')}}" target="main"><i class="fa fa-fw fa-image"></i>图片列表</a></li>
 				</ul>
 			</li>
 		</ul>
